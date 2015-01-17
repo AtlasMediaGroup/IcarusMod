@@ -4,3 +4,8 @@ description: The custom hook in plugin for the Superior Freedom Network linking 
 depend: [TotalFreedomMod]
 authors: [Wild1145, Camzie99, Hockeyfan360]
 main: com.superiornetworks.icarus.IcarusMod
+
+commands:
+  Icarus:
+    description: Mostly for test usage, but will prove that the commands actually are running as expected.
+    usage: /<command>

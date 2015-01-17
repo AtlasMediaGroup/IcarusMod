@@ -71,31 +71,31 @@
 
     -->
 	
-	<target name="-post-jar">
-    <echo level="info" message="---- Finalizing Build" />
+    <target name="-post-jar">
+        <echo level="info" message="---- Finalizing Build" />
 
-    <!-- Rename unmapped (no libaries) .jar file -->
-    <copy file="${dist.jar}" tofile="${dist.dir}/${ant.project.name}-unmapped.jar" />
-    <delete file="${dist.dir}/${ant.project.name}.jar" />
+        <!-- Rename unmapped (no libaries) .jar file -->
+        <copy file="${dist.jar}" tofile="${dist.dir}/${ant.project.name}-unmapped.jar" />
+        <delete file="${dist.dir}/${ant.project.name}.jar" />
 
-    <!-- Generate mapped (with libraries) .jar file -->
-    <jar compress="${jar.compress}"  destfile="${dist.jar}">
+        <!-- Generate mapped (with libraries) .jar file -->
+        <jar compress="${jar.compress}"  destfile="${dist.jar}">
 
-        <zipfileset src="${dist.dir}/${ant.project.name}-unmapped.jar" excludes="META-INF/*" />
+            <zipfileset src="${dist.dir}/${ant.project.name}-unmapped.jar" excludes="META-INF/*" />
 
-        <zipgroupfileset dir="${dist.dir}/lib/" includes="BukkitLib*" />
+            <zipgroupfileset dir="${dist.dir}/lib/" includes="BukkitLib*" />
 
-        <manifest>
-            <attribute name="Main-Class" value="${main.class}" />
-        </manifest>
-    </jar>
+            <manifest>
+                <attribute name="Main-Class" value="${main.class}" />
+            </manifest>
+        </jar>
 
-    <!-- Delete /dist/README.txt -->
-    <delete file="${dist.dir}/README.TXT" />
+        <!-- Delete /dist/README.txt -->
+        <delete file="${dist.dir}/README.TXT" />
 
-    <!-- Delete /dist/lib folder -->
-    <delete dir="${dist.dir}/lib/" />
+        <!-- Delete /dist/lib folder -->
+        <delete dir="${dist.dir}/lib/" />
 
-    <echo level="info" message="---- Done" />
-</target>
+        <echo level="info" message="---- Done" />
+    </target>
 </project>
