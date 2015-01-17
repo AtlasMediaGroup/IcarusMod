@@ -1,9 +1,8 @@
 package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.Command_Icarus;
-import java.util.logging.Level;
+import me.StevenLawson.TotalFreedomMod.TFM_Log;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
-import net.pravian.bukkitlib.implementation.BukkitLogger;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.PlayerUtils;
 import org.bukkit.command.Command;
@@ -14,13 +13,15 @@ public class IcarusMod extends BukkitPlugin
 {
 
     private IcarusMod plugin;
-    public BukkitLogger logger;
+
     public String pluginName;
     public String pluginVersion;
     public String pluginBuildNumber;
     public String pluginBuildDate;
     public String pluginAuthors;
+    //
     public static BukkitCommandHandler handler;
+    //
 
     @Override
     public void onLoad()
@@ -30,21 +31,20 @@ public class IcarusMod extends BukkitPlugin
         pluginVersion = pdf.getVersion();
         pluginAuthors = PlayerUtils.concatPlayernames(pdf.getAuthors());
         plugin = this;
-        logger = new BukkitLogger(plugin);
 
     }
 
     @Override
     public void onEnable()
     {
-        logger.log(Level.INFO, "The IcarusMod has been enabled without issue.");
+        TFM_Log.info(pluginName + " has been enabled without any issues.");
         handler.setCommandLocation(Command_Icarus.class.getPackage());
     }
 
     @Override
     public void onDisable()
     {
-        logger.log(Level.INFO, "The IcarusMod has been disabled without issue.");
+        TFM_Log.info(pluginName + " has been disabled without any issues.");
     }
 
     @Override
