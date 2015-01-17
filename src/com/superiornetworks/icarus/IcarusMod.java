@@ -44,7 +44,7 @@ public class IcarusMod extends BukkitPlugin
     @Override
     public void onDisable()
     {
-        logger.log(Level.INFO, "The IcarusMod has been disabled without isue.");
+        logger.log(Level.INFO, "The IcarusMod has been disabled without issue.");
     }
 
     @Override
