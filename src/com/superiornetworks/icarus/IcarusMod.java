@@ -2,6 +2,7 @@ package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.Command_Icarus;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import net.pravian.bukkitlib.BukkitLib;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.PlayerUtils;
@@ -20,7 +21,7 @@ public class IcarusMod extends BukkitPlugin
     public String pluginBuildDate;
     public String pluginAuthors;
     //
-    public static BukkitCommandHandler handler;
+    public BukkitCommandHandler handler;
     //
 
     @Override
@@ -30,15 +31,18 @@ public class IcarusMod extends BukkitPlugin
         pluginName = pdf.getName();
         pluginVersion = pdf.getVersion();
         pluginAuthors = PlayerUtils.concatPlayernames(pdf.getAuthors());
-        plugin = this;
+        this.plugin = this;
+        this.handler = new BukkitCommandHandler(plugin);
 
     }
 
     @Override
     public void onEnable()
     {
-        TFM_Log.info(pluginName + " has been enabled without any issues.");
+        BukkitLib.init(plugin);
         handler.setCommandLocation(Command_Icarus.class.getPackage());
+        TFM_Log.info(pluginName + " has been enabled without any issues.");
+
     }
 
     @Override
