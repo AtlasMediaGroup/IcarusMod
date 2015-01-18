@@ -1,7 +1,10 @@
 package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.Command_Icarus;
+import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.StevenLawson.TotalFreedomMod.TFM_Log;
+import static me.StevenLawson.TotalFreedomMod.TotalFreedomMod.plugin;
+import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
@@ -23,6 +26,7 @@ public class IcarusMod extends BukkitPlugin
     //
     public BukkitCommandHandler handler;
     //
+    public static MySQL mySQL;
 
     @Override
     public void onLoad()
@@ -42,6 +46,7 @@ public class IcarusMod extends BukkitPlugin
         BukkitLib.init(plugin);
         handler.setCommandLocation(Command_Icarus.class.getPackage());
         TFM_Log.info(pluginName + " has been enabled without any issues.");
+        mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());
 
     }
 
