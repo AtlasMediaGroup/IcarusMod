@@ -5,6 +5,7 @@ import me.StevenLawson.TotalFreedomMod.Config.TFM_ConfigEntry;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
+import net.pravian.bukkitlib.config.YamlConfig;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.LoggerUtils;
 import org.bukkit.command.Command;
@@ -16,6 +17,7 @@ public class IcarusMod extends BukkitPlugin
     public IcarusMod plugin;
     public BukkitCommandHandler handler;
     public static MySQL mySQL;
+    public YamlConfig config;
 
     @Override
     public void onLoad()
@@ -29,10 +31,12 @@ public class IcarusMod extends BukkitPlugin
     {
         BukkitLib.init(plugin);
         LoggerUtils.info(plugin, "has been enabled with no problems.");
-
+        this.config = new YamlConfig(plugin, "config.yml");
         handler.setCommandLocation(Command_icarusmod.class.getPackage());
 
-        mySQL = new MySQL(plugin, TFM_ConfigEntry.HOSTNAME.getString(), TFM_ConfigEntry.PORT.getString(), TFM_ConfigEntry.DATABASE.getString(), TFM_ConfigEntry.USER.getString(), TFM_ConfigEntry.PASSWORD.getString());
+        config.load();
+
+        mySQL = new MySQL(plugin, config.getString("Hostname"), config.getString("Port"), config.getString("Database"), config.getString("User"), config.getString("Password"));
     }
 
     @Override

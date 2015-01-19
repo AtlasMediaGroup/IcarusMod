@@ -1,0 +1,10 @@
+#IcarusMod Configuration File
+
+# MySQL Details
+
+Hostname: ''
+Port: '3306'  
+# Dont change the port unless you know the shit your messing with
+Database: ''
+Username: ''
+Password: ''
