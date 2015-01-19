@@ -7,7 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 @CommandPermissions(source = SourceType.ANY, permission = "")
-public class Command_Icarus extends BukkitCommand
+public class Command_icarusmod extends BukkitCommand
 {
 
     @Override
