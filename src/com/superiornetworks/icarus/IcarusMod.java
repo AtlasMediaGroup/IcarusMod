@@ -1,6 +1,6 @@
 package com.superiornetworks.icarus;
 
-import com.superiornetworks.icarus.commands.Command_icarusmod;
+import com.superiornetworks.icarus.commands.*;
 import com.superiornetworks.icarus.listeners.PlayerListener;
 import com.superiornetworks.icarus.modules.FamousWarning;
 import me.husky.mysql.MySQL;
@@ -44,6 +44,7 @@ public class IcarusMod extends BukkitPlugin
         // Bukkit Lib Important Stuff
         BukkitLib.init(plugin);
         handler.setCommandLocation(Command_icarusmod.class.getPackage());
+        handler.setCommandLocation(Command_wetoggle.class.getPackage());
 
         // More YAML Setting Up and information.
         this.config = new YamlConfig(plugin, "config.yml");
