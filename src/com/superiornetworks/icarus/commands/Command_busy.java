@@ -1,9 +1,9 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
 import com.superiornetworks.icarus.modules.BusyModule;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
-import me.StevenLawson.TotalFreedomMod.TotalFreedomMod;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
 import net.pravian.bukkitlib.command.SourceType;
@@ -20,7 +20,7 @@ public class Command_busy extends BukkitCommand<IcarusMod>
     {
         if (!TFM_AdminList.isSuperAdmin(sender))
         {
-            sender.sendMessage(TotalFreedomMod.MSG_NO_PERMS);
+            sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
         }
         
