@@ -2,6 +2,7 @@ package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.*;
 import com.superiornetworks.icarus.listeners.PlayerListener;
+import com.superiornetworks.icarus.modules.BusyModule;
 import com.superiornetworks.icarus.modules.FamousWarning;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -27,6 +28,7 @@ public class IcarusMod extends BukkitPlugin
 
     // Module Information
     public FamousWarning famousWarning;
+    public BusyModule busymodule;
 
     @Override
     public void onLoad()
@@ -52,6 +54,7 @@ public class IcarusMod extends BukkitPlugin
         // Listeners
         final PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(plugin), plugin);
+        pm.registerEvents(new BusyModule(plugin), plugin);
 
         // MySQL Stuffs
         mySQL = new MySQL(plugin, config.getString("Hostname"), config.getString("Port"), config.getString("Database"), config.getString("User"), config.getString("Password"));
