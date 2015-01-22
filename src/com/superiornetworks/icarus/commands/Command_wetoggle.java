@@ -2,6 +2,7 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
+import me.StevenLawson.TotalFreedomMod.Commands.TFM_Command;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
@@ -21,7 +22,7 @@ public class Command_wetoggle extends BukkitCommand<IcarusMod>{
     {
         if (!TFM_AdminList.isSuperAdmin(sender))
         {
-            sender.sendMessage(ICM_Utils.NO_PERMS);
+            sender.sendMessage(TFM_Command.MSG_NO_PERMS);
             return true;
         }
         PluginManager pm = Bukkit.getServer().getPluginManager();
