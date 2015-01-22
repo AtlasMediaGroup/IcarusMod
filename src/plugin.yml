@@ -9,3 +9,9 @@ commands:
   icarusmod:
     description: Mostly for test usage, but will prove that the commands actually are running as expected.
     usage: /<command>
+  wetoggle:
+    desctiption: Toggles WE.
+    usage: /<command>
+  busy:
+    description: Puts you in the busy status.
+    usage: /<command>
