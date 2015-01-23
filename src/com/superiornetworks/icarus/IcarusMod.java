@@ -17,7 +17,7 @@ import org.bukkit.plugin.PluginManager;
 public class IcarusMod extends BukkitPlugin
 {
 
-    public IcarusMod plugin;
+    public static IcarusMod plugin;
     public BukkitCommandHandler handler;
 
     // MySQL  
