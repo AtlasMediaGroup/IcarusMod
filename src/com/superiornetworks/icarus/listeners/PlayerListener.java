@@ -20,10 +20,11 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -83,6 +84,19 @@ public class PlayerListener implements Listener
             event.setCancelled(true);
             playerMsg(hitter, "Don't try to PVP in Creative or God mode. ~ Thanks.", ChatColor.RED);
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onPlayerQuit(PlayerQuitEvent event)
+    {
+        plugin.busyModule.onPlayerQuit(event);
+    }
+
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
+    public void onPlayerChat(AsyncPlayerChatEvent event)
+    {
+        plugin.busyModule.onPlayerChat(event);
+
     }
 
     @EventHandler
@@ -147,17 +161,6 @@ public class PlayerListener implements Listener
             }
             event.setCancelled(true);
         }
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onPlayerQuit(PlayerQuitEvent event)
-    {
-        plugin.busyModule.onPlayerQuit(event);
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
-    public void onPlayerChat(AsyncPlayerChatEvent event)
-    {
-        plugin.busyModule.onPlayerChat(event);
-
     }
-
-}
