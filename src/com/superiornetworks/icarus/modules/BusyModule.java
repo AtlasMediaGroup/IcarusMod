@@ -38,7 +38,7 @@ public class BusyModule extends IcarusModule implements Listener
     
     public static boolean isBusy(Player player)
     {
-        if (!busyAdmins.contains(player.getName()))
+        if (busyAdmins.contains(player.getName()))
         {
             return true;
         }
