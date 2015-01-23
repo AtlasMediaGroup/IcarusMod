@@ -27,12 +27,10 @@ public class Command_wetoggle extends BukkitCommand<IcarusMod>
         }
         PluginManager pm = Bukkit.getServer().getPluginManager();
         Plugin we = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-
-        if (pm.getPlugin("WorldEdit") == null)
-        {
+        
+        if (we == null)
             return true;
-        }
-        //
+        
         if (we.isEnabled())
         {
             sender.sendMessage(ChatColor.GREEN + "WorldEdit disabled!");

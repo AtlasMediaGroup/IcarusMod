@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class ICM_SqlHandler
 {
-
+    
     public static void updateDatabase(String SQLquery) throws SQLException
     {
         Connection c = mySQL.openConnection();
@@ -16,7 +16,7 @@ public class ICM_SqlHandler
         statement.executeUpdate(SQLquery);
     }
 
-    public void getValueFromDB(String SQLquery) throws SQLException
+    public static void getValueFromDB(String SQLquery) throws SQLException
     {
         Connection c = mySQL.openConnection();
         Statement statement = c.createStatement();

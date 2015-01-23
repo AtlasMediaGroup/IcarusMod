@@ -19,14 +19,14 @@ import org.reflections.Reflections;
 public class IcarusMod extends BukkitPlugin
 {
 
-    public IcarusMod plugin;
+    public static IcarusMod plugin;
     public BukkitCommandHandler handler;
 
     // MySQL  
     public static MySQL mySQL;
 
     // YAML File Information
-    public YamlConfig config;
+    public static YamlConfig config;
 
     // Module Information
     public FamousWarning famousWarning;
