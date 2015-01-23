@@ -6,11 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 public class ICM_SqlHandler
 {
-    
-      public static void updateDatabase(String SQLquery) throws SQLException
+
+    public static void updateDatabase(String SQLquery) throws SQLException
     {
         Connection c = mySQL.openConnection();
         Statement statement = c.createStatement();
@@ -24,5 +23,5 @@ public class ICM_SqlHandler
         ResultSet res = statement.executeQuery(SQLquery);
         res.next();
     }
-    
+
 }

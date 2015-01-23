@@ -15,13 +15,14 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class BusySystem extends IcarusModule implements Listener
 {
-    public BusySystem(IcarusMod plugin) 
+
+    public BusySystem(IcarusMod plugin)
     {
         super(plugin);
     }
-    
+
     static List<String> busyAdmins = new ArrayList<>();
-    
+
     public static void toggleBusyPlayer(Player player)
     {
         if (busyAdmins.contains(player.getName()))
@@ -35,7 +36,7 @@ public class BusySystem extends IcarusModule implements Listener
             player.sendMessage(ChatColor.GREEN + "You have toggled busy status on.");
         }
     }
-    
+
     public static boolean isBusy(Player player)
     {
         if (!busyAdmins.contains(player.getName()))
@@ -44,12 +45,13 @@ public class BusySystem extends IcarusModule implements Listener
         }
         return false;
     }
+
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event)
     {
         busyAdmins.remove(event.getPlayer().getName());
     }
-    
+
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event)
     {
@@ -57,24 +59,24 @@ public class BusySystem extends IcarusModule implements Listener
         for (final String word : words)
         {
             Player player = Bukkit.getServer().getPlayer(word);
-            
+
             if (player == null)
             {
                 return;
             }
-            
+
             if (!TFM_AdminList.isSuperAdmin(player))
             {
-               return; 
+                return;
             }
-            
+
             if (BusySystem.isBusy(player))
             {
                 event.getPlayer().sendMessage(ChatColor.RED + "The admin " + player.getName() + " is busy. If you were trying to get his/her attention, please try again later.");
             }
         }
     }
-    
+
     @EventHandler
     public void commandEvent(PlayerCommandPreprocessEvent event)
     {

@@ -14,10 +14,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 @CommandPermissions(source = SourceType.ANY, permission = "")
-public class Command_wetoggle extends BukkitCommand<IcarusMod>{
+public class Command_wetoggle extends BukkitCommand<IcarusMod>
+{
 
     @Override
-    public boolean run(CommandSender sender, Command cmd, String string, String[] args) 
+    public boolean run(CommandSender sender, Command cmd, String string, String[] args)
     {
         if (!TFM_AdminList.isSuperAdmin(sender))
         {
@@ -26,8 +27,11 @@ public class Command_wetoggle extends BukkitCommand<IcarusMod>{
         }
         PluginManager pm = Bukkit.getServer().getPluginManager();
         Plugin we = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
-        
-        if (pm.getPlugin("WorldEdit") == null) return true;
+
+        if (pm.getPlugin("WorldEdit") == null)
+        {
+            return true;
+        }
         //
         if (we.isEnabled())
         {
@@ -41,5 +45,5 @@ public class Command_wetoggle extends BukkitCommand<IcarusMod>{
             pm.enablePlugin(we);
         }
         return true;
-    }    
+    }
 }

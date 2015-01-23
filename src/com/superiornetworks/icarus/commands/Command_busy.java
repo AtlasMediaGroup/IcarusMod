@@ -16,17 +16,17 @@ public class Command_busy extends BukkitCommand<IcarusMod>
 {
 
     @Override
-    public boolean run(CommandSender sender, Command cmnd, String string, String[] args) 
+    public boolean run(CommandSender sender, Command cmnd, String string, String[] args)
     {
         if (!TFM_AdminList.isSuperAdmin(sender))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
         }
-        
+
         Player player = (Player) sender;
         BusySystem.toggleBusyPlayer(player);
         return true;
     }
-    
+
 }

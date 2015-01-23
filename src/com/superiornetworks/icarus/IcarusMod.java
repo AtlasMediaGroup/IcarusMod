@@ -14,7 +14,6 @@ import net.pravian.bukkitlib.util.LoggerUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.PluginManager;
 import org.reflections.Reflections;
 
 public class IcarusMod extends BukkitPlugin
