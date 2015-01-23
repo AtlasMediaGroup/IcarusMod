@@ -8,3 +8,8 @@ Port: '3306'
 Database: ''
 Username: ''
 Password: ''
+
+#Toggles
+toggles:
+    #Is adminworld enabled?
+    AdminWorld: true

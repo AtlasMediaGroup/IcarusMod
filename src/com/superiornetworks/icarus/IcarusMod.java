@@ -24,7 +24,7 @@ public class IcarusMod extends BukkitPlugin
     public static MySQL mySQL;
 
     // YAML File Information
-    public YamlConfig config;
+    public static YamlConfig config;
 
     // Module Information
     public FamousWarning famousWarning;

@@ -15,3 +15,6 @@ commands:
   busy:
     description: Puts you in the busy status.
     usage: /<command>
+  icmtoggle:
+    description: Allows you to toggle certain aspects of the IcarusMod
+    usage: /toggle <setting>
