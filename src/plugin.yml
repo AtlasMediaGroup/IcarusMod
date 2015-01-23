@@ -1,7 +1,7 @@
 name: IcarusMod
 version: 0.0.0
 description: The custom hook in plugin for the Superior Freedom Network linking to TotalFreedomMod
-depend: [TotalFreedomMod]
+depend: [TotalFreedomMod, CoreProtect]
 authors: [Wild1145, Camzie99, Hockeyfan360]
 main: com.superiornetworks.icarus.IcarusMod
 
