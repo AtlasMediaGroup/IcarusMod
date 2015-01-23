@@ -28,6 +28,7 @@ public class PlayerListener implements Listener
         plugin.famousWarning.onUncancelledPlayerJoin(event);
 
         //Turn on commandspy
+        // TODO: Move to a seperate file to keep this one clean. 
         if (TFM_AdminList.isSuperAdmin(player))
         {
             TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
