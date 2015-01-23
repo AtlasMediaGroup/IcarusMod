@@ -2,7 +2,7 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
-import com.superiornetworks.icarus.modules.BusyModule;
+import com.superiornetworks.icarus.modules.BusySystem;
 import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
@@ -25,7 +25,7 @@ public class Command_busy extends BukkitCommand<IcarusMod>
         }
         
         Player player = (Player) sender;
-        BusyModule.toggleBusyPlayer(player);
+        BusySystem.toggleBusyPlayer(player);
         return true;
     }
     

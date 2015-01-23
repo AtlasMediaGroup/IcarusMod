@@ -13,9 +13,9 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class BusyModule extends IcarusModule implements Listener
+public class BusySystem extends IcarusModule implements Listener
 {
-    public BusyModule(IcarusMod plugin) 
+    public BusySystem(IcarusMod plugin) 
     {
         super(plugin);
     }
@@ -68,7 +68,7 @@ public class BusyModule extends IcarusModule implements Listener
                return; 
             }
             
-            if (BusyModule.isBusy(player))
+            if (BusySystem.isBusy(player))
             {
                 event.getPlayer().sendMessage(ChatColor.RED + "The admin " + player.getName() + " is busy. If you were trying to get his/her attention, please try again later.");
             }
@@ -92,7 +92,7 @@ public class BusyModule extends IcarusModule implements Listener
                 return;
             }
 
-            if (BusyModule.isBusy(player))
+            if (BusySystem.isBusy(player))
             {
                 event.getPlayer().sendMessage(ChatColor.RED + "The admin " + player.getName() + " is busy. If you were trying to get his/her attention, please try again later.");
             }
