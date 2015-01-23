@@ -2,8 +2,7 @@ package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.Command_icarusmod;
 import com.superiornetworks.icarus.listeners.PlayerListener;
-import com.superiornetworks.icarus.modules.BusySystem;
-import com.superiornetworks.icarus.modules.FamousWarning;
+import com.superiornetworks.icarus.modules.*;
 import java.util.Set;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -30,7 +29,11 @@ public class IcarusMod extends BukkitPlugin
 
     // Module Information
     public FamousWarning famousWarning;
-    public BusySystem busyModule;
+    public BusySystem busySystem;
+    public CreativePVP creativePVP;
+    public DoomHammer doomHammer;
+    public AdminWorldToggle adminWorldToggle;
+    public CommandSpyOverride commandSpyOverride;
 
     @Override
     public void onLoad()
@@ -40,7 +43,11 @@ public class IcarusMod extends BukkitPlugin
 
         // Module Loading
         famousWarning = new FamousWarning(plugin);
-        busyModule = new BusySystem(plugin);
+        busySystem = new BusySystem(plugin);
+        creativePVP = new CreativePVP(plugin);
+        doomHammer = new DoomHammer(plugin);
+        adminWorldToggle = new AdminWorldToggle(plugin);
+        commandSpyOverride = new CommandSpyOverride(plugin);
     }
 
     @Override
