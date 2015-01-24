@@ -21,3 +21,6 @@ commands:
   doomhammer:
     description: Give yourself a DoomHammer.
     usage: /doomhammer
+  devmode:
+    description: Allows you to turn on devmode.
+    usage: /<command> <everyone|admins|developers|off>
