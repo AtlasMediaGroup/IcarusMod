@@ -32,6 +32,7 @@ public class IcarusMod extends BukkitPlugin
     public DoomHammer doomHammer;
     public AdminWorldToggle adminWorldToggle;
     public CommandSpyOverride commandSpyOverride;
+    public DevelopmentMode developmentMode;
 
     @Override
     public void onLoad()
@@ -46,6 +47,7 @@ public class IcarusMod extends BukkitPlugin
         doomHammer = new DoomHammer(plugin);
         adminWorldToggle = new AdminWorldToggle(plugin);
         commandSpyOverride = new CommandSpyOverride(plugin);
+        developmentMode = new DevelopmentMode(plugin);
     }
 
     @Override

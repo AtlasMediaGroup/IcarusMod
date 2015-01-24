@@ -27,6 +27,7 @@ public class PlayerListener implements Listener
     {
         plugin.famousWarning.onUncancelledPlayerJoin(event);
         plugin.commandSpyOverride.onUncancelledPlayerJoin(event);
+        plugin.developmentMode.onUncancelledPlayerJoin(event);
     }
     
     @EventHandler
@@ -45,6 +46,7 @@ public class PlayerListener implements Listener
     public void onPlayerQuit(PlayerQuitEvent event)
     {
         plugin.busySystem.onPlayerQuit(event);
+        plugin.developmentMode.onPlayerQuit(event);
     }
     
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
