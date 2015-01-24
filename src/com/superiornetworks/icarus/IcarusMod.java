@@ -3,7 +3,6 @@ package com.superiornetworks.icarus;
 import com.superiornetworks.icarus.commands.Command_icarusmod;
 import com.superiornetworks.icarus.listeners.PlayerListener;
 import com.superiornetworks.icarus.modules.*;
-import java.util.Set;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
@@ -12,9 +11,7 @@ import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.LoggerUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
-import org.reflections.Reflections;
 
 public class IcarusMod extends BukkitPlugin
 {
@@ -65,17 +62,6 @@ public class IcarusMod extends BukkitPlugin
         final PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(plugin), plugin);
 
-        /*
-         // Listeners - Thanks WickedGamingUK for the code :) - This currently does not work and we will re-visit at a later date. 
-         Reflections listeners = new Reflections(PlayerListener.class.getPackage());
-
-         Set<Class<? extends Listener>> listenerSet = listeners.getSubTypesOf(Listener.class);
-
-         for (Class<? extends Listener> listener : listenerSet)
-         {
-         register(listener);
-         }
-         */
         // MySQL Stuffs
         mySQL = new MySQL(plugin, config.getString("Hostname"), config.getString("Port"), config.getString("Database"), config.getString("User"), config.getString("Password"));
 
