@@ -1,5 +1,5 @@
 name: IcarusMod
-version: 0.0.0
+version: 0.5
 description: The custom hook in plugin for the Superior Freedom Network linking to TotalFreedomMod
 depend: [TotalFreedomMod, CoreProtect]
 authors: [Wild1145, Camzie99, Hockeyfan360]
@@ -24,3 +24,9 @@ commands:
   devmode:
     description: Allows you to turn on devmode.
     usage: /<command> <everyone|admins|developers|off>
+  god:
+    description: Give yourself god mode.
+    usage: /<command> 
+  report:
+    description: Files a report against another player
+    usage: /command <player> <reason>
