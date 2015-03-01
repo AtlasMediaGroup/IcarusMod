@@ -14,7 +14,7 @@ public class ICM_Utils
 
     public static final List<String> MANAGERS = Arrays.asList("wild1145", "Camzie99");
     public static final List<String> COMMUNITYTEAM = Arrays.asList("");
-    public static final List<String> DEVELOPERS = Arrays.asList("wild1145", "Camzie99", "hockeyfan360");
+    public static final List<String> DEVELOPERS = Arrays.asList("wild1145", "Camzie99", "Hockeyfan360");
 
     // TODO: Get this information directly from the database. 
     
