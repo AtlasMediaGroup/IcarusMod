@@ -19,7 +19,7 @@ public class SeniorAdminChat extends IcarusModule
         {
             if (TFM_AdminList.isSeniorAdmin(p, true))
             {
-                p.sendMessage("§f[§bADMIN§f] §4" + sender.getName() + " §d[SrA]§f: §d" + message);
+                p.sendMessage("§f[§bADMIN§f] §4" + sender.getName() + " §d[SrA]§f: §d " + message);
             }
         }
     }
