@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 public class ICM_Bans
 {
+
     public static void addBan(Player player, CommandSender sender, String reason)
     {
         try

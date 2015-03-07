@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class ICM_SqlHandler
 {
-    
+
     public static void updateDatabase(String SQLquery) throws SQLException
     {
         Connection c = mySQL.openConnection();

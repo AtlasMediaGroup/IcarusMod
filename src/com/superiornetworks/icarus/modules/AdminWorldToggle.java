@@ -29,6 +29,5 @@ public class AdminWorldToggle extends IcarusModule implements Listener
             player.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
         }
     }
-    
-    
+
 }

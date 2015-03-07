@@ -29,7 +29,7 @@ public class CreativePVP extends IcarusModule implements Listener
         {
             return;
         }
-        
+
         Player player = (Player) event.getDamager();
         if (player.getGameMode() == GameMode.CREATIVE || ICM_Utils.GOD.contains(player.getName()))
         {
@@ -37,7 +37,7 @@ public class CreativePVP extends IcarusModule implements Listener
             playerMsg(player, "Don't try to PVP in Creative or God mode. ~ Thanks.", ChatColor.RED);
         }
     }
-    
+
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event)
     {
@@ -51,6 +51,5 @@ public class CreativePVP extends IcarusModule implements Listener
             event.setCancelled(true);
         }
     }
-    
-    
+
 }

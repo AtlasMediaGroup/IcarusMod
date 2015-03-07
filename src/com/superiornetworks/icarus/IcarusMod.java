@@ -60,7 +60,7 @@ public class IcarusMod extends BukkitPlugin
         // More YAML Setting Up and information.
         this.config = new YamlConfig(plugin, "config.yml");
 
-         // Listeners
+        // Listeners
         final PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(plugin), plugin);
 

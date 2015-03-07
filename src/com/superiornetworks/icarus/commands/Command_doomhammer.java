@@ -11,26 +11,27 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(source = SourceType.PLAYER, permission="")
+@CommandPermissions(source = SourceType.PLAYER, permission = "")
 public class Command_doomhammer extends BukkitCommand
 {
+
     @Override
     public boolean run(CommandSender sender, Command cmd, String label, String[] args)
     {
-        if(!(sender instanceof Player))
+        if (!(sender instanceof Player))
         {
             return true;
         }
         Player player = (Player) sender;
-        if(!ICM_Utils.MANAGERS.contains(player.getName()))
+        if (!ICM_Utils.MANAGERS.contains(player.getName()))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
         }
-        if(!ICM_Utils.DOOMHAMMERS.contains(player.getName()))
+        if (!ICM_Utils.DOOMHAMMERS.contains(player.getName()))
         {
             TFM_Util.adminAction(player.getName(), "Unleashing the DOOM-HAMMER!", true);
-            for(int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 player.getWorld().strikeLightningEffect(player.getLocation());
             }

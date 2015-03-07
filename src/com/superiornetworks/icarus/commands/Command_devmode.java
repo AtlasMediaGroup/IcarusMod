@@ -14,18 +14,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandPermissions(source = SourceType.ANY, permission = "")
-public class Command_devmode extends BukkitCommand 
+public class Command_devmode extends BukkitCommand
 {
 
     @Override
-    public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args) 
+    public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         if (!ICM_Utils.DEVELOPERS.contains(sender.getName()))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
         }
-        
+
         if (args.length != 1)
         {
             sender.sendMessage(ChatColor.RED + "Usage: /<command> <everyone:admins:developers:off>");
@@ -79,5 +79,5 @@ public class Command_devmode extends BukkitCommand
         }
         return true;
     }
-    
+
 }
