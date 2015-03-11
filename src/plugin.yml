@@ -29,4 +29,7 @@ commands:
     usage: /<command> 
   report:
     description: Files a report against another player
-    usage: /command <player> <reason>
+    usage: /<command> <player> <reason>
+  p:
+    description: Allows you to chat with seniors in private.
+    usage: /<command> <message>
