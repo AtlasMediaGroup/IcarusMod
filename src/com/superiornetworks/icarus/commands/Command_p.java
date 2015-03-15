@@ -17,7 +17,7 @@ public class Command_p extends BukkitCommand
     @Override
     public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.SENIOR))
+        if (!ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.SENIOR))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;

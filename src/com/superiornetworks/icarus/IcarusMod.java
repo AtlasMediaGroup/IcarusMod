@@ -77,7 +77,7 @@ public class IcarusMod extends BukkitPlugin
         pm.registerEvents(new PlayerListener(plugin), plugin);
 
         // MySQL Stuffs
-        mySQL = new MySQL(plugin, "fop.us.to", "3306", "icarus", "icarus", "Password123*");
+        mySQL = new MySQL(plugin, config.getString("Hostname"), config.getString("Port"), config.getString("Username"), config.getString("Password"), config.getString("Database"));
 
         // The Actual Loading of the configuration File
         config.load();

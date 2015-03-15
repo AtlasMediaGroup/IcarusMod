@@ -95,5 +95,19 @@ public class ICM_SqlHandler
         res.next();
         return res.getBoolean("doomHammer");
     }
+    
+    public static boolean isGod(String playerName) throws SQLException
+    {
+        if(!playerExists(playerName))
+        {
+            return false;
+        }
+        Connection c = mySQL.openConnection();
+        PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `playerName` = '?'");
+        statement.setString(1, playerName);
+        ResultSet res = statement.executeQuery();
+        res.next();
+        return res.getBoolean("godMod");
+    }
 
 }
