@@ -28,6 +28,7 @@ public class PlayerListener implements Listener
         plugin.famousWarning.onUncancelledPlayerJoin(event);
         plugin.commandSpyOverride.onUncancelledPlayerJoin(event);
         plugin.developmentMode.onUncancelledPlayerJoin(event);
+        plugin.joinModule.onPlayerJoin(event);
     }
 
     @EventHandler
@@ -56,6 +57,12 @@ public class PlayerListener implements Listener
 
     }
 
+    @EventHandler
+    public void onChatEvent(AsyncPlayerChatEvent event)
+    {
+        plugin.chatModule.onChat(event);
+    }
+    
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event)
     {

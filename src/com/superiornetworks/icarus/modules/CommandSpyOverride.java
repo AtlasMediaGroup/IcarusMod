@@ -1,8 +1,11 @@
 package com.superiornetworks.icarus.modules;
 
+import com.superiornetworks.icarus.ICM_Rank;
+import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.IcarusMod;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
-import me.StevenLawson.TotalFreedomMod.TFM_PlayerData;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,10 +25,16 @@ public class CommandSpyOverride extends IcarusModule implements Listener
     {
         Player player = event.getPlayer();
 
-        if (TFM_AdminList.isSuperAdmin(player))
+        if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
         {
-            TFM_PlayerData playerdata = TFM_PlayerData.getPlayerData(player);
-            playerdata.setCommandSpy(true);
+            try
+            {
+                ICM_SqlHandler.updateDatabase("UPDATE `icarus`.`players` SET `commandSpy` `1`");
+            }
+            catch (SQLException ex)
+            {
+                Logger.getLogger(CommandSpyOverride.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

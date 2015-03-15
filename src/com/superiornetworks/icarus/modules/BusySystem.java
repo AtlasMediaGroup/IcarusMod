@@ -1,9 +1,9 @@
 package com.superiornetworks.icarus.modules;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.IcarusMod;
 import java.util.ArrayList;
 import java.util.List;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -65,7 +65,7 @@ public class BusySystem extends IcarusModule implements Listener
                 return;
             }
 
-            if (!TFM_AdminList.isSuperAdmin(player))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
                 return;
             }
@@ -89,7 +89,7 @@ public class BusySystem extends IcarusModule implements Listener
                 continue;
             }
 
-            if (!TFM_AdminList.isSuperAdmin(player))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
                 return;
             }

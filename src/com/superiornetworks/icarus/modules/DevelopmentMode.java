@@ -1,13 +1,13 @@
 package com.superiornetworks.icarus.modules;
 
-import com.superiornetworks.icarus.ICM_Utils;
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.IcarusMod;
 import java.util.ArrayList;
 import java.util.List;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -41,7 +41,7 @@ public class DevelopmentMode extends IcarusModule implements Listener
     //The below list is used to detect who not to put a join message on.
     static List<String> noQuitMessage = new ArrayList<>();
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onUncancelledPlayerJoin(PlayerJoinEvent event)
     {
         Player player = event.getPlayer();
@@ -49,7 +49,7 @@ public class DevelopmentMode extends IcarusModule implements Listener
 
         if (DevelopmentMode.isInMode(DevMode.DEV_ONLY))
         {
-            if (!ICM_Utils.DEVELOPERS.contains(player.getName()))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.DEVELOPER))
             {
                 noQuitMessage.add(playername);
                 event.setJoinMessage(null);
@@ -58,7 +58,7 @@ public class DevelopmentMode extends IcarusModule implements Listener
         }
         if (DevelopmentMode.isInMode(DevMode.ADMIN_ONLY))
         {
-            if (!TFM_AdminList.isSuperAdmin(player))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
                 noQuitMessage.add(playername);
                 event.setJoinMessage(null);

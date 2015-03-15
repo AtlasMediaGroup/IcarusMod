@@ -1,8 +1,8 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.modules.SeniorAdminChat;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
 import net.pravian.bukkitlib.command.SourceType;
@@ -17,7 +17,7 @@ public class Command_p extends BukkitCommand
     @Override
     public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (!TFM_AdminList.isSeniorAdmin(sender, true))
+        if (ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.SENIOR))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;

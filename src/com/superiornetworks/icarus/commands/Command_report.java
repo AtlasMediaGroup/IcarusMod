@@ -1,8 +1,8 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import java.sql.SQLException;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
 import net.pravian.bukkitlib.command.SourceType;
@@ -58,7 +58,7 @@ public class Command_report extends BukkitCommand
         }
         for (Player admin : Bukkit.getOnlinePlayers())
         {
-            if (TFM_AdminList.isSuperAdmin(admin))
+            if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
                 admin.sendMessage(ChatUtils.colorize("&8[&4ICarusMod&8] &a" + sender.getName() + "&4Has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }

@@ -3,8 +3,11 @@ package com.superiornetworks.icarus;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -12,10 +15,26 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class ICM_Utils
 {
 
-    public static final List<String> MANAGERS = Arrays.asList("wild1145", "Camzie99");
+    public static final List<String> MANAGERS = Arrays.asList("Wild1145", "Camzie99");
     public static final List<String> COMMUNITYTEAM = Arrays.asList("");
-    public static final List<String> DEVELOPERS = Arrays.asList("wild1145", "Camzie99", "Hockeyfan360");
-
+    public static final List<String> DEVELOPERS = Arrays.asList("Wild1145", "Camzie99", "Hockeyfan360");
+    public static final List<ChatColor> COLOURS = Arrays.asList(
+            ChatColor.DARK_BLUE,
+            ChatColor.DARK_GREEN,
+            ChatColor.DARK_AQUA,
+            ChatColor.DARK_RED,
+            ChatColor.DARK_PURPLE,
+            ChatColor.GOLD,
+            ChatColor.BLUE,
+            ChatColor.GREEN,
+            ChatColor.AQUA,
+            ChatColor.RED,
+            ChatColor.LIGHT_PURPLE,
+            ChatColor.YELLOW
+    );
+    //REPLACING WITH MYSQL SHORTLY
+    public static final List<String> FAMOUS = Arrays.asList("");
+    
     // TODO: Get this information directly from the database. 
     //Want to migrate to custom playerdata.
     public static ArrayList<String> DOOMHAMMERS = new ArrayList<>();
@@ -32,5 +51,37 @@ public class ICM_Utils
         banhammermeta.setDisplayName(ChatColor.RED + "DoomHammer!");
         banhammer.setItemMeta(banhammermeta);
         return banhammer;
+    }
+    
+    public static ChatColor getRandomChatColour()
+    {
+        Random random = new Random();
+        return COLOURS.get(random.nextInt(COLOURS.size()));
+    }
+    
+    public static String colour(String string)
+    {
+        string = ChatColor.translateAlternateColorCodes('&', string);
+        string = string.replaceAll("&-", getRandomChatColour().toString());
+        return string;
+    }
+    
+    public static String aOrAn(String string)
+    {
+        if (string.toLowerCase().matches("^[aeiou].*"))
+        {
+            return "an";
+        }
+        return "a";
+    }
+    
+    public static void adminAction(String name, String message, boolean isRed)
+    {
+        Bukkit.broadcastMessage((isRed ? ChatColor.RED : ChatColor.AQUA) + name + " - " + message);
+    }
+    
+    public static void playerMsg(CommandSender player, String message)
+    {
+        player.sendMessage(colour(message));
     }
 }
