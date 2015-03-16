@@ -34,7 +34,15 @@ public class Command_report extends BukkitCommand
             return false;
         }
         Player player = PlayerUtils.getPlayer(args[0]);
-        String Reported = player.getName();
+        String Reported;
+        if(player != null)
+        {
+            Reported = player.getName();
+        }
+        else
+        {
+            Reported = args[0];
+        }
         String report_reason = null;
         if (args.length < 2)
         {
@@ -65,7 +73,8 @@ public class Command_report extends BukkitCommand
                 admin.sendMessage(ChatUtils.colorize("&8[&4ICarusMod&8] &a" + sender.getName() + "&4Has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
         }
-        player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + "&4 an adminstrator will review this soon."));
+        if(player != null)
+            player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + "&4 an adminstrator will review this soon."));
         sender.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "Your report has been recieved and will be reviewed soon."));
 
         try
@@ -73,7 +82,7 @@ public class Command_report extends BukkitCommand
             Connection c = ICM_SqlHandler.getConnection();
             PreparedStatement statement = c.prepareStatement("INSERT INTO `reports` (`senderName`, `playerName`, `reportReason`, `ip`) VALUES (?,?,?,?)");
             statement.setString(1, sender.getName());
-            statement.setString(2, player.getName());
+            statement.setString(2, Reported);
             statement.setString(3, report_reason);
             statement.setString(4, player.getAddress().getAddress().getHostAddress());
             statement.executeUpdate();

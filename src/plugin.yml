@@ -35,3 +35,6 @@ commands:
   setlogin:
     description: Set your login message.
     usage: /<command> <message>
+  saconfig:
+    description: Admin management.
+    usage: /<command> <list|add <player> [rank]|delete <player>>
