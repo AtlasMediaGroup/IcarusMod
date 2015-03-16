@@ -6,41 +6,80 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import org.bukkit.entity.Player;
 
 public class ICM_SqlHandler
 {
-
-    public static void updateDatabase(String SQLquery) throws SQLException
+    public static Connection getConnection()
     {
-        Connection c = mySQL.openConnection();
-        Statement statement = c.createStatement();
-        statement.executeUpdate(SQLquery);
+        if(mySQL.checkConnection())
+        {
+            return mySQL.getConnection();
+        }
+        return mySQL.openConnection();
     }
-
-    public static void getValueFromDB(String SQLquery) throws SQLException
+    
+    public static void generateTables() throws SQLException
     {
-        Connection c = mySQL.openConnection();
+        Connection c = getConnection();
         Statement statement = c.createStatement();
-        ResultSet res = statement.executeQuery(SQLquery);
-        res.next();
+        String players = "CREATE TABLE IF NOT EXISTS `players` ("
+                + "`id` INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                + "`playerName` VARCHAR(16) NOT NULL UNIQUE,"
+                + "`nick` TEXT,"
+                + "`tag` TEXT,"
+                + "`loginMessage` TEXT,"
+                + "`rank` TEXT,"
+                + "`ip` VARCHAR(64),"
+                + "`godMode` BOOLEAN,"
+                + "`doomHammer` BOOLEAN"
+                + ")";
+        String reports = "CREATE TABLE IF NOT EXISTS `reports` ("
+                + "id INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                + "`senderName` VARCHAR(16) NOT NULL,"
+                + "`playerName` VARCHAR(16) NOT NULL,"
+                + "`reportReason` TEXT,"
+                + "`ip` VARCHAR(64),"
+                + "`time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                + ")";
+        String bans = "CREATE TABLE IF NOT EXISTS `bans` ("
+                + "id INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                + "`senderName` VARCHAR(16) NOT NULL,"
+                + "`playerName` VARCHAR(16) NOT NULL UNIQUE,"
+                + "`banReason` TEXT,"
+                + "`ip` VARCHAR(64),"
+                + "`time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                + ")";
+        statement.executeUpdate(players);
+        statement.executeUpdate(reports);
+        statement.executeUpdate(bans);
+    }
+    
+    public static void generateNewPlayer(Player player) throws SQLException
+    {
+        Connection c = getConnection();
+        PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `ip`, `godMode`, `doomHammer`) VALUES (?, '', 'Op', ?, '0', '0')");
+        statement.setString(1, player.getName());
+        statement.setString(2, player.getAddress().getAddress().getHostAddress());
+        statement.executeUpdate();
+    }
+    
+    public static Object getFromTable(String uniqueColumn, String uniqueValue, String lookingFor, String inTable) throws SQLException
+    {
+        Connection c = getConnection();
+        PreparedStatement statement = c.prepareStatement("SELECT * FROM `" + inTable + "` WHERE `" + uniqueColumn + "` = ?");
+        statement.setString(1, uniqueValue);
+        ResultSet res = statement.executeQuery();
+        if(res.next())
+        {
+            return res.getObject(lookingFor);
+        }
+        return null;
     }
     
     public static boolean playerExists(String playerName) throws SQLException
     {
-        Connection c = mySQL.openConnection();
-        PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `playerName` = '?'");
-        statement.setString(1, playerName);
-        ResultSet res = statement.executeQuery();
-        res.next();
-        return res.getString("playerName") != null;
-    }
-    
-    public static void generateNewPlayer(String playerName) throws SQLException
-    {
-        Connection c = mySQL.openConnection();
-        PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `godMode`, `doomHammer`, `commandSpy`) VALUES ('?', '', 'Op', '0', '0', '0')");
-        statement.setString(1, playerName);
-        statement.executeUpdate();
+        return getFromTable("playerName", playerName, "playerName", "players") != null;
     }
     
     public static String getLoginMessage(String playerName) throws SQLException
@@ -49,16 +88,12 @@ public class ICM_SqlHandler
         {
             return null;
         }
-        Connection c = mySQL.openConnection();
-        PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `playerName` = '?'");
-        statement.setString(1, playerName);
-        ResultSet res = statement.executeQuery();
-        res.next();
-        if(res.getString("loginMessage") == null)
+        Object obj = getFromTable("playerName", playerName, "loginMessage", "players");
+        if(obj instanceof String)
         {
-            return null;
+            return (String) obj;
         }
-        return res.getString("loginMessage");
+        return null;
     }
     
     public static String getRank(String playerName) throws SQLException
@@ -67,19 +102,40 @@ public class ICM_SqlHandler
         {
             return "Op";
         }
-        Connection c = mySQL.openConnection();
-        PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `playerName` = '?'");
-        statement.setString(1, playerName);
-        ResultSet res = statement.executeQuery();
-        res.next();
-        if(res.getString("rank") == null)
+        Object obj = getFromTable("playerName", playerName, "rank", "players");
+        if(obj instanceof String)
         {
-            return "Op";
+            return (String) obj;
         }
-        else
+        return "Op";
+    }
+    
+    public static String getTag(String playerName) throws SQLException
+    {
+        if(!playerExists(playerName))
         {
-            return res.getString("rank");
+            return "&7[&c" + getRank(playerName) + "&7]";
         }
+        Object obj = getFromTable("playerName", playerName, "tag", "players");
+        if(obj instanceof String)
+        {
+            return (String) obj;
+        }
+        return "&7[&c" + getRank(playerName) + "&7]";
+    }
+    
+    public static String getNick(String playerName) throws SQLException
+    {
+        if(!playerExists(playerName))
+        {
+            return playerName;
+        }
+        Object obj = getFromTable("playerName", playerName, "nick", "players");
+        if(obj instanceof String)
+        {
+            return (String) obj;
+        }
+        return playerName;
     }
     
     public static boolean hasDoomHammer(String playerName) throws SQLException
@@ -88,12 +144,12 @@ public class ICM_SqlHandler
         {
             return false;
         }
-        Connection c = mySQL.openConnection();
-        PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `playerName` = '?'");
-        statement.setString(1, playerName);
-        ResultSet res = statement.executeQuery();
-        res.next();
-        return res.getBoolean("doomHammer");
+        Object obj = getFromTable("playerName", playerName, "doomHammer", "players");
+        if(obj instanceof Boolean)
+        {
+            return (Boolean) obj;
+        }
+        return false;
     }
     
     public static boolean isGod(String playerName) throws SQLException
@@ -102,12 +158,12 @@ public class ICM_SqlHandler
         {
             return false;
         }
-        Connection c = mySQL.openConnection();
-        PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `playerName` = '?'");
-        statement.setString(1, playerName);
-        ResultSet res = statement.executeQuery();
-        res.next();
-        return res.getBoolean("godMod");
+        Object obj = getFromTable("playerName", playerName, "godMode", "players");
+        if(obj instanceof Boolean)
+        {
+            return (Boolean) obj;
+        }
+        return false;
     }
 
 }

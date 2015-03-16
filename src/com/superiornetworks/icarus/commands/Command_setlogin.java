@@ -1,7 +1,7 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
-import com.superiornetworks.icarus.IcarusMod;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -28,7 +28,7 @@ public class Command_setlogin extends BukkitCommand
         String combined = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
         try
         {
-            PreparedStatement statement = IcarusMod.mySQL.openConnection().prepareStatement("UPDATE `icarus`.`players` SET `loginMessage` = ? WHERE `playerName` = ?");
+            PreparedStatement statement = ICM_SqlHandler.getConnection().prepareStatement("UPDATE `icarus`.`players` SET `loginMessage` = ? WHERE `playerName` = ?");
             statement.setString(2, sender.getName());
             statement.setString(1, combined);
             statement.executeUpdate();

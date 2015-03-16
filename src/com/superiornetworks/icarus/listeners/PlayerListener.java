@@ -26,7 +26,6 @@ public class PlayerListener implements Listener
     public void onUncancelledPlayerJoin(PlayerJoinEvent event)
     {
         plugin.famousWarning.onUncancelledPlayerJoin(event);
-        plugin.commandSpyOverride.onUncancelledPlayerJoin(event);
         plugin.developmentMode.onUncancelledPlayerJoin(event);
         plugin.joinModule.onPlayerJoin(event);
     }

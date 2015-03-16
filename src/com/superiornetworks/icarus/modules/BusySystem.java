@@ -39,11 +39,7 @@ public class BusySystem extends IcarusModule implements Listener
 
     public static boolean isBusy(Player player)
     {
-        if (!busyAdmins.contains(player.getName()))
-        {
-            return true;
-        }
-        return false;
+        return busyAdmins.contains(player.getName());
     }
 
     @EventHandler

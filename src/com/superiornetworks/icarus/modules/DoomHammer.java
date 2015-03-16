@@ -57,7 +57,7 @@ public class DoomHammer extends IcarusModule implements Listener
                 if (e instanceof Player)
                 {
                     Player eplayer = (Player) e;
-                    ICM_Bans.addBan(eplayer, player, "Hit by " + player.getName() + "'s DoomHammer!");
+                    ICM_Bans.addBan(eplayer.getName(), player, "Hit by " + player.getName() + "'s DoomHammer!");
                     ICM_Utils.adminAction(player.getName(), "Casting oblivion over " + eplayer.getName(), true);
                     Bukkit.broadcastMessage(ChatColor.RED + eplayer.getName() + " will be completely obliviated!");
                 }

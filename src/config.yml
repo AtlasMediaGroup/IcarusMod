@@ -2,12 +2,12 @@
 
 # MySQL Details
 
-Hostname: ''
-Port: '3306'  
+hostName: ''
+port: '3306'  
 # Dont change the port unless you know the shit your messing with
-Database: ''
-Username: ''
-Password: ''
+database: ''
+username: ''
+password: ''
 
 #Toggles
 toggles:
