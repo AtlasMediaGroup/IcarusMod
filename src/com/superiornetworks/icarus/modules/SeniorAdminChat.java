@@ -19,6 +19,7 @@ public class SeniorAdminChat extends IcarusModule
         {
             if (TFM_AdminList.isSeniorAdmin(p, true))
             {
+                // Some strange ass colour codes being used here...
                 p.sendMessage("§f[§bADMIN§f] §4" + sender.getName() + " §d[SrA]§f: §d " + message);
             }
         }
