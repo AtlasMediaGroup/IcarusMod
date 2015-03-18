@@ -1,9 +1,11 @@
 package com.superiornetworks.icarus.modules;
 
+import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
-import static me.StevenLawson.TotalFreedomMod.TFM_Util.playerMsg;
-import org.bukkit.ChatColor;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,10 +33,17 @@ public class CreativePVP extends IcarusModule implements Listener
         }
 
         Player player = (Player) event.getDamager();
-        if (player.getGameMode() == GameMode.CREATIVE || ICM_Utils.GOD.contains(player.getName()))
+        try
         {
-            event.setCancelled(true);
-            playerMsg(player, "Don't try to PVP in Creative or God mode. ~ Thanks.", ChatColor.RED);
+            if (player.getGameMode() == GameMode.CREATIVE || ICM_SqlHandler.isGod(player.getName()))
+            {
+                event.setCancelled(true);
+                ICM_Utils.playerMsg(player, "&cDon't try to PVP in Creative or God mode. ~ Thanks.");
+            }
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(CreativePVP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

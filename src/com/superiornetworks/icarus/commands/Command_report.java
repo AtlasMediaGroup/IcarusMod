@@ -1,8 +1,10 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
 import net.pravian.bukkitlib.command.SourceType;
@@ -19,7 +21,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@CommandPermissions(source = SourceType.PLAYER)
+@CommandPermissions(source = SourceType.ANY)
 public class Command_report extends BukkitCommand
 {
 
@@ -32,9 +34,17 @@ public class Command_report extends BukkitCommand
             return false;
         }
         Player player = PlayerUtils.getPlayer(args[0]);
-        String Reported = player.getName();
+        String Reported;
+        if(player != null)
+        {
+            Reported = player.getName();
+        }
+        else
+        {
+            Reported = args[0];
+        }
         String report_reason = null;
-        if (args.length <= 2)
+        if (args.length < 2)
         {
             return false;
         }
@@ -58,26 +68,29 @@ public class Command_report extends BukkitCommand
         }
         for (Player admin : Bukkit.getOnlinePlayers())
         {
-            if (TFM_AdminList.isSuperAdmin(admin))
+            if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
                 admin.sendMessage(ChatUtils.colorize("&8[&4ICarusMod&8] &a" + sender.getName() + "&4Has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
         }
-        player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + " an adminstrator will review this soon."));
+        if(player != null)
+            player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + "&4 an adminstrator will review this soon."));
         sender.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "Your report has been recieved and will be reviewed soon."));
-
-        long unixTime = System.currentTimeMillis() / 1000L;
 
         try
         {
-            ICM_SqlHandler.updateDatabase("INSERT INTO reports (Sender, Player, Reason, IP, Time) VALUES ('" + sender.getName() + "', '" + player.getName() + "', '" + report_reason + "', '" + player.getAddress().getAddress().getHostAddress() + " ', '" + unixTime + "');");
-
+            Connection c = ICM_SqlHandler.getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `reports` (`senderName`, `playerName`, `reportReason`, `ip`) VALUES (?,?,?,?)");
+            statement.setString(1, sender.getName());
+            statement.setString(2, Reported);
+            statement.setString(3, report_reason);
+            statement.setString(4, player.getAddress().getAddress().getHostAddress());
+            statement.executeUpdate();
         }
         catch (SQLException ex)
         {
-            sender.sendMessage(ChatColor.DARK_RED + "An error within MySQL has occoured. Please contact a developer.");
+            
         }
-
         return true;
 
     }

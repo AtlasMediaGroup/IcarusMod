@@ -2,15 +2,23 @@ package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.Command_icarusmod;
 import com.superiornetworks.icarus.listeners.PlayerListener;
-import com.superiornetworks.icarus.modules.*;
+import com.superiornetworks.icarus.modules.AdminWorldToggle;
+import com.superiornetworks.icarus.modules.BusySystem;
+import com.superiornetworks.icarus.modules.ChatModule;
+import com.superiornetworks.icarus.modules.CreativePVP;
+import com.superiornetworks.icarus.modules.DevelopmentMode;
+import com.superiornetworks.icarus.modules.DoomHammer;
+import com.superiornetworks.icarus.modules.FamousWarning;
+import com.superiornetworks.icarus.modules.JoinModule;
+import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
-import net.pravian.bukkitlib.config.YamlConfig;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.LoggerUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 
 public class IcarusMod extends BukkitPlugin
@@ -23,7 +31,8 @@ public class IcarusMod extends BukkitPlugin
     public static MySQL mySQL;
 
     // YAML File Information
-    public static YamlConfig config;
+    public static ICM_Config icmconfig;
+    public static FileConfiguration config;
 
     // Module Information
     public FamousWarning famousWarning;
@@ -31,8 +40,9 @@ public class IcarusMod extends BukkitPlugin
     public CreativePVP creativePVP;
     public DoomHammer doomHammer;
     public AdminWorldToggle adminWorldToggle;
-    public CommandSpyOverride commandSpyOverride;
     public DevelopmentMode developmentMode;
+    public ChatModule chatModule;
+    public JoinModule joinModule;
 
     @Override
     public void onLoad()
@@ -46,8 +56,9 @@ public class IcarusMod extends BukkitPlugin
         creativePVP = new CreativePVP(plugin);
         doomHammer = new DoomHammer(plugin);
         adminWorldToggle = new AdminWorldToggle(plugin);
-        commandSpyOverride = new CommandSpyOverride(plugin);
         developmentMode = new DevelopmentMode(plugin);
+        chatModule = new ChatModule(plugin);
+        joinModule = new JoinModule(plugin);
     }
 
     @Override
@@ -58,17 +69,26 @@ public class IcarusMod extends BukkitPlugin
         handler.setCommandLocation(Command_icarusmod.class.getPackage());
 
         // More YAML Setting Up and information.
-        this.config = new YamlConfig(plugin, "config.yml");
+        icmconfig = new ICM_Config(plugin, "config.yml");
+        icmconfig.saveDefaultConfig();
+        config = icmconfig.getConfig();
 
         // Listeners
         final PluginManager pm = plugin.getServer().getPluginManager();
         pm.registerEvents(new PlayerListener(plugin), plugin);
 
         // MySQL Stuffs
-        mySQL = new MySQL(plugin, config.getString("Hostname"), config.getString("Port"), config.getString("Database"), config.getString("User"), config.getString("Password"));
-
-        // The Actual Loading of the configuration File
-        config.load();
+        //Create MySQL
+        mySQL = new MySQL(plugin, config.getString("hostName"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
+        try
+        {
+            //Generate Default Tables
+            ICM_SqlHandler.generateTables();
+        }
+        catch (SQLException ex)
+        {
+            plugin.getLogger().severe(ex.getLocalizedMessage());
+        }
 
         // The All Clear
         LoggerUtils.info(plugin, "has been enabled with no problems.");
@@ -79,7 +99,7 @@ public class IcarusMod extends BukkitPlugin
     public void onDisable()
     {
         // Save the config.
-        config.save();
+        icmconfig.saveConfig();
 
         // All clear, its disabled! Woot
         LoggerUtils.info(plugin, "has been disabled with no problems.");

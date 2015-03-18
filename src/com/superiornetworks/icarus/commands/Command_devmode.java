@@ -1,9 +1,9 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DevelopmentMode.DevMode;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
 import net.pravian.bukkitlib.command.SourceType;
@@ -20,7 +20,7 @@ public class Command_devmode extends BukkitCommand
     @Override
     public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (!ICM_Utils.DEVELOPERS.contains(sender.getName()))
+        if (!ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.DEVELOPER))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
@@ -43,7 +43,7 @@ public class Command_devmode extends BukkitCommand
             DevelopmentMode.setMode(DevMode.ADMIN_ONLY);
             for (Player p : Bukkit.getOnlinePlayers())
             {
-                if (!TFM_AdminList.isSuperAdmin(p))
+                if (!ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.SUPER))
                 {
                     p.kickPlayer(ChatColor.DARK_RED + "Developement mode has been enabled, only admins are allowed online.");
                 }

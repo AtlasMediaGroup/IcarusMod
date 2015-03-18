@@ -1,8 +1,8 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
-import me.StevenLawson.TotalFreedomMod.TFM_AdminList;
 import net.pravian.bukkitlib.command.BukkitCommand;
 import net.pravian.bukkitlib.command.CommandPermissions;
 import net.pravian.bukkitlib.command.SourceType;
@@ -20,7 +20,7 @@ public class Command_wetoggle extends BukkitCommand<IcarusMod>
     @Override
     public boolean run(CommandSender sender, Command cmd, String string, String[] args)
     {
-        if (!TFM_AdminList.isSuperAdmin(sender))
+        if (!ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.SUPER))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
