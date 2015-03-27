@@ -4,7 +4,6 @@
 
 hostName: ''
 port: '3306'  
-# Dont change the port unless you know the shit your messing with
 database: ''
 username: ''
 password: ''
