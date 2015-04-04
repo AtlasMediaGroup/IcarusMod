@@ -5,6 +5,7 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
@@ -43,7 +44,7 @@ public class DoomHammer extends IcarusModule implements Listener
             Entity e = null;
             if (item.equals(ICM_Utils.getDoomHammer()) && ICM_SqlHandler.hasDoomHammer(player.getName()))
             {
-                for (Block block : player.getLineOfSight(null, 50))
+                for (Block block : player.getLineOfSight((HashSet<Byte>) null, 50))
                 {
                     Location loc2 = block.getLocation();
                     for (LivingEntity entity : player.getWorld().getLivingEntities())
@@ -75,7 +76,7 @@ public class DoomHammer extends IcarusModule implements Listener
                             le.setHealth(0d);
                         }
                     }.runTaskLater(IcarusMod.plugin, 20L * 2L);
-                    
+
                 }
                 event.setCancelled(true);
             }
