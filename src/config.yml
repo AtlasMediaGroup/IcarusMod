@@ -2,11 +2,16 @@
 
 # MySQL Details
 
-hostName: ''
-port: '3306'  
-database: ''
-username: ''
-password: ''
+hostname:
+##
+port:
+##
+database:
+##
+user:
+##
+password:
+##
 
 #Toggles
 toggles:

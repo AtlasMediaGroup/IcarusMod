@@ -79,7 +79,7 @@ public class IcarusMod extends BukkitPlugin
 
         // MySQL Stuffs
         //Create MySQL
-        mySQL = new MySQL(plugin, config.getString("hostName"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
+        mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("user"), config.getString("password"));
         try
         {
             //Generate Default Tables
