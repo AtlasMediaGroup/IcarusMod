@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import org.bukkit.entity.Player;
 
 public class ICM_SqlHandler
@@ -21,8 +20,7 @@ public class ICM_SqlHandler
     
     public static void generateTables() throws SQLException
     {
-        Connection c = getConnection();
-        Statement statement = c.createStatement();
+        Connection c = mySQL.openConnection();
         String players = "CREATE TABLE IF NOT EXISTS `players` ("
                 + "`id` INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
                 + "`playerName` VARCHAR(16) NOT NULL UNIQUE,"
@@ -50,9 +48,16 @@ public class ICM_SqlHandler
                 + "`ip` VARCHAR(64),"
                 + "`time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
                 + ")";
-        statement.executeUpdate(players);
-        statement.executeUpdate(reports);
-        statement.executeUpdate(bans);
+       String commands = "CREATE TABLE IF NOT EXISTS `commands` ("
+                + "`commandName` VARCHAR(64) NOT NULL UNIQUE,"
+                + "`level` INTEGER NOT NULL,"
+                + "`message` TEXT NOT NULL,"
+                + "`kick` BOOLEAN"
+                + ")";
+       c.createStatement().execute(players);
+       c.createStatement().execute(reports);
+       c.createStatement().execute(bans);
+       c.createStatement().execute(commands);
     }
     
     public static void generateNewPlayer(Player player) throws SQLException

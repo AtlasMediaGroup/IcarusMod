@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -28,6 +29,13 @@ public class PlayerListener implements Listener
         plugin.famousWarning.onUncancelledPlayerJoin(event);
         plugin.developmentMode.onUncancelledPlayerJoin(event);
         plugin.joinModule.onPlayerJoin(event);
+    }
+    
+    @EventHandler
+    public void onCommandPreprocess(PlayerCommandPreprocessEvent event)
+    {
+        plugin.commandBlockModule.onCommandPreprocess(event);
+        plugin.commandSpyModule.onCommandPreprocess(event);
     }
 
     @EventHandler

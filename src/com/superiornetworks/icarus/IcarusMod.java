@@ -5,6 +5,8 @@ import com.superiornetworks.icarus.listeners.PlayerListener;
 import com.superiornetworks.icarus.modules.AdminWorldToggle;
 import com.superiornetworks.icarus.modules.BusySystem;
 import com.superiornetworks.icarus.modules.ChatModule;
+import com.superiornetworks.icarus.modules.CommandBlockModule;
+import com.superiornetworks.icarus.modules.CommandSpyModule;
 import com.superiornetworks.icarus.modules.CreativePVP;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DoomHammer;
@@ -43,11 +45,13 @@ public class IcarusMod extends BukkitPlugin
     public DevelopmentMode developmentMode;
     public ChatModule chatModule;
     public JoinModule joinModule;
+    public CommandBlockModule commandBlockModule;
+    public CommandSpyModule commandSpyModule;
 
     @Override
     public void onLoad()
     {
-        this.plugin = this;
+        plugin = this;
         this.handler = new BukkitCommandHandler(plugin);
 
         // Module Loading
@@ -59,6 +63,8 @@ public class IcarusMod extends BukkitPlugin
         developmentMode = new DevelopmentMode(plugin);
         chatModule = new ChatModule(plugin);
         joinModule = new JoinModule(plugin);
+        commandBlockModule = new CommandBlockModule(plugin);
+        commandSpyModule = new CommandSpyModule(plugin);
     }
 
     @Override
@@ -79,7 +85,7 @@ public class IcarusMod extends BukkitPlugin
 
         // MySQL Stuffs
         //Create MySQL
-        mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("user"), config.getString("password"));
+        mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
         try
         {
             //Generate Default Tables
