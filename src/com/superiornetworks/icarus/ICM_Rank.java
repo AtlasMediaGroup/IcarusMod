@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -21,11 +22,22 @@ public class ICM_Rank
             this.level = level;
             this.name = name;
         }
+        public int getLevel()
+        {
+            return this.level;
+        }
     }
     
     public static boolean isRankOrHigher(CommandSender player, Rank rank)
     {
         return getRank(player).level >= rank.level;
+    }
+    
+    public static boolean isRankOrHigher(CommandSender player, int level)
+    {
+        Bukkit.broadcastMessage("" + level);
+        Bukkit.broadcastMessage("" + getRank(player).level);
+        return getRank(player).level >= level;
     }
     
     public static Rank getRank(CommandSender player)

@@ -3,7 +3,6 @@ package com.superiornetworks.icarus.modules;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.IcarusMod;
-import static com.superiornetworks.icarus.IcarusMod.mySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

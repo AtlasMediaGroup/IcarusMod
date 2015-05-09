@@ -1,6 +1,7 @@
 package com.superiornetworks.icarus;
 
 import com.superiornetworks.icarus.commands.Command_icarusmod;
+import com.superiornetworks.icarus.commands.ICM_CommandRegistry;
 import com.superiornetworks.icarus.listeners.PlayerListener;
 import com.superiornetworks.icarus.modules.AdminWorldToggle;
 import com.superiornetworks.icarus.modules.BusySystem;
@@ -95,6 +96,9 @@ public class IcarusMod extends BukkitPlugin
         {
             plugin.getLogger().severe(ex.getLocalizedMessage());
         }
+        
+        //Enable Commands
+        ICM_CommandRegistry.registerCommands();
 
         // The All Clear
         LoggerUtils.info(plugin, "has been enabled with no problems.");
