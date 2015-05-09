@@ -10,9 +10,10 @@ public class ICM_CommandBlock
     public static boolean isBlocked(CommandSender sender, String command) throws SQLException
     {
         String[] label = command.split(" ");
-        if(Bukkit.getCommandAliases().get(label[0]) != null)
+        String search = label[0].replaceAll("/", "");
+        if(Bukkit.getCommandAliases().get(search) != null)
         {
-            for(String newCommand : Bukkit.getCommandAliases().get(label[0]))
+            for(String newCommand : Bukkit.getCommandAliases().get(search))
             {
                 Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "level", "commands");
                 if (!(obj instanceof Integer))
@@ -22,39 +23,63 @@ public class ICM_CommandBlock
                 int commandLevel = (Integer) obj;
                 int senderLevel = ICM_Rank.getRank(sender).level;
                 return senderLevel < commandLevel;
-            } 
+            }
         }
-
-        return false;
+        Object obj = ICM_SqlHandler.getFromTable("commandName", search, "level", "commands");
+        if (!(obj instanceof Integer))
+        {
+            return false;
+        }
+        int commandLevel = (Integer) obj;
+        int senderLevel = ICM_Rank.getRank(sender).level;
+        return senderLevel < commandLevel;
     }
     
     public static String getMessage(String command) throws SQLException
     {
         String[] label = command.split(" ");
-        for(String newCommand : Bukkit.getCommandAliases().get(label[0]))
+        String search = label[0].replaceAll("/", "");
+        if(Bukkit.getCommandAliases().get(search) != null)
         {
-            Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "message", "commands");
-            if (!(obj instanceof String))
+            for(String newCommand : Bukkit.getCommandAliases().get(search))
             {
-                continue;
+                Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "message", "commands");
+                if (!(obj instanceof String))
+                {
+                    continue;
+                }
+                return (String) obj;
             }
-            return (String) obj;
         }
-        return "Command is not blocked...";
+        Object obj = ICM_SqlHandler.getFromTable("commandName", search, "message", "commands");
+        if (!(obj instanceof String))
+        {
+            return "No message defined";
+        }
+        return (String) obj;
     }
     
     public static boolean isKicker(String command) throws SQLException
     {
         String[] label = command.split(" ");
-        for(String newCommand : Bukkit.getCommandAliases().get(label[0]))
+        String search = label[0].replaceAll("/", "");
+        if(Bukkit.getCommandAliases().get(search) != null)
         {
-            Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "kick", "commands");
-            if (!(obj instanceof Boolean))
+            for(String newCommand : Bukkit.getCommandAliases().get(search))
             {
-                continue;
+                Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "kick", "commands");
+                if (!(obj instanceof Boolean))
+                {
+                    continue;
+                }
+                return (Boolean) obj;
             }
-            return (Boolean) obj;
         }
-        return false;
+        Object obj = ICM_SqlHandler.getFromTable("commandName", search, "kick", "commands");
+        if (!(obj instanceof Boolean))
+        {
+            return false;
+        }
+        return (Boolean) obj;
     }
 }

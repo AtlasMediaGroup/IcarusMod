@@ -1,6 +1,5 @@
 package com.superiornetworks.icarus;
 
-import static com.superiornetworks.icarus.IcarusMod.mySQL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -37,7 +36,12 @@ public class ICM_Bans
             }
         }
         Connection c = ICM_SqlHandler.getConnection();
-        PreparedStatement statement = c.prepareStatement("INSERT INTO `bans` ");
+        PreparedStatement statement = c.prepareStatement("INSERT INTO `bans` (`senderName`, `playerName`, `banReason`, `ip`) VALUES (?, ?, ?, ?)");
+        statement.setString(1, sender.getName());
+        statement.setString(2, player);
+        statement.setString(3, reason);
+        statement.setString(4, ip);
+        statement.executeUpdate();
     }
     
     public static void removeBan(CommandSender sender, String player) throws SQLException
