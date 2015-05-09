@@ -39,7 +39,13 @@ public class Command_ban
         
         try
         {
+            if(ICM_Bans.isBanned(playerName))
+            {
+                ICM_Utils.playerMsg(sender, "&cPlayer is already banned.");
+                return true;
+            }
             ICM_Bans.addBan(playerName, sender, reason);
+            ICM_Utils.adminAction(sender.getName(), "Banning " + playerName + ". Reason: " + reason, true);
             return true;
         }
         catch (SQLException ex)

@@ -13,6 +13,7 @@ import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DoomHammer;
 import com.superiornetworks.icarus.modules.FamousWarning;
 import com.superiornetworks.icarus.modules.JoinModule;
+import com.superiornetworks.icarus.modules.LoginModule;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -48,6 +49,7 @@ public class IcarusMod extends BukkitPlugin
     public JoinModule joinModule;
     public CommandBlockModule commandBlockModule;
     public CommandSpyModule commandSpyModule;
+    public LoginModule loginModule;
 
     @Override
     public void onLoad()
@@ -66,6 +68,7 @@ public class IcarusMod extends BukkitPlugin
         joinModule = new JoinModule(plugin);
         commandBlockModule = new CommandBlockModule(plugin);
         commandSpyModule = new CommandSpyModule(plugin);
+        loginModule = new LoginModule(plugin);
     }
 
     @Override

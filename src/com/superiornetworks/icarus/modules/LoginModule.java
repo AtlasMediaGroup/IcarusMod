@@ -24,7 +24,7 @@ public class LoginModule extends IcarusModule implements Listener
         {
             if(ICM_Bans.isBanned(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
             {
-                event.disallow(PlayerLoginEvent.Result.KICK_BANNED, ICM_Bans.getReason(event.getPlayer().getName()));
+                event.disallow(PlayerLoginEvent.Result.KICK_BANNED, ICM_Bans.getReason(event.getPlayer().getName()) + " ~ " + ICM_Bans.getBanner(event.getPlayer().getName()));
             }
         }
         catch (SQLException ex)

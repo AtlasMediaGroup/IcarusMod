@@ -2,6 +2,7 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Bans;
 import com.superiornetworks.icarus.ICM_Rank;
+import com.superiornetworks.icarus.ICM_Utils;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,13 @@ public class Command_unban
         String name = args[0];
         try
         {
+            if(!ICM_Bans.isBanned(name))
+            {
+                ICM_Utils.playerMsg(sender, "&cPlayer is not banned.");
+                return true;
+            }
             ICM_Bans.removeBan(sender, name);
+            ICM_Utils.adminAction(sender.getName(), "Unbanning " + name + ".", true);
             return true;
         }
         catch (SQLException ex)

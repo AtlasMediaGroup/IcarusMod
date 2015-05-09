@@ -10,6 +10,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -36,6 +37,12 @@ public class PlayerListener implements Listener
     {
         plugin.commandBlockModule.onCommandPreprocess(event);
         plugin.commandSpyModule.onCommandPreprocess(event);
+    }
+    
+    @EventHandler
+    public void onPlayerLoginEvent(PlayerLoginEvent event)
+    {
+        plugin.loginModule.onPlayerLoginEvent(event);
     }
 
     @EventHandler

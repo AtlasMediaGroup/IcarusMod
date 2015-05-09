@@ -26,7 +26,7 @@ public class CommandSpyModule extends IcarusModule implements Listener
             return;
         }
         ChatColor colour = ChatColor.GRAY;
-        List<String> alertCommands = Arrays.asList("/set", "/replace", "/remove", "ci", "clear");
+        List<String> alertCommands = Arrays.asList("//set", "//replace", "//remove", "/ci", "/clear");
         for(String alert : alertCommands)
         {
             if(event.getMessage().toLowerCase().startsWith(alert))
@@ -38,7 +38,7 @@ public class CommandSpyModule extends IcarusModule implements Listener
         {
             if(ICM_Rank.getRank(event.getPlayer()).level < ICM_Rank.getRank(player).level)
             {
-                player.sendMessage(colour + event.getPlayer().getName() + ": /" + event.getMessage().toLowerCase());
+                player.sendMessage(colour + event.getPlayer().getName() + ": " + event.getMessage().toLowerCase());
             }
         }
     }
