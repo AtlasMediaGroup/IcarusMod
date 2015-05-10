@@ -55,9 +55,16 @@ public class CreativePVP extends IcarusModule implements Listener
             return;
         }
         Player player = (Player) event.getEntity();
-        if (ICM_Utils.GOD.contains(player.getName()))
+        try
         {
-            event.setCancelled(true);
+            if (ICM_SqlHandler.isGod(player.getName()))
+            {
+                event.setCancelled(true);
+            }
+        }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(CreativePVP.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

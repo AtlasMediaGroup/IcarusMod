@@ -88,6 +88,20 @@ public class ICM_SqlHandler
         return getFromTable("playerName", playerName, "playerName", "players") != null;
     }
     
+    public static String getIp(String playerName) throws SQLException
+    {
+        if(!playerExists(playerName))
+        {
+            return null;
+        }
+        Object obj = getFromTable("playerName", playerName, "ip", "players");
+        if(obj instanceof String)
+        {
+            return (String) obj;
+        }
+        return null;
+    }
+    
     public static String getLoginMessage(String playerName) throws SQLException
     {
         if(!playerExists(playerName))

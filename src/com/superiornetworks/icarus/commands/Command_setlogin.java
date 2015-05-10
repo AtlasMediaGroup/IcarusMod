@@ -25,7 +25,7 @@ public class Command_setlogin
         String combined = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
         try
         {
-            PreparedStatement statement = ICM_SqlHandler.getConnection().prepareStatement("UPDATE `icarus`.`players` SET `loginMessage` = ? WHERE `playerName` = ?");
+            PreparedStatement statement = ICM_SqlHandler.getConnection().prepareStatement("UPDATE `players` SET `loginMessage` = ? WHERE `playerName` = ?");
             statement.setString(2, sender.getName());
             statement.setString(1, combined);
             statement.executeUpdate();

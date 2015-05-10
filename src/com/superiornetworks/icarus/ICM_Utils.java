@@ -9,12 +9,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ICM_Utils
 {
 
+    public static final ArrayList<Player> IMPOSTERS = new ArrayList<>();
     public static final List<String> MANAGERS = Arrays.asList("Wild1145", "Camzie99");
     public static final List<String> COMMUNITYTEAM = Arrays.asList("");
     public static final List<String> DEVELOPERS = Arrays.asList("Wild1145", "Camzie99", "Hockeyfan360");
@@ -34,11 +36,6 @@ public class ICM_Utils
     );
     //REPLACING WITH MYSQL SHORTLY
     public static final List<String> FAMOUS = Arrays.asList("");
-    
-    // TODO: Get this information directly from the database. 
-    //Want to migrate to custom playerdata.
-    public static ArrayList<String> DOOMHAMMERS = new ArrayList<>();
-    public static ArrayList<String> GOD = new ArrayList<>();
 
     public static final String NO_PERMS_MESSAGE = (ChatColor.DARK_RED + "Sorry, you do not have the required permissions to access this command. If you feel this is in error, please contact a server manager or developer ASAP!");
 

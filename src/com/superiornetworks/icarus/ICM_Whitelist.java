@@ -31,7 +31,7 @@ public class ICM_Whitelist
     public static void addToWhitelist(String player) throws SQLException
     {
         Connection c = ICM_SqlHandler.getConnection();
-        PreparedStatement statement = c.prepareStatement("UPDATE `icarus`.`players` SET `whitelisted` = TRUE WHERE `playerName` = ?");
+        PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `whitelisted` = TRUE WHERE `playerName` = ?");
         statement.setString(1, player);
         statement.executeUpdate();
     }
@@ -39,7 +39,7 @@ public class ICM_Whitelist
     public static void removeFromWhitelist(String player) throws SQLException
     {
         Connection c = ICM_SqlHandler.getConnection();
-        PreparedStatement statement = c.prepareStatement("UPDATE `icarus`.`players` SET `whitelisted` = FALSE WHERE `playerName` = ?");
+        PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `whitelisted` = FALSE WHERE `playerName` = ?");
         statement.setString(1, player);
         statement.executeUpdate();
     }

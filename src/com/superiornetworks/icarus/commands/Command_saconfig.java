@@ -46,7 +46,7 @@ public class Command_saconfig extends BukkitCommand
                     arrays.add(sradmins);
                     arrays.add(devs);
                     arrays.add(managers);
-                    for(ArrayList<String> array : arrays)
+                    for (ArrayList<String> array : arrays)
                     {
                         Collections.sort(array, String.CASE_INSENSITIVE_ORDER);
                     }
@@ -57,7 +57,7 @@ public class Command_saconfig extends BukkitCommand
                     while (res.next())
                     {
                         number++;
-                        switch(res.getString("rank"))
+                        switch (res.getString("rank"))
                         {
                             case "Super Admin":
                                 sadmins.add(res.getString("playerName"));
@@ -122,6 +122,21 @@ public class Command_saconfig extends BukkitCommand
             }
             if (args[0].equalsIgnoreCase("add"))
             {
+                if (ICM_Rank.getRank(player).level == -1)
+                {
+                    try
+                    {
+                        Connection c = ICM_SqlHandler.getConnection();
+                        PreparedStatement statement2 = c.prepareStatement("UPDATE `players` SET `ip` = ? WHERE `playerName` = ?");
+                        statement2.setString(1, player.getAddress().getAddress().getHostAddress());
+                        statement2.setString(2, player.getName());
+                        statement2.executeUpdate();
+                    }
+                    catch (SQLException ex)
+                    {
+                        Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.SUPER);
                 ICM_Utils.adminAction(sender.getName(), "adding " + player.getName() + " to Super Admin.", false);
                 return true;
@@ -161,8 +176,23 @@ public class Command_saconfig extends BukkitCommand
                 sender.sendMessage(ChatColor.RED + "You can only add someone to a rank lower than yourself.");
                 return true;
             }
+            if (ICM_Rank.getRank(player).level == -1)
+            {
+                try
+                {
+                    Connection c = ICM_SqlHandler.getConnection();
+                    PreparedStatement statement2 = c.prepareStatement("UPDATE `players` SET `ip` = ? WHERE `playerName` = ?");
+                    statement2.setString(1, player.getAddress().getAddress().getHostAddress());
+                    statement2.setString(2, player.getName());
+                    statement2.executeUpdate();
+                }
+                catch (SQLException ex)
+                {
+                    Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
             ICM_Rank.setRank(player.getName(), ICM_Rank.getFromLevel(level));
-            ICM_Utils.adminAction(sender.getName(), "adding " + player.getName() + " to " + ICM_Rank.getFromLevel(level).name + ".", false); 
+            ICM_Utils.adminAction(sender.getName(), "adding " + player.getName() + " to " + ICM_Rank.getFromLevel(level).name + ".", false);
             return true;
         }
         return false;

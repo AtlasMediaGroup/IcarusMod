@@ -12,6 +12,7 @@ import com.superiornetworks.icarus.modules.CreativePVP;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DoomHammer;
 import com.superiornetworks.icarus.modules.FamousWarning;
+import com.superiornetworks.icarus.modules.ImposterModule;
 import com.superiornetworks.icarus.modules.JoinModule;
 import com.superiornetworks.icarus.modules.LoginModule;
 import java.sql.SQLException;
@@ -51,6 +52,7 @@ public class IcarusMod extends BukkitPlugin
     public CommandBlockModule commandBlockModule;
     public CommandSpyModule commandSpyModule;
     public LoginModule loginModule;
+    public ImposterModule imposterModule;
 
     @Override
     public void onLoad()
@@ -70,6 +72,7 @@ public class IcarusMod extends BukkitPlugin
         commandBlockModule = new CommandBlockModule(plugin);
         commandSpyModule = new CommandSpyModule(plugin);
         loginModule = new LoginModule(plugin);
+        imposterModule = new ImposterModule(plugin);
     }
 
     @Override

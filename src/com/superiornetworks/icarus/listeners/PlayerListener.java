@@ -37,6 +37,7 @@ public class PlayerListener implements Listener
     {
         plugin.commandBlockModule.onCommandPreprocess(event);
         plugin.commandSpyModule.onCommandPreprocess(event);
+        plugin.imposterModule.onCommandPreprocess(event);
     }
     
     @EventHandler
@@ -49,6 +50,7 @@ public class PlayerListener implements Listener
     public void onPlayerMoveEvent(PlayerMoveEvent event)
     {
         plugin.adminWorldToggle.onPlayerMoveEvent(event);
+        plugin.imposterModule.onPlayerMoveEvent(event);
     }
 
     @EventHandler
