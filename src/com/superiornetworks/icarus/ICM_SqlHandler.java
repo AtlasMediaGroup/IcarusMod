@@ -30,7 +30,8 @@ public class ICM_SqlHandler
                 + "`rank` TEXT,"
                 + "`ip` VARCHAR(64),"
                 + "`godMode` BOOLEAN,"
-                + "`doomHammer` BOOLEAN"
+                + "`doomHammer` BOOLEAN,"
+                + "`whitelisted` BOOLEAN"
                 + ")";
         String reports = "CREATE TABLE IF NOT EXISTS `reports` ("
                 + "id INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
@@ -63,7 +64,7 @@ public class ICM_SqlHandler
     public static void generateNewPlayer(Player player) throws SQLException
     {
         Connection c = getConnection();
-        PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `ip`, `godMode`, `doomHammer`) VALUES (?, '', 'Op', ?, '0', '0')");
+        PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `ip`, `godMode`, `doomHammer`, `whitelisted`) VALUES (?, '', 'Op', ?, '0', '0', FALSE)");
         statement.setString(1, player.getName());
         statement.setString(2, player.getAddress().getAddress().getHostAddress());
         statement.executeUpdate();

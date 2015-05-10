@@ -2,6 +2,7 @@ package com.superiornetworks.icarus.modules;
 
 import com.superiornetworks.icarus.ICM_Bans;
 import com.superiornetworks.icarus.ICM_Rank;
+import com.superiornetworks.icarus.ICM_Whitelist;
 import com.superiornetworks.icarus.IcarusMod;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -30,6 +31,13 @@ public class LoginModule extends IcarusModule implements Listener
         catch (SQLException ex)
         {
             Logger.getLogger(LoginModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(ICM_Whitelist.whitelist)
+        {
+            if(!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+            {
+                event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST, "The server is currently whiteisted.");
+            }
         }
     }
 }
