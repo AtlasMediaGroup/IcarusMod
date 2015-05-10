@@ -4,33 +4,17 @@ import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DevelopmentMode.DevMode;
-import net.pravian.bukkitlib.command.BukkitCommand;
-import net.pravian.bukkitlib.command.CommandPermissions;
-import net.pravian.bukkitlib.command.SourceType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(source = SourceType.ANY, permission = "")
-public class Command_devmode extends BukkitCommand
+@CommandParameters(name="devmode",description="Change into developer mode.",usage="/devmode <everyone:admins:developers:off>")
+public class Command_devmode
 {
-
-    @Override
-    public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args)
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
-        if (!ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.DEVELOPER))
-        {
-            sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
-            return true;
-        }
-
-        if (args.length != 1)
-        {
-            sender.sendMessage(ChatColor.RED + "Usage: /<command> <everyone:admins:developers:off>");
-            return true;
-        }
         if (args[0].equalsIgnoreCase("everyone"))
         {
             DevelopmentMode.setMode(DevMode.EVERYONE);

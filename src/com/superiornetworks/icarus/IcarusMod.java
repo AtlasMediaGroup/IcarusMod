@@ -20,6 +20,7 @@ import net.pravian.bukkitlib.BukkitLib;
 import net.pravian.bukkitlib.command.BukkitCommandHandler;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.LoggerUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -82,38 +83,70 @@ public class IcarusMod extends BukkitPlugin
         icmconfig = new ICM_Config(plugin, "config.yml");
         icmconfig.saveDefaultConfig();
         config = icmconfig.getConfig();
-
-        // Listeners
-        final PluginManager pm = plugin.getServer().getPluginManager();
-        pm.registerEvents(new PlayerListener(plugin), plugin);
-
-        // MySQL Stuffs
-        //Create MySQL
-        mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
-        try
-        {
-            //Generate Default Tables
-            ICM_SqlHandler.generateTables();
-        }
-        catch (SQLException ex)
-        {
-            plugin.getLogger().severe(ex.getLocalizedMessage());
-        }
         
-        //Enable Commands
-        ICM_CommandRegistry.registerCommands();
+        boolean error = false;
+        if (config.getString("hostname") == null)
+        {
+            LoggerUtils.severe(plugin, "Hostname is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            error = true;
+        }
+        if (config.getString("port") == null)
+        {
+            LoggerUtils.severe(plugin, "Port is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            error = true;
+        }
+        if (config.getString("database") == null)
+        {
+            LoggerUtils.severe(plugin, "Database is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            error = true;
+        }
+        if (config.getString("username") == null)
+        {
+            LoggerUtils.severe(plugin, "Username is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            error = true;
+        }
+        if (config.getString("password") == null)
+        {
+            LoggerUtils.severe(plugin, "Password is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            error = true;
+        }
 
-        // The All Clear
-        LoggerUtils.info(plugin, "has been enabled with no problems.");
+        final PluginManager pm = plugin.getServer().getPluginManager();
+        if (!error)
+        {
+            // Listeners
+            pm.registerEvents(new PlayerListener(plugin), plugin);
+
+            // MySQL Stuffs
+            //Create MySQL
+            mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
+            try
+            {
+                //Generate Default Tables
+                ICM_SqlHandler.generateTables();
+            }
+            catch (SQLException ex)
+            {
+                plugin.getLogger().severe(ex.getLocalizedMessage());
+            }
+
+            //Enable Commands
+            ICM_CommandRegistry.registerCommands();
+
+            // The All Clear
+            LoggerUtils.info(plugin, "has been enabled with no problems.");
+        }
+        else
+        {
+            Bukkit.broadcastMessage("IcarusMod had an issue loading up, please check your logs for more info, on first start, this is normal!");
+            pm.disablePlugin(plugin);
+        }
 
     }
 
     @Override
     public void onDisable()
     {
-        // Save the config.
-        icmconfig.saveConfig();
-
         // All clear, its disabled! Woot
         LoggerUtils.info(plugin, "has been disabled with no problems.");
     }

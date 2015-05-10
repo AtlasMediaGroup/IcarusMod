@@ -1,19 +1,16 @@
-#IcarusMod Configuration File
-
-# MySQL Details
+#IcarusMod Config File
+#MySQL Details
 
 hostname:
-##
+    
 port:
-##
+    
 database:
-##
+    
 username:
-##
+    
 password:
-##
-
-#Toggles
+    
+#To be moved.
 toggles:
-    #Is adminworld enabled?
     AdminWorld: true

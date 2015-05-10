@@ -1,25 +1,22 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.pravian.bukkitlib.command.BukkitCommand;
-import net.pravian.bukkitlib.command.CommandPermissions;
-import net.pravian.bukkitlib.command.SourceType;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandPermissions(source = SourceType.PLAYER, permission = "")
-public class Command_setlogin extends BukkitCommand
+@CommandParameters(name="setlogin",description="Set your custom login message.",usage="/setlogin <message>",rank=ICM_Rank.Rank.SUPER)
+public class Command_setlogin
 {
-    @Override
-    public boolean run(CommandSender sender, Command command, String label, String[] args)
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if(args.length == 0)
         {

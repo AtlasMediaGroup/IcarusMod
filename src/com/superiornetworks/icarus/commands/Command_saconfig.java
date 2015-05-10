@@ -156,7 +156,7 @@ public class Command_saconfig extends BukkitCommand
                 sender.sendMessage(StringUtils.join(ArrayUtils.subarray(args, 2, args.length), " ") + " is an invalid rank.");
                 return true;
             }
-            if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.getFromLevel(level)))
+            if (!ICM_Rank.isRankOrHigher(sender, level))
             {
                 sender.sendMessage(ChatColor.RED + "You can only add someone to a rank lower than yourself.");
                 return true;
