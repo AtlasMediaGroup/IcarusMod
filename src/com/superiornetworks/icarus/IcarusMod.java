@@ -27,7 +27,7 @@ import org.bukkit.plugin.PluginManager;
 
 public class IcarusMod extends BukkitPlugin
 {
-
+    public HashMap<String, Long> cooldowns = new HashMap<String, Long>();
     public static IcarusMod plugin;
     public BukkitCommandHandler handler;
 
@@ -124,4 +124,19 @@ public class IcarusMod extends BukkitPlugin
         // BukkitLib Magic here, making commands work!
         return handler.handleCommand(sender, cmd, commandLabel, args);
     }
+
+@Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        int cooldownTime = 3;
+        if(cooldowns.containsKey(sender.getName())) {
+            long secondsLeft = ((cooldowns.get(sender.getName())/1000)+cooldownTime) - (System.currentTimeMillis()/1000);
+            if(secondsLeft>0) {
+                sender.sendMessage(ChatColor.RED + "You cant use that commands for another "+ secondsLeft +" seconds!");
+                return true;
+            }
+        }
+        cooldowns.put(sender.getName(), System.currentTimeMillis());
+        return true;
+    }
+    
 }
