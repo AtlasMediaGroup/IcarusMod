@@ -13,7 +13,10 @@ commands:
     usage: /<command>
   busy:
     description: Puts you in the busy status.
-    usage: /<command>
+    usage: /<command>'
+  ban:
+    description: Ban a user
+    usage: /ban <player> <reason>
   icmtoggle:
     description: Allows you to toggle certain aspects of the IcarusMod
     usage: /toggle <setting>
