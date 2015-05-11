@@ -4,13 +4,14 @@ import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DevelopmentMode.DevMode;
+import com.superiornetworks.icarus.ICM_Rank.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name="devmode",description="Change into developer mode.",usage="/devmode <everyone:admins:developers:off>")
+@CommandParameters(name="devmode",description="Change into developer mode.",usage="/devmode <everyone:admins:developers:off>",rank=ICM_Rank.Rank.DEVELOPER)
 public class Command_devmode
 {
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
