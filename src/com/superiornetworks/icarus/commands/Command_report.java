@@ -57,7 +57,7 @@ public class Command_report extends BukkitCommand
         }
         if (player == sender)
         {
-            sender.sendMessage(ChatColor.DARK_RED + "For some god awful reason, you have attempted to report yourself... Exactly why you have tried that, nobody knows however what we do know is... Your just damn right stupid... Have a cookie");
+            sender.sendMessage(ChatColor.DARK_RED + "For some god awful reason, you have attempted to report yourself... Exactly why you have tried that, nobody knows. However what we do know is... You're just damn right stupid... Have a cookie.");
             final ItemStack heldItem = new ItemStack(Material.COOKIE);
             final ItemMeta heldItemMeta = heldItem.getItemMeta();
             heldItemMeta.setDisplayName((new StringBuilder()).append(ChatColor.WHITE).append("Idiot of ").append(ChatColor.DARK_GRAY).append("the week award").toString());
