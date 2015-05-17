@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class PlayerListener implements Listener
 {
@@ -90,5 +91,10 @@ public class PlayerListener implements Listener
     {
         plugin.doomHammer.onPlayerUseItem(event);
     }
-
+    
+    @EventHandler
+    public void onWeatherChange(WeatherChangeEvent event)
+    {
+        plugin.weatherModule.onWeatherChange(event);
+    }
 }
