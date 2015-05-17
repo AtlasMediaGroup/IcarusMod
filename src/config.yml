@@ -1,14 +1,15 @@
 #IcarusMod Config File
 #MySQL Details
 
+#IP of the MySQL Server Location
 hostname:
-    
+#Port, obiously
 port:
-    
+#Database name
 database:
-    
+#Username
 username:
-    
+#Password
 password:
     
 #To be moved.
