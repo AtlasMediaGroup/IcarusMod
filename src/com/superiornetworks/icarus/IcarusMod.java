@@ -15,6 +15,7 @@ import com.superiornetworks.icarus.modules.FamousWarning;
 import com.superiornetworks.icarus.modules.ImposterModule;
 import com.superiornetworks.icarus.modules.JoinModule;
 import com.superiornetworks.icarus.modules.LoginModule;
+import com.superiornetworks.icarus.modules.ItemBlocker;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -42,6 +43,7 @@ public class IcarusMod extends BukkitPlugin
 
     // Module Information
     public FamousWarning famousWarning;
+    public ItemBlocker itemBlocker;
     public BusySystem busySystem;
     public CreativePVP creativePVP;
     public DoomHammer doomHammer;
@@ -70,6 +72,7 @@ public class IcarusMod extends BukkitPlugin
         chatModule = new ChatModule(plugin);
         joinModule = new JoinModule(plugin);
         commandBlockModule = new CommandBlockModule(plugin);
+        itemBlocker = new ItemBlocker(plugin);
         commandSpyModule = new CommandSpyModule(plugin);
         loginModule = new LoginModule(plugin);
         imposterModule = new ImposterModule(plugin);
