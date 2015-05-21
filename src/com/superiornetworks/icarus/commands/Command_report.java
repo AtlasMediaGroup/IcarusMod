@@ -70,12 +70,12 @@ public class Command_report extends BukkitCommand
         {
             if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
-                admin.sendMessage(ChatUtils.colorize("&8[&4ICarusMod&8] &a" + sender.getName() + " &4Has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
+                admin.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &a" + sender.getName() + " &4has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
         }
         if(player != null)
-            player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + " &4 an adminstrator will review this soon."));
-        sender.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "Your report has been recieved and will be reviewed soon."));
+            player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + " &4an administrator will review this soon."));
+        sender.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "Your report has been received and will be reviewed soon."));
 
         try
         {
