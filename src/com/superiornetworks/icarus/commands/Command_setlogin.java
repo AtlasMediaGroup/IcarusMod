@@ -33,7 +33,7 @@ public class Command_setlogin
         }
         catch (SQLException ex)
         {
-            sender.sendMessage(ChatColor.RED + "Something went wrong... please tell a developer of the IcarusMod!");
+            sender.sendMessage(ChatColor.RED + "Something went wrong... please tell one of the IcarusMod developers!");
             Logger.getLogger(Command_setlogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
