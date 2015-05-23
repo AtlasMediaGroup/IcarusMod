@@ -32,7 +32,7 @@ public class Command_god extends BukkitCommand
             {
                 playerMsg(sender, "&aEnabled god mode.");
                 Connection c = ICM_SqlHandler.getConnection();
-                PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `godMode` = FALSE WHERE `playerName` = ?");
+                PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `godMode` = TRUE WHERE `playerName` = ?");
                 statement.setString(1, player.getName());
                 statement.executeUpdate();
             }
