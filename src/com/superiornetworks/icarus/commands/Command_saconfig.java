@@ -113,7 +113,7 @@ public class Command_saconfig extends BukkitCommand
             {
                 if (ICM_Rank.isRankOrHigher(player, ICM_Rank.getRank(sender)) && sender instanceof Player)
                 {
-                    sender.sendMessage("You can only remove someone of a lower rank than yourself from admin.");
+                    sender.sendMessage("You can only remove someone from admin if they are a lower rank than you.");
                     return true;
                 }
                 ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.OP);
@@ -153,7 +153,7 @@ public class Command_saconfig extends BukkitCommand
             player = Bukkit.getPlayer(args[1]);
             if (player == null)
             {
-                sender.sendMessage("Player: " + args[1] + " is not online.");
+                sender.sendMessage(args[1] + " is not online.");
                 return true;
             }
             int level;
@@ -173,7 +173,7 @@ public class Command_saconfig extends BukkitCommand
             }
             if (!ICM_Rank.isRankOrHigher(sender, level))
             {
-                sender.sendMessage(ChatColor.RED + "You can only add someone to a rank lower than yourself.");
+                sender.sendMessage(ChatColor.RED + "You can only add someone to a rank that's lower than yours.");
                 return true;
             }
             if (ICM_Rank.getRank(player).level == -1)
