@@ -74,7 +74,7 @@ public class Command_report extends BukkitCommand
             }
             if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
             {
-                sender.sendMessage(ChatColor.PURPLE + "Please do not try to report a staff member, If the staff member is abusing make sure to report him to a high enough rank to take action!");
+                sender.sendMessage(ChatColor.PURPLE + "Please do not report staff members. If a staff member is abusing, take it to the forums.");
             }
         }
         if(player != null)
