@@ -9,25 +9,25 @@ commands:
     description: Mostly for test usage, but will prove that the commands actually are running as expected.
     usage: /<command>
   wetoggle:
-    desctiption: Toggles WE.
+    desctiption: Toggles WorldEdit.
     usage: /<command>
   busy:
-    description: Puts you in the busy status.
+    description: Toggles your busy status to on/off
     usage: /<command>
   icmtoggle:
     description: Allows you to toggle certain aspects of the IcarusMod
     usage: /toggle <setting>
   doomhammer:
-    description: Give yourself a DoomHammer.
+    description: Give yourself a Doom Hammer.
     usage: /doomhammer
   devmode:
     description: Allows you to turn on devmode.
     usage: /<command> <everyone|admins|developers|off>
   god:
-    description: Give yourself god mode.
+    description: Enable/Disable God mode.
     usage: /<command> 
   report:
-    description: Files a report against another player
+    description: Report another player for breaking the rules
     usage: /<command> <player> <reason>
   p:
     description: Allows you to chat with seniors in private.
