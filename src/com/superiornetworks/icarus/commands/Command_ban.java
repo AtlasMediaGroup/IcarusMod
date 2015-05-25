@@ -41,7 +41,7 @@ public class Command_ban
         {
             if(ICM_Bans.isBanned(playerName))
             {
-                ICM_Utils.playerMsg(sender, "&cPlayer is already banned.");
+                ICM_Utils.playerMsg(sender, "&cThat player is already banned.");
                 return true;
             }
             ICM_Bans.addBan(playerName, sender, reason);

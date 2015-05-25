@@ -23,7 +23,7 @@ public class Command_unban
         {
             if(!ICM_Bans.isBanned(name))
             {
-                ICM_Utils.playerMsg(sender, "&cPlayer is not banned.");
+                ICM_Utils.playerMsg(sender, "&cThat player is not banned.");
                 return true;
             }
             ICM_Bans.removeBan(sender, name);
