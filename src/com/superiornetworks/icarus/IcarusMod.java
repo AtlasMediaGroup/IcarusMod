@@ -15,7 +15,6 @@ import com.superiornetworks.icarus.modules.FamousWarning;
 import com.superiornetworks.icarus.modules.ImposterModule;
 import com.superiornetworks.icarus.modules.JoinModule;
 import com.superiornetworks.icarus.modules.LoginModule;
-import com.superiornetworks.icarus.modules.WeatherModule;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -54,7 +53,6 @@ public class IcarusMod extends BukkitPlugin
     public CommandSpyModule commandSpyModule;
     public LoginModule loginModule;
     public ImposterModule imposterModule;
-    public WeatherModule weatherModule;
 
     @Override
     public void onLoad()
@@ -75,7 +73,6 @@ public class IcarusMod extends BukkitPlugin
         commandSpyModule = new CommandSpyModule(plugin);
         loginModule = new LoginModule(plugin);
         imposterModule = new ImposterModule(plugin);
-        weatherModule = new WeatherModule(plugin);
     }
 
     @Override
@@ -123,9 +120,6 @@ public class IcarusMod extends BukkitPlugin
             // Listeners
             pm.registerEvents(new PlayerListener(plugin), plugin);
 
-            //Set weather and time
-            WeatherModule.setCorrectWeather();
-            
             // MySQL Stuffs
             //Create MySQL
             mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
