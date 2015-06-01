@@ -38,9 +38,3 @@ commands:
   saconfig:
     description: Admin management.
     usage: /<command> <list|add <player> [rank]|delete <player>>
-  opall:
-    description: Op all online players.
-    usage: /<command>
-  tag:
-    description: Set someone's tag.
-    usage: /<command> <set:playername> <tag>

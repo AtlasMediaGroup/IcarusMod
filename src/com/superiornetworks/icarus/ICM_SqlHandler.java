@@ -186,27 +186,4 @@ public class ICM_SqlHandler
         return false;
     }
 
-    public static void setNickname(String playerName, String nickname) throws SQLException
-    {
-        //For sake of simplicity, this method will replace & with §, so players can also have colors in their nicks.
-        if (!playerExists(playerName)) return;
-
-        Connection c = getConnection();
-        PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `nick` = ? WHERE `playerName` = ?");
-        statement.setString(1, nickname.replaceAll("&", "§"));
-        statement.setString(2, playerName);
-        statement.executeUpdate();
-    }
-    
-    public static void setTag(String playerName, String tag) throws SQLException
-    {
-        //For sake of simplicity, this method will replace & with §, so players can also have colors in their nicks.
-        if (!playerExists(playerName)) return;
-
-        Connection c = getConnection();
-        PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `tag` = ? WHERE `playerName` = ?");
-        statement.setString(1, tag.replaceAll("&", "§"));
-        statement.setString(2, playerName);
-        statement.executeUpdate();
-    }
 }

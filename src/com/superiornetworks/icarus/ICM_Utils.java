@@ -81,15 +81,4 @@ public class ICM_Utils
     {
         player.sendMessage(colour(message));
     }
-    
-    public static String buildMessage(String[] args, int startat)
-    {
-        String message = "";
-        for(int i = startat; i < args.length; i++)
-        {
-            String arg = args[i] + " "; 
-            message = message + arg; 
-        }
-        return message;
-    } 
 }
