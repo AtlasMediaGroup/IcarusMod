@@ -36,7 +36,7 @@ public class Command_tag
                 
                 if (tag.contains("`") || tag.contains("'"))
                 {
-                    sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot these charecters: ` or '");
+                    sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot use these charecters: ` or '");
                     return true;
                 }
                 if (tag.length() > 25)
@@ -64,7 +64,7 @@ public class Command_tag
                 String tag = ICM_Utils.buildMessage(args, 1);
                 if (tag.contains("`") || tag.contains("'"))
                 {
-                    sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot these charecters: ` or '");
+                    sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot use these charecters: ` or '");
                     return true;
                 }
                 if (tag.length() > 25)
