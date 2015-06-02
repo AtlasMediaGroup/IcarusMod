@@ -33,6 +33,30 @@ public class PlayerListener implements Listener
     }
     
     @EventHandler
+    public void onLiquidSpread(BlockFromToEvent event)
+    {
+      plugin.itemBlocker.onLiquidSpread(event);
+    }
+    
+    @EventHandler
+    public void onExplode(EntityExplodeEvent event)
+    {
+      plugin.itemBlocker.onExplode(event);
+    }
+    
+    @EventHandler
+    public void onItemUse(PlayerInteractEvent event)
+    {
+      plugin.itemBlocker.onItemUse(event);
+    }
+    
+    @EventHandler
+    public void onBlockIgnite(BlockIgniteEvent event)
+    {
+      plugin.itemBlocker.onBlockIgnite(event);
+    }
+    
+    @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event)
     {
         plugin.commandBlockModule.onCommandPreprocess(event);
