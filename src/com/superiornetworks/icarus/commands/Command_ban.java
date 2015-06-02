@@ -46,6 +46,7 @@ public class Command_ban
             }
             ICM_Bans.addBan(playerName, sender, reason);
             ICM_Utils.adminAction(sender.getName(), "Banning " + playerName + ". Reason: " + reason, true);
+            player.kickPlayer(ChatColor.RED + "You have been banned!" + (reason != null ? ("\nReason: " + ChatColor.YELLOW + reason) : "") + " \nBanned by: " + sender.getName());
             return true;
         }
         catch (SQLException ex)
