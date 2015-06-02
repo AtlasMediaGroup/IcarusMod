@@ -13,6 +13,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 public class PlayerListener implements Listener
 {
@@ -23,6 +27,34 @@ public class PlayerListener implements Listener
     {
         this.plugin = plugin;
     }
+
+ @EventHandler
+  public void onExplode(EntityExplodeEvent event)
+  {
+      event.setCancelled(true);
+  }
+  
+  @EventHandler
+  public void onItemUse(PlayerInteractEvent event)
+  {
+    Player player = event.getPlayer();
+    if (event.getItem() == null) {
+      return;
+    }
+    ItemStack item = event.getItem();
+    if (((item.getType() == Material.WATER) || (item.getType() == Material.WATER_BUCKET) || (item.getType() == Material.STATIONARY_WATER))) {
+      event.setCancelled(true);
+    }
+    if (((item.getType() == Material.LAVA) || (item.getType() == Material.LAVA_BUCKET) || (item.getType() == Material.STATIONARY_LAVA))) {
+      event.setCancelled(true);
+    }
+    if ((item.getType() == Material.TNT)) {
+      event.setCancelled(true);
+    }
+    if (((item.getType() == Material.FLINT_AND_STEEL) || (item.getType() == Material.FIRE) || (item.getType() == Material.FIREBALL))) {
+      event.setCancelled(true);
+    }
+  }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onUncancelledPlayerJoin(PlayerJoinEvent event)
