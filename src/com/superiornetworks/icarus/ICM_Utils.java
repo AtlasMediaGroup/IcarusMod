@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.server.v1_8_R1.ChatSerializer;
+import net.minecraft.server.v1_8_R1.EnumTitleAction;
+import net.minecraft.server.v1_8_R1.IChatBaseComponent;
+import net.minecraft.server.v1_8_R1.PacketPlayOutTitle;
+import net.minecraft.server.v1_8_R1.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -92,4 +98,25 @@ public class ICM_Utils
         }
         return message;
     } 
+    
+    //Please note that with titles, you must ALWAYS send the title first, and the subtitle second.
+    public static void sendTitle(Player player, String message, int fadein, int stay, int fadeout)
+    {
+        CraftPlayer craftplayer = (CraftPlayer) player;
+        PlayerConnection connection = craftplayer.getHandle().playerConnection;
+        String finalmessage = message.replaceAll("&", "§");
+        IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + finalmessage + "\"}");
+        PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle, fadein, stay, fadeout);
+        connection.sendPacket(title);
+    }
+    
+    public static void sendSubtitle(Player player, String message, int fadein, int stay, int fadeout)
+    {
+        CraftPlayer craftplayer = (CraftPlayer) player;
+        PlayerConnection connection = craftplayer.getHandle().playerConnection;
+        String finalmessage = message.replaceAll("&", "§");
+        IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + finalmessage + "\"}");
+        PacketPlayOutTitle subtitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatTitle, fadein, stay, fadeout);
+        connection.sendPacket(subtitle);
+    }
 }

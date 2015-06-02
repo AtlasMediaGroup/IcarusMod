@@ -44,6 +44,9 @@ public class JoinModule extends IcarusModule implements Listener
             {
                 Bukkit.broadcastMessage(ChatColor.RED + "WARNING: " + event.getPlayer().getName() + " is an imposter. Admins, please deal with this in an appropriate manner.");
             }
+            
+            ICM_Utils.sendTitle(player, "&6&lWelcome back!", 1, 2, 1);
+            ICM_Utils.sendSubtitle(player, "&f&lWe hope you enjoy your stay.", 2, 2, 2);
         }
         catch (SQLException ex)
         {
