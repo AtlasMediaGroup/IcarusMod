@@ -55,10 +55,17 @@ public class ICM_SqlHandler
                 + "`message` TEXT NOT NULL,"
                 + "`kick` BOOLEAN"
                 + ")";
+        String settings = "CREATE TABLE IF NOT EXISTS `settings` ("
+                + "`settingName` VARCHAR(64) NOT NULL UNIQUE,"
+                + "`int` INTEGER,"
+                + "`string` TEXT,"
+                + "`boolean` BOOLEAN"
+                + ")";
        c.createStatement().execute(players);
        c.createStatement().execute(reports);
        c.createStatement().execute(bans);
        c.createStatement().execute(commands);
+       c.createStatement().execute(settings);
     }
     
     public static void generateNewPlayer(Player player) throws SQLException
@@ -208,5 +215,5 @@ public class ICM_SqlHandler
         statement.setString(1, tag.replaceAll("&", "§"));
         statement.setString(2, playerName);
         statement.executeUpdate();
-    }
+    }   
 }

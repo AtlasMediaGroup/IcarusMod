@@ -64,6 +64,7 @@ public class PlayerListener implements Listener
     {
         plugin.busySystem.onPlayerQuit(event);
         plugin.developmentMode.onPlayerQuit(event);
+        plugin.joinModule.onPlayerQuit(event);
     }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)

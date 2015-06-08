@@ -21,7 +21,7 @@ public class ICM_Bans
         if (Bukkit.getPlayer(player) != null)
         {
             ip = Bukkit.getPlayer(player).getAddress().getAddress().getHostAddress();
-            Bukkit.getPlayer(player).kickPlayer("Banned:\n" + reason + " ~ " + sender.getName());
+            Bukkit.getPlayer(player).kickPlayer("§c§lYou have been banned!\nYou were banned for: §e" + reason + "\n§c§lBanned by: §e" + sender.getName());
         }
         else
         {

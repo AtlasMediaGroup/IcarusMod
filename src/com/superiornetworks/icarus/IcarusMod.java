@@ -127,6 +127,7 @@ public class IcarusMod extends BukkitPlugin
             {
                 //Generate Default Tables
                 ICM_SqlHandler.generateTables();
+                ICM_Settings.generateDefaultSettings();
             }
             catch (SQLException ex)
             {
