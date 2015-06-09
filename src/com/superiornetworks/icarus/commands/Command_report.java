@@ -72,6 +72,10 @@ public class Command_report extends BukkitCommand
             {
                 admin.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &a" + sender.getName() + " &4has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
+            if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
+            {
+                sender.sendMessage(ChatColor.DARK_PURPLE + "Please do not report staff members. If a staff member is abusing, take it to the forums.");
+            }
         }
         if(player != null)
             player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + " &4an administrator will review this soon."));
