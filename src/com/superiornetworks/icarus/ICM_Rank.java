@@ -14,15 +14,17 @@ public class ICM_Rank
     public enum Rank
     {
 
-        IMPOSTER(-1, "Imposter"), OP(0, "Op"), SUPER(1, "Super Admin"), TELNET(2, "Telnet Admin"), SENIOR(3, "Senior Admin"), DEVELOPER(4, "Developer"), MANAGER(5, "Manager");
+        IMPOSTER(-1, "Imposter", "§e[IMP]"), OP(0, "Op", "§c[OP]"), SUPER(1, "Super Admin", "§b[SA]"), TELNET(2, "Telnet Admin", "§&2[STA]"), SENIOR(3, "Senior Admin", "&d[SrA]"), DEVELOPER(4, "Developer", "§5[Dev]"), MANAGER(5, "Manager", "§4[MgR]");
 
         public int level;
         public String name;
+        public String actag; //Admin-chat tag
 
-        Rank(int level, String name)
+        Rank(int level, String name, String actag)
         {
             this.level = level;
             this.name = name;
+            this.actag = actag;
         }
 
         public int getLevel()
