@@ -44,3 +44,6 @@ commands:
   tag:
     description: Set someone's tag.
     usage: /<command> <set:playername> <tag>
+  say:
+    description: Broadcast a message in chat.
+    usage: /<command> <message>

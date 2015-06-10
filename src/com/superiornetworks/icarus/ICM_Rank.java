@@ -14,7 +14,7 @@ public class ICM_Rank
     public enum Rank
     {
 
-        IMPOSTER(-1, "Imposter", "§e[IMP]"), OP(0, "Op", "§c[OP]"), SUPER(1, "Super Admin", "§b[SA]"), TELNET(2, "Telnet Admin", "§&2[STA]"), SENIOR(3, "Senior Admin", "&d[SrA]"), DEVELOPER(4, "Developer", "§5[Dev]"), MANAGER(5, "Manager", "§4[MgR]");
+        IMPOSTER(-1, "Imposter", "§e[IMP]"), OP(0, "Op", "§c[OP]"), SUPER(1, "Super Admin", "§b[SA]"), TELNET(2, "Telnet Admin", "§&2[STA]"), SENIOR(3, "Senior Admin", "§d[SrA]"), DEVELOPER(4, "Developer", "§5[Dev]"), MANAGER(5, "Manager", "§4[MgR]");
 
         public int level;
         public String name;

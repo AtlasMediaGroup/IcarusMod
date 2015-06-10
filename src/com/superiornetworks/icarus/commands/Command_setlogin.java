@@ -13,7 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name="setlogin",description="Set your custom login message.",usage="/setlogin <message>",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name="setlogin",description="Set your custom login message.",usage="/setlogin <off:message>",rank=ICM_Rank.Rank.SUPER)
 public class Command_setlogin
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -24,7 +24,15 @@ public class Command_setlogin
         }
         String combined = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
         try
-        {
+        {        
+            if (args[0].equalsIgnoreCase("off"))
+            {
+                PreparedStatement statement = ICM_SqlHandler.getConnection().prepareStatement("UPDATE `players` SET `loginMessage` = NULL WHERE `playerName` = ?");
+                statement.setString(1, sender.getName());
+                statement.executeUpdate();
+                sender.sendMessage(ChatColor.GREEN + "Success! Your login message is now set to its default state!");
+                return true;
+            }
             PreparedStatement statement = ICM_SqlHandler.getConnection().prepareStatement("UPDATE `players` SET `loginMessage` = ? WHERE `playerName` = ?");
             statement.setString(2, sender.getName());
             statement.setString(1, combined);
