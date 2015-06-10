@@ -14,7 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(source = SourceType.PLAYER, permission = "")
+@CommandPermissions(name="god",description="Toggle God",usage="/<command>",rank=ICM_Rank.Rank.OP)
 public class Command_god extends BukkitCommand
 {
 
@@ -28,7 +28,6 @@ public class Command_god extends BukkitCommand
                 return true;
             }
             Player player = (Player) sender;
-            if (!ICM_SqlHandler.hasDoomHammer(player.getName()))
             {
                 playerMsg(sender, "&aEnabled god mode.");
                 Connection c = ICM_SqlHandler.getConnection();
