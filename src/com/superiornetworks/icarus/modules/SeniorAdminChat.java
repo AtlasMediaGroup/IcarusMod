@@ -20,7 +20,7 @@ public class SeniorAdminChat extends IcarusModule
             if (ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.SENIOR))
             {
                 // Some strange ass colour codes being used here...
-                p.sendMessage("§f[§bADMIN§f] §4" + sender.getName() + " §d[SrA]§f: §d " + message);
+                p.sendMessage("§f[§bADMIN§f] §4" + sender.getName() + "[" + ICM_Rank + "] "  + message);
             }
         }
     }
