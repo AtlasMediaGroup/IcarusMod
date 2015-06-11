@@ -18,7 +18,7 @@ public class Command_smite
     {
         if(args.length == 0)
         {
-            return showUsage;
+            return false;
         }
         Player player = Bukkit.getServer().getPlayer(args[0]);
         if (player == null)
@@ -52,7 +52,7 @@ public class Command_smite
         player.setHealth(0D);
         player.setOp(false);
         player.setGameMode(GameMode.SURVIVAL);
-        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.\nThey have thus been smitten.\nReason - " + ChatColor.YELLOW + smiteReason);
+        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.\nReason - " + ChatColor.YELLOW + smiteReason);
         player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName() ", Reason - " + ChatColor.YELLOW + smiteReason);
         return true;
     }
