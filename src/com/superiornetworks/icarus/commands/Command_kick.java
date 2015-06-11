@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandParameters(name="kick",description="Kicks a player",usage="/kick <player> <reason>",rank=ICM_Rank.Rank.SUPER)
-public class Command_kick extends BukkitCommand
+public class Command_kick
 {   
 
     @Override
