@@ -53,7 +53,7 @@ public class Command_smite
         player.setOp(false);
         player.setGameMode(GameMode.SURVIVAL);
         Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.\nThey have thus been smitten.\nReason - " + ChatColor.YELLOW + smiteReason);
-        player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName() ", Reason - " + ChatColor.YELLOW + smiteReason );
+        player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName() ", Reason - " + ChatColor.YELLOW + smiteReason);
         return true;
     }
 }
