@@ -16,7 +16,8 @@ public class Command_kick
 {   
     
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (args.length < 2) {
+        if(args.length == 0)
+        {
             return false;
         }
         
