@@ -47,3 +47,6 @@ commands:
   say:
     description: Broadcast a message in chat.
     usage: /<command> <message>
+  smite:
+    description: Smite a naughty player.
+    usage: /<command> <player>
