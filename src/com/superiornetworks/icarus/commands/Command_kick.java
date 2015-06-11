@@ -14,14 +14,13 @@ import org.bukkit.entity.Player;
 @CommandParameters(name="kick",description="Kicks a player",usage="/kick <player> <reason>",rank=ICM_Rank.Rank.SUPER)
 public class Command_kick
 {   
-
-    @Override
-    public boolean run(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+    
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length < 2) {
-            return showUsage();
+            return false;
         }
         
-        final Player player = getPlayer(args[0]);
+        final Player player = Bukkit.getServer().getPlayer(args[0]);
         
         if (player == null) {
             sender.sendMessage(ChatColor.RED + "Player not found.\nPlease review arguments.");
