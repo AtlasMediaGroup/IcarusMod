@@ -2,6 +2,8 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Rank;
 import org.bukkit.Bukkit;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.World;
@@ -10,13 +12,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandParameters(name="smite",description="The most basic form of disciplinary action.",usage="/smite <player>",rank=ICM_Rank.Rank.SUPER)
-public class Command_say
+public class Command_smite
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if(args.length == 0)
         {
-            return false;
+            return showUsage;
         }
         Player player = Bukkit.getServer().getPlayer(args[0]);
         if (player == null)
@@ -33,9 +35,11 @@ public class Command_say
         
         if (ICM_Rank.getRank(sender).level <= ICM_Rank.getRank(player).level)
         {
-            sender.sendMessage(ChatColor.DARK_RED + "You cannot smite someone that is equal or higher in ranking than yourself.");
+            sender.sendMessage(ChatColor.DARK_RED + "You cannot smite someone that is an equal or higher rank than yourself.");
             return true;
         }
+        
+        String smiteReason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
         
         World world = player.getWorld();
         world.strikeLightningEffect(player.getLocation());
@@ -48,8 +52,8 @@ public class Command_say
         player.setHealth(0D);
         player.setOp(false);
         player.setGameMode(GameMode.SURVIVAL);
-        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.");
-        player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName());
+        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.\nThey have thus been smitten.\nReason - " + ChatColor.YELLOW + smiteReason);
+        player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName() ", Reason - " + ChatColor.YELLOW + smiteReason );
         return true;
     }
 }
