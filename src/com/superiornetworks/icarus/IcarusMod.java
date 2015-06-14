@@ -53,6 +53,7 @@ public class IcarusMod extends BukkitPlugin
     public CommandSpyModule commandSpyModule;
     public LoginModule loginModule;
     public ImposterModule imposterModule;
+    public WeatherModule weatherModule;
 
     @Override
     public void onLoad()
@@ -73,6 +74,7 @@ public class IcarusMod extends BukkitPlugin
         commandSpyModule = new CommandSpyModule(plugin);
         loginModule = new LoginModule(plugin);
         imposterModule = new ImposterModule(plugin);
+        weatherModule = new WeatherModule(plugin);
     }
 
     @Override
