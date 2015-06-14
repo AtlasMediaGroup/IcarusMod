@@ -15,6 +15,7 @@ import com.superiornetworks.icarus.modules.FamousWarning;
 import com.superiornetworks.icarus.modules.ImposterModule;
 import com.superiornetworks.icarus.modules.JoinModule;
 import com.superiornetworks.icarus.modules.LoginModule;
+import com.superiornetworks.icarus.modules.WeatherModule;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -119,6 +120,8 @@ public class IcarusMod extends BukkitPlugin
         final PluginManager pm = plugin.getServer().getPluginManager();
         if (!error)
         {
+            WeatherModule.setInitialWeather();
+            
             // Listeners
             pm.registerEvents(new PlayerListener(plugin), plugin);
 
