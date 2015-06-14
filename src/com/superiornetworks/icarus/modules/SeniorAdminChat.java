@@ -6,13 +6,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class SeniorAdminChat extends IcarusModule 
+public class SeniorAdminChat extends IcarusModule
 {
-    public SeniorAdminChat(IcarusMod plugin) 
+
+    public SeniorAdminChat(IcarusMod plugin)
     {
         super(plugin);
     }
-    
+
     public static void chat(CommandSender sender, String message)
     {
         for (Player p : Bukkit.getOnlinePlayers())

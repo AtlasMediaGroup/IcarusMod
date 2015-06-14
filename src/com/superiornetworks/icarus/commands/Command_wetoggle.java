@@ -2,10 +2,6 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
-import com.superiornetworks.icarus.IcarusMod;
-import net.pravian.bukkitlib.command.BukkitCommand;
-import net.pravian.bukkitlib.command.CommandPermissions;
-import net.pravian.bukkitlib.command.SourceType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,14 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
-@CommandPermissions(source = SourceType.ANY, permission = "")
-public class Command_wetoggle extends BukkitCommand<IcarusMod>
+@CommandParameters(name = "wetoggle", description = "Toggles the worldedit plugin between enabled and disabled.", usage = "/wetoggle", rank = ICM_Rank.Rank.SUPER)
+public class Command_wetoggle
 {
 
-    @Override
-    public boolean run(CommandSender sender, Command cmd, String string, String[] args)
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
-        if (!ICM_Rank.isRankOrHigher(playerSender, ICM_Rank.Rank.SUPER))
+        if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;

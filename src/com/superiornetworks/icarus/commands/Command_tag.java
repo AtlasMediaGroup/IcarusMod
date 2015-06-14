@@ -13,9 +13,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name="tag",description="Set your tag.", usage = "/<command> <set:playername> <tag>",rank=ICM_Rank.Rank.OP)
-public class Command_tag 
+@CommandParameters(name = "tag", description = "Set your tag.", usage = "/<command> <set:playername> <tag>", rank = ICM_Rank.Rank.OP)
+public class Command_tag
 {
+
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         try
@@ -24,16 +25,16 @@ public class Command_tag
             {
                 return false;
             }
-            
+
             if (args[0].equalsIgnoreCase("set"))
-            {            
+            {
                 if (sender instanceof ConsoleCommandSender)
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "You can only set your tag in game.");
                     return true;
                 }
                 String tag = ICM_Utils.buildMessage(args, 1);
-                
+
                 if (tag.contains("`") || tag.contains("'"))
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot use these charecters: ` or '");
@@ -48,12 +49,12 @@ public class Command_tag
                 sender.sendMessage(ChatColor.GREEN + "You tag is now: " + tag);
             }
             else
-            {                
+            {
 
                 if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
                 {
                     sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
-                }                
+                }
 
                 if (!ICM_SqlHandler.playerExists(args[0]))
                 {
@@ -78,7 +79,7 @@ public class Command_tag
                 if (p != null)
                 {
                     p.sendMessage(ChatColor.GREEN + "Your tag was changed by: " + sender.getName() + " to: " + tag);
-                }                      
+                }
             }
         }
         catch (SQLException ex)

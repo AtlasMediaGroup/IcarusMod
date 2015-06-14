@@ -27,7 +27,7 @@ public class JoinModule extends IcarusModule implements Listener
     }
 
     static List<String> noQuitMessage = new ArrayList<>();
-    
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event)
     {
@@ -35,14 +35,14 @@ public class JoinModule extends IcarusModule implements Listener
 
         try
         {
-            if(ICM_Bans.isBanned(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+            if (ICM_Bans.isBanned(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
             {
                 noQuitMessage.add(player.getName());
                 player.kickPlayer("§c§lYou are banned!\nYou were banned for: §e" + ICM_Bans.getReason(player.getName()) + "\n§c§lBanned by: §e" + ICM_Bans.getBanner(player.getName()));
             }
-            if(ICM_Whitelist.whitelist)
+            if (ICM_Whitelist.whitelist)
             {
-                if(!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+                if (!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
                 {
                     noQuitMessage.add(player.getName());
                     player.kickPlayer("§f§lThe server is currently whitelisted. Please check back later.");
@@ -61,11 +61,11 @@ public class JoinModule extends IcarusModule implements Listener
             {
                 event.setJoinMessage(ChatColor.AQUA + player.getName() + " is " + ICM_Utils.aOrAn(ICM_SqlHandler.getRank(player.getName())) + " " + ICM_SqlHandler.getRank(player.getName()));
             }
-            if(ICM_Rank.getRank(event.getPlayer()).level == -1)
+            if (ICM_Rank.getRank(event.getPlayer()).level == -1)
             {
                 Bukkit.broadcastMessage(ChatColor.RED + "WARNING: " + event.getPlayer().getName() + " is an imposter. Admins, please deal with this in an appropriate manner.");
             }
-            
+
             String title = ICM_Settings.getString("settingName", "title-message-on-join", "string");
             String subtitle = ICM_Settings.getString("settingName", "subtitle-message-on-join", "string");
             ICM_Utils.sendTitle(player, title, 2, 2, 2);
@@ -76,7 +76,7 @@ public class JoinModule extends IcarusModule implements Listener
             plugin.getLogger().severe(ex.getLocalizedMessage());
         }
     }
-    
+
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event)
     {

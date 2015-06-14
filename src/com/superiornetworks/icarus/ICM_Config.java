@@ -19,18 +19,18 @@ public class ICM_Config
 
     public ICM_Config(JavaPlugin plugin, String fileName)
     {
-        if(plugin == null)
+        if (plugin == null)
         {
             throw new IllegalArgumentException("plugin cannot be null");
         }
-        if(!plugin.isInitialized())
+        if (!plugin.isInitialized())
         {
             throw new IllegalArgumentException("plugin must be initialized");
         }
         this.plugin = plugin;
         this.fileName = fileName;
         File dataFolder = plugin.getDataFolder();
-        if(dataFolder == null)
+        if (dataFolder == null)
         {
             throw new IllegalStateException();
         }
@@ -43,7 +43,7 @@ public class ICM_Config
 
         // Look for defaults in the jar
         InputStream defConfigStream = plugin.getResource(fileName);
-        if(defConfigStream != null)
+        if (defConfigStream != null)
         {
             YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
             fileConfiguration.setDefaults(defConfig);
@@ -52,7 +52,7 @@ public class ICM_Config
 
     public FileConfiguration getConfig()
     {
-        if(fileConfiguration == null)
+        if (fileConfiguration == null)
         {
             this.reloadConfig();
         }
@@ -61,15 +61,17 @@ public class ICM_Config
 
     public void saveConfig()
     {
-        if(fileConfiguration == null || configFile == null)
+        if (fileConfiguration == null || configFile == null)
         {
             return;
-        } else
+        }
+        else
         {
             try
             {
                 getConfig().save(configFile);
-            } catch(IOException ex)
+            }
+            catch (IOException ex)
             {
                 plugin.getLogger().log(Level.SEVERE, "Could not save config to " + configFile, ex);
             }
@@ -78,7 +80,7 @@ public class ICM_Config
 
     public void saveDefaultConfig()
     {
-        if(!configFile.exists())
+        if (!configFile.exists())
         {
             this.plugin.saveResource(fileName, false);
         }

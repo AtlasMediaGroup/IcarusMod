@@ -1,20 +1,9 @@
 package com.superiornetworks.icarus;
 
-import com.superiornetworks.icarus.commands.Command_icarusmod;
+import com.superiornetworks.icarus.commands.Command_ban;
 import com.superiornetworks.icarus.commands.ICM_CommandRegistry;
 import com.superiornetworks.icarus.listeners.PlayerListener;
-import com.superiornetworks.icarus.modules.AdminWorldToggle;
-import com.superiornetworks.icarus.modules.BusySystem;
-import com.superiornetworks.icarus.modules.ChatModule;
-import com.superiornetworks.icarus.modules.CommandBlockModule;
-import com.superiornetworks.icarus.modules.CommandSpyModule;
-import com.superiornetworks.icarus.modules.CreativePVP;
-import com.superiornetworks.icarus.modules.DevelopmentMode;
-import com.superiornetworks.icarus.modules.DoomHammer;
-import com.superiornetworks.icarus.modules.FamousWarning;
-import com.superiornetworks.icarus.modules.ImposterModule;
-import com.superiornetworks.icarus.modules.JoinModule;
-import com.superiornetworks.icarus.modules.LoginModule;
+import com.superiornetworks.icarus.modules.*;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.bukkitlib.BukkitLib;
@@ -80,13 +69,13 @@ public class IcarusMod extends BukkitPlugin
     {
         // Bukkit Lib Important Stuff
         BukkitLib.init(plugin);
-        handler.setCommandLocation(Command_icarusmod.class.getPackage());
+        handler.setCommandLocation(Command_ban.class.getPackage());
 
         // More YAML Setting Up and information.
         icmconfig = new ICM_Config(plugin, "config.yml");
         icmconfig.saveDefaultConfig();
         config = icmconfig.getConfig();
-        
+
         boolean error = false;
         if (config.getString("hostname") == null)
         {

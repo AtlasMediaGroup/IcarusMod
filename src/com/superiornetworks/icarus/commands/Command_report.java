@@ -5,9 +5,6 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import net.pravian.bukkitlib.command.BukkitCommand;
-import net.pravian.bukkitlib.command.CommandPermissions;
-import net.pravian.bukkitlib.command.SourceType;
 import net.pravian.bukkitlib.util.ChatUtils;
 import net.pravian.bukkitlib.util.PlayerUtils;
 import org.apache.commons.lang.ArrayUtils;
@@ -21,12 +18,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@CommandPermissions(source = SourceType.ANY)
-public class Command_report extends BukkitCommand
+@CommandParameters(name = "report", description = "Report another player for breaking the rules.", usage = "/report <player> <reason>", rank = ICM_Rank.Rank.OP)
+public class Command_report
 {
 
-    @Override
-    public boolean run(CommandSender sender, Command cmnd, String string, String[] args)
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
 
         if (args.length == 0)
@@ -35,7 +31,7 @@ public class Command_report extends BukkitCommand
         }
         Player player = PlayerUtils.getPlayer(args[0]);
         String Reported;
-        if(player != null)
+        if (player != null)
         {
             Reported = player.getName();
         }
@@ -73,8 +69,10 @@ public class Command_report extends BukkitCommand
                 admin.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &a" + sender.getName() + " &4has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
         }
-        if(player != null)
+        if (player != null)
+        {
             player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + " &4an administrator will review this soon."));
+        }
         sender.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "Your report has been received and will be reviewed soon."));
 
         try
@@ -89,7 +87,7 @@ public class Command_report extends BukkitCommand
         }
         catch (SQLException ex)
         {
-            
+
         }
         return true;
 

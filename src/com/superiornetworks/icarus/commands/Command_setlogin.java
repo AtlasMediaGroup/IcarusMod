@@ -13,18 +13,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name="setlogin",description="Set your custom login message.",usage="/setlogin <off:message>",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "setlogin", description = "Set your custom login message.", usage = "/setlogin <off:message>", rank = ICM_Rank.Rank.SUPER)
 public class Command_setlogin
 {
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(args.length == 0)
+        if (args.length == 0)
         {
             return false;
         }
         String combined = StringUtils.join(ArrayUtils.subarray(args, 0, args.length), " ");
         try
-        {        
+        {
             if (args[0].equalsIgnoreCase("off"))
             {
                 PreparedStatement statement = ICM_SqlHandler.getConnection().prepareStatement("UPDATE `players` SET `loginMessage` = NULL WHERE `playerName` = ?");

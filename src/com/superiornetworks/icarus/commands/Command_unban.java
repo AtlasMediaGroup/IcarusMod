@@ -9,19 +9,20 @@ import java.util.logging.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name="unban",description="Unban a player.",usage="/unban <player>",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "unban", description = "Unban a player.", usage = "/unban <player>", rank = ICM_Rank.Rank.SUPER)
 public class Command_unban
 {
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(args.length < 1)
+        if (args.length < 1)
         {
             return false;
         }
         String name = args[0];
         try
         {
-            if(!ICM_Bans.isBanned(name))
+            if (!ICM_Bans.isBanned(name))
             {
                 ICM_Utils.playerMsg(sender, "&cThat player is not banned.");
                 return true;

@@ -11,9 +11,9 @@ public class ICM_CommandBlock
     {
         String[] label = command.split(" ");
         String search = label[0].replaceAll("/", "");
-        if(Bukkit.getCommandAliases().get(search) != null)
+        if (Bukkit.getCommandAliases().get(search) != null)
         {
-            for(String newCommand : Bukkit.getCommandAliases().get(search))
+            for (String newCommand : Bukkit.getCommandAliases().get(search))
             {
                 Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "level", "commands");
                 if (!(obj instanceof Integer))
@@ -34,14 +34,14 @@ public class ICM_CommandBlock
         int senderLevel = ICM_Rank.getRank(sender).level;
         return senderLevel < commandLevel;
     }
-    
+
     public static String getMessage(String command) throws SQLException
     {
         String[] label = command.split(" ");
         String search = label[0].replaceAll("/", "");
-        if(Bukkit.getCommandAliases().get(search) != null)
+        if (Bukkit.getCommandAliases().get(search) != null)
         {
-            for(String newCommand : Bukkit.getCommandAliases().get(search))
+            for (String newCommand : Bukkit.getCommandAliases().get(search))
             {
                 Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "message", "commands");
                 if (!(obj instanceof String))
@@ -58,14 +58,14 @@ public class ICM_CommandBlock
         }
         return (String) obj;
     }
-    
+
     public static boolean isKicker(String command) throws SQLException
     {
         String[] label = command.split(" ");
         String search = label[0].replaceAll("/", "");
-        if(Bukkit.getCommandAliases().get(search) != null)
+        if (Bukkit.getCommandAliases().get(search) != null)
         {
-            for(String newCommand : Bukkit.getCommandAliases().get(search))
+            for (String newCommand : Bukkit.getCommandAliases().get(search))
             {
                 Object obj = ICM_SqlHandler.getFromTable("commandName", newCommand, "kick", "commands");
                 if (!(obj instanceof Boolean))

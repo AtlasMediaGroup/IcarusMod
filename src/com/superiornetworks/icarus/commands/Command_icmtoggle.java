@@ -7,9 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name="icmtoggle",description="Toggle IcarusMod features.",usage="/toggle <feature>",rank=ICM_Rank.Rank.MANAGER)
+@CommandParameters(name = "icmtoggle", description = "Toggle IcarusMod features.", usage = "/toggle <feature>", rank = ICM_Rank.Rank.MANAGER)
 public class Command_icmtoggle
 {
+
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
         if (args.length == 0)

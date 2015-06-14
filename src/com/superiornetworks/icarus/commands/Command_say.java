@@ -9,12 +9,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name="smite",description="The most basic form of disciplinary action.",usage="/smite <player>",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "say", description = "Have a message? Use the power ot shout it loud with the say command.", usage = "/say", rank = ICM_Rank.Rank.SUPER)
 public class Command_say
 {
+
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(args.length == 0)
+        if (args.length == 0)
         {
             return false;
         }
@@ -24,19 +25,19 @@ public class Command_say
             sender.sendMessage(ChatColor.DARK_RED + "Player not found!");
             return true;
         }
-        
+
         if (player.getName().equals(sender.getName()))
         {
             sender.sendMessage(ChatColor.DARK_RED + "Please do not attempt to smite yourself.");
             return true;
         }
-        
+
         if (ICM_Rank.getRank(sender).level <= ICM_Rank.getRank(player).level)
         {
             sender.sendMessage(ChatColor.DARK_RED + "You cannot smite someone that is equal or higher in ranking than yourself.");
             return true;
         }
-        
+
         World world = player.getWorld();
         world.strikeLightningEffect(player.getLocation());
         world.strikeLightningEffect(player.getLocation());

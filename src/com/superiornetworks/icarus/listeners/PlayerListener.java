@@ -31,7 +31,7 @@ public class PlayerListener implements Listener
         plugin.developmentMode.onUncancelledPlayerJoin(event);
         plugin.joinModule.onPlayerJoin(event);
     }
-    
+
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event)
     {
@@ -39,7 +39,7 @@ public class PlayerListener implements Listener
         plugin.commandSpyModule.onCommandPreprocess(event);
         plugin.imposterModule.onCommandPreprocess(event);
     }
-    
+
     @EventHandler
     public void onPlayerLoginEvent(PlayerLoginEvent event)
     {
@@ -79,7 +79,7 @@ public class PlayerListener implements Listener
     {
         plugin.chatModule.onChat(event);
     }
-    
+
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event)
     {

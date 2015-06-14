@@ -7,11 +7,12 @@ import org.bukkit.event.player.PlayerLoginEvent;
 
 public class LoginModule extends IcarusModule implements Listener
 {
+
     public LoginModule(IcarusMod plugin)
     {
         super(plugin);
     }
-    
+
     @EventHandler
     public void onPlayerLoginEvent(PlayerLoginEvent event)
     {

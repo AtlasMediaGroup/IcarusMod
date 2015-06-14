@@ -11,9 +11,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name="devmode",description="Change into developer mode.",usage="/devmode <everyone:admins:developers:off>",rank=ICM_Rank.Rank.DEVELOPER)
+@CommandParameters(name = "devmode", description = "Change into developer mode.", usage = "/devmode <everyone:admins:developers:off>", rank = ICM_Rank.Rank.DEVELOPER)
 public class Command_devmode
 {
+
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         if (args[0].equalsIgnoreCase("everyone"))

@@ -11,15 +11,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@CommandParameters(name="potato",description="Give everyone potatoes!",usage="/potato",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "potato", description = "Give everyone potatoes!", usage = "/potato", rank = ICM_Rank.Rank.SUPER)
 public class Command_potato
 {
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) 
+
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         for (Player p : Bukkit.getOnlinePlayers())
         {
             Inventory inv = p.getInventory();
-            
+
             ItemStack item = new ItemStack(Material.BAKED_POTATO, 1);
             ItemMeta im;
             im = item.getItemMeta();

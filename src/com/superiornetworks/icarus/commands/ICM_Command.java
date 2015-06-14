@@ -115,7 +115,8 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
                 f.setAccessible(true);
                 cmap = (CommandMap) f.get(Bukkit.getServer());
                 return getCommandMap();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 e.printStackTrace();
             }
@@ -135,7 +136,7 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
     }
 
     private Object getPrivateField(Object object, String field) throws SecurityException,
-            NoSuchFieldException, IllegalArgumentException, IllegalAccessException
+                                                                       NoSuchFieldException, IllegalArgumentException, IllegalAccessException
     {
         Class<?> clazz = object.getClass();
         Field objectField = clazz.getDeclaredField(field);
@@ -159,7 +160,8 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
             {
                 knownCommands.remove(alias);
             }
-        } catch (SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e)
+        }
+        catch (SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e)
         {
             e.printStackTrace();
         }

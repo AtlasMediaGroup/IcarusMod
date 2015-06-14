@@ -5,17 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ICM_Settings 
+public class ICM_Settings
 {
+
     public static boolean settingExists(String settingName) throws SQLException
     {
         return ICM_SqlHandler.getFromTable("settingName", settingName, "settingName", "settings") != null;
     }
-    
+
     public static void generateDefaultSettings() throws SQLException
     {
         //This method does not override existing settings, it only creates the settings if they do not exist.
-        
+
         if (!settingExists("title-message-on-join"))
         {
             Connection c = getConnection();
@@ -42,7 +43,7 @@ public class ICM_Settings
         }
         //To add: network-wide lockdown, whitelist, adminmode, and more.
     }
-    
+
     //The reason we have these methods is so that we do not have to run instanceof checks every time a setting is checked.
     public static String getString(String uniqueColumn, String uniqueValue, String lookingFor) throws SQLException
     {
@@ -53,7 +54,7 @@ public class ICM_Settings
         }
         return "No string found. Please contact a developer.";
     }
-    
+
     public static Integer getInt(String uniqueColumn, String uniqueValue, String lookingFor) throws SQLException
     {
         Object obj = ICM_SqlHandler.getFromTable(uniqueColumn, uniqueValue, lookingFor, "settings");
@@ -63,7 +64,7 @@ public class ICM_Settings
         }
         return 0;
     }
-    
+
     public static boolean getBoolean(String uniqueColumn, String uniqueValue, String lookingFor) throws SQLException
     {
         Object obj = ICM_SqlHandler.getFromTable(uniqueColumn, uniqueValue, lookingFor, "settings");
@@ -73,13 +74,16 @@ public class ICM_Settings
         }
         return false;
     }
-    
+
     public static void updateSetting(String settingName, Object obj) throws SQLException
     {
         if (obj instanceof String)
         {
             String string = (String) obj;
-            if (!settingExists(settingName)) return;
+            if (!settingExists(settingName))
+            {
+                return;
+            }
             Connection c = getConnection();
             PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `string` = ? WHERE `settingName` = ?");
             statement.setString(1, string);
@@ -88,7 +92,10 @@ public class ICM_Settings
         else if (obj instanceof Boolean)
         {
             Boolean bool = (Boolean) obj; //If you name it boolean, Java recognizes it as the boolean class, not a variable.
-            if (!settingExists(settingName)) return;
+            if (!settingExists(settingName))
+            {
+                return;
+            }
             Connection c = getConnection();
             PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `boolean` = ? WHERE `settingName` = ?");
             statement.setBoolean(1, bool);
@@ -97,7 +104,10 @@ public class ICM_Settings
         else if (obj instanceof Integer)
         {
             Integer integer = (Integer) obj; //Same goes for this.
-            if (!settingExists(settingName)) return;
+            if (!settingExists(settingName))
+            {
+                return;
+            }
             Connection c = getConnection();
             PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `int` = ? WHERE `settingName` = ?");
             statement.setInt(1, integer);

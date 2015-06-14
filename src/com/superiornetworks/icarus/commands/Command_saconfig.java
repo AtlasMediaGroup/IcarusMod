@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.pravian.bukkitlib.command.BukkitCommand;
-import net.pravian.bukkitlib.command.CommandPermissions;
-import net.pravian.bukkitlib.command.SourceType;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Bukkit;
@@ -22,12 +19,11 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(source = SourceType.ANY, permission = "")
-public class Command_saconfig extends BukkitCommand
+@CommandParameters(name = "saconfig", description = "Access and change admin information", usage = "/saconfig <list | <add | delete> <username>>", rank = ICM_Rank.Rank.OP)
+public class Command_saconfig
 {
 
-    @Override
-    public boolean run(CommandSender sender, Command cmd, String label, String[] args)
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
         if (args.length == 1)
         {

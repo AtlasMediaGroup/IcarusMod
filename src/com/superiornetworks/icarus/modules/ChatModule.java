@@ -14,11 +14,12 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatModule extends IcarusModule implements Listener
 {
+
     public ChatModule(IcarusMod plugin)
     {
         super(plugin);
     }
-    
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent event)
     {

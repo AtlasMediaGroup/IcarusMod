@@ -55,20 +55,20 @@ public class ICM_Utils
         banhammer.setItemMeta(banhammermeta);
         return banhammer;
     }
-    
+
     public static ChatColor getRandomChatColour()
     {
         Random random = new Random();
         return COLOURS.get(random.nextInt(COLOURS.size()));
     }
-    
+
     public static String colour(String string)
     {
         string = ChatColor.translateAlternateColorCodes('&', string);
         string = string.replaceAll("&-", getRandomChatColour().toString());
         return string;
     }
-    
+
     public static String aOrAn(String string)
     {
         if (string.toLowerCase().matches("^[aeiou].*"))
@@ -77,28 +77,28 @@ public class ICM_Utils
         }
         return "a";
     }
-    
+
     public static void adminAction(String name, String message, boolean isRed)
     {
         Bukkit.broadcastMessage((isRed ? ChatColor.RED : ChatColor.AQUA) + name + " - " + message);
     }
-    
+
     public static void playerMsg(CommandSender player, String message)
     {
         player.sendMessage(colour(message));
     }
-    
+
     public static String buildMessage(String[] args, int startat)
     {
         String message = "";
-        for(int i = startat; i < args.length; i++)
+        for (int i = startat; i < args.length; i++)
         {
-            String arg = args[i] + " "; 
-            message = message + arg; 
+            String arg = args[i] + " ";
+            message = message + arg;
         }
         return message;
-    } 
-    
+    }
+
     //Please note that with titles, you must ALWAYS send the title first, and the subtitle second.
     public static void sendTitle(Player player, String message, int fadein, int stay, int fadeout)
     {
@@ -109,7 +109,7 @@ public class ICM_Utils
         PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle, fadein, stay, fadeout);
         connection.sendPacket(title);
     }
-    
+
     public static void sendSubtitle(Player player, String message, int fadein, int stay, int fadeout)
     {
         CraftPlayer craftplayer = (CraftPlayer) player;

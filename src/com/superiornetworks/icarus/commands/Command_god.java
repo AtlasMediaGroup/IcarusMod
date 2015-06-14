@@ -1,5 +1,6 @@
 package com.superiornetworks.icarus.commands;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import static com.superiornetworks.icarus.ICM_Utils.playerMsg;
 import java.sql.Connection;
@@ -7,19 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.pravian.bukkitlib.command.BukkitCommand;
-import net.pravian.bukkitlib.command.CommandPermissions;
-import net.pravian.bukkitlib.command.SourceType;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandPermissions(source = SourceType.PLAYER, permission = "")
-public class Command_god extends BukkitCommand
+@CommandParameters(name = "god", description = "Toggle your god mode", usage = "/god", rank = ICM_Rank.Rank.OP)
+public class Command_god
 {
 
-    @Override
-    public boolean run(CommandSender sender, Command cmd, String label, String[] args)
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
         try
         {

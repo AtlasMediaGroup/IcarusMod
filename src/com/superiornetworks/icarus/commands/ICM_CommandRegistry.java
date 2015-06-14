@@ -17,6 +17,7 @@ import org.bukkit.command.PluginCommand;
 
 public class ICM_CommandRegistry
 {
+
     private static CommandMap cmap = getCommandMap();
 
     public ICM_CommandRegistry()
@@ -51,9 +52,9 @@ public class ICM_CommandRegistry
                                 command.register();
                             }
                         }
-                        catch(ClassNotFoundException ex)
+                        catch (ClassNotFoundException ex)
                         {
-                            
+
                         }
                     }
                 }
@@ -86,7 +87,8 @@ public class ICM_CommandRegistry
                 f.setAccessible(true);
                 cmap = (CommandMap) f.get(Bukkit.getServer());
                 return getCommandMap();
-            } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e)
+            }
+            catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e)
             {
                 e.printStackTrace();
             }

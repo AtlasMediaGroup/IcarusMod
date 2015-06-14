@@ -11,15 +11,16 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@CommandParameters(name="pie",description="Give everybody pie!",usage="/pie",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "pie", description = "Give everybody pie!", usage = "/pie", rank = ICM_Rank.Rank.SUPER)
 public class Command_pie
 {
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) 
-    {   
+
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
+    {
         for (Player p : Bukkit.getOnlinePlayers())
         {
             Inventory inv = p.getInventory();
-            
+
             ItemStack item = new ItemStack(Material.PUMPKIN_PIE, 1);
             ItemMeta im;
             im = item.getItemMeta();

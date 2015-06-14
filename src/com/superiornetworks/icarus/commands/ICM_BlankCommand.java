@@ -10,6 +10,7 @@ import org.bukkit.command.CommandSender;
 
 public class ICM_BlankCommand extends ICM_Command
 {
+
     Class clazz;
     Object object;
 
@@ -20,7 +21,8 @@ public class ICM_BlankCommand extends ICM_Command
         try
         {
             this.object = clazz.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
+        }
+        catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
         {
             Logger.getLogger(ICM_BlankCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -32,7 +34,8 @@ public class ICM_BlankCommand extends ICM_Command
         try
         {
             return (boolean) clazz.getMethod("onCommand", CommandSender.class, Command.class, String.class, String[].class).invoke(object, sender, cmd, label, args);
-        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
+        }
+        catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
         {
             Logger.getLogger(ICM_BlankCommand.class.getName()).log(Level.SEVERE, null, ex);
         }

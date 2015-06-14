@@ -15,22 +15,22 @@ public class ImposterModule extends IcarusModule implements Listener
     {
         super(plugin);
     }
-    
+
     @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event)
     {
-        if(ICM_Rank.getRank(event.getPlayer()).getLevel() == -1)
+        if (ICM_Rank.getRank(event.getPlayer()).getLevel() == -1)
         {
             event.getPlayer().teleport(event.getFrom());
             ICM_Utils.playerMsg(event.getPlayer(), "&cYou may not move whilst impostered.");
             event.setCancelled(true);
         }
     }
-    
+
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event)
     {
-        if(ICM_Rank.getRank(event.getPlayer()).getLevel() == -1)
+        if (ICM_Rank.getRank(event.getPlayer()).getLevel() == -1)
         {
             ICM_Utils.playerMsg(event.getPlayer(), "&cYou may not send commands whilst impotered.");
             event.setCancelled(true);
