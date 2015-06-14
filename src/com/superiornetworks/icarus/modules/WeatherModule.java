@@ -12,6 +12,17 @@ public class WeatherModule extends IcarusModule implements Listener
         super(plugin);
     }
     
+    public static void setInitialWeather() {
+        for (World world : Bukkit.getServer().getWorlds()) {
+            // Set time to day
+            world.setGameRuleValue("doDaylightCycle", "false");
+            world.setTime(0L);
+            // Set weather to clear
+            world.setStorm(false);
+            world.setThundering(false);
+        }
+    }
+    
     @EventHandler
     public void onWeatherChange(WeatherChangeEvent event)
     {
