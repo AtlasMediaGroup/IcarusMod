@@ -18,7 +18,7 @@ import me.husky.Database;
  * @author tips48
  */
 public class MySQL extends Database
-{
+    {
 
     private final String user;
     private final String database;
@@ -39,7 +39,7 @@ public class MySQL extends Database
      * @param password Password
      */
     public MySQL(Plugin plugin, String hostname, String port, String database, String username, String password)
-    {
+        {
         super(plugin);
         this.hostname = hostname;
         this.port = port;
@@ -47,124 +47,124 @@ public class MySQL extends Database
         this.user = username;
         this.password = password;
         this.connection = null;
-    }
+        }
 
     @Override
     public Connection openConnection()
-    {
-        try
         {
+        try
+            {
             Class.forName("com.mysql.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://" + this.hostname + ":" + this.port + "/" + this.database, this.user, this.password);
-        }
+            }
         catch (SQLException e)
-        {
+            {
             plugin.getLogger().log(Level.SEVERE, "Could not connect to MySQL server! because: " + e.getMessage());
-        }
+            }
         catch (ClassNotFoundException e)
-        {
+            {
             plugin.getLogger().log(Level.SEVERE, "JDBC Driver not found!");
-        }
+            }
         return connection;
-    }
+        }
 
     @Override
     public boolean checkConnection()
-    {
+        {
         return connection != null;
-    }
+        }
 
     @Override
     public Connection getConnection()
-    {
+        {
         return connection;
-    }
+        }
 
     @Override
     public void closeConnection()
-    {
-        if (connection != null)
         {
+        if (connection != null)
+            {
             try
-            {
+                {
                 connection.close();
-            }
+                }
             catch (SQLException e)
-            {
+                {
                 plugin.getLogger().log(Level.SEVERE, "Error closing the MySQL Connection!");
                 e.printStackTrace();
+                }
             }
         }
-    }
 
     public ResultSet querySQL(String query)
-    {
+        {
         Connection c = null;
 
         if (checkConnection())
-        {
+            {
             c = getConnection();
-        }
+            }
         else
-        {
+            {
             c = openConnection();
-        }
+            }
 
         Statement s = null;
 
         try
-        {
+            {
             s = c.createStatement();
-        }
+            }
         catch (SQLException e1)
-        {
+            {
             e1.printStackTrace();
-        }
+            }
 
         ResultSet ret = null;
 
         try
-        {
+            {
             ret = s.executeQuery(query);
-        }
+            }
         catch (SQLException e)
-        {
+            {
             e.printStackTrace();
-        }
+            }
 
         closeConnection();
 
         return ret;
-    }
+        }
 
     public void updateSQL(String update)
-    {
+        {
 
         Connection c = null;
 
         if (checkConnection())
-        {
+            {
             c = getConnection();
-        }
+            }
         else
-        {
+            {
             c = openConnection();
-        }
+            }
 
         Statement s = null;
 
         try
-        {
+            {
             s = c.createStatement();
             s.executeUpdate(update);
-        }
+            }
         catch (SQLException e1)
-        {
+            {
             e1.printStackTrace();
-        }
+            }
 
         closeConnection();
 
-    }
+        }
 
-}
+    }

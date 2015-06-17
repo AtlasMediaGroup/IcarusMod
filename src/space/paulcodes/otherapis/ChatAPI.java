@@ -1,4 +1,5 @@
 package space.paulcodes.otherapis;
 
-public class ChatAPI {
-}
+public class ChatAPI
+    {
+    }

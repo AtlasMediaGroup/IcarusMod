@@ -8,19 +8,19 @@ import java.sql.SQLException;
 import org.bukkit.entity.Player;
 
 public class ICM_SqlHandler
-{
+    {
 
     public static Connection getConnection()
-    {
-        if (mySQL.checkConnection())
         {
+        if (mySQL.checkConnection())
+            {
             return mySQL.getConnection();
-        }
+            }
         return mySQL.openConnection();
-    }
+        }
 
     public static void generateTables() throws SQLException
-    {
+        {
         Connection c = mySQL.openConnection();
         String players = "CREATE TABLE IF NOT EXISTS `players` ("
                          + "`id` INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
@@ -67,160 +67,160 @@ public class ICM_SqlHandler
         c.createStatement().execute(bans);
         c.createStatement().execute(commands);
         c.createStatement().execute(settings);
-    }
+        }
 
     public static void generateNewPlayer(Player player) throws SQLException
-    {
+        {
         Connection c = getConnection();
         PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `ip`, `godMode`, `doomHammer`, `whitelisted`) VALUES (?, '', 'Op', ?, '0', '0', FALSE)");
         statement.setString(1, player.getName());
         statement.setString(2, player.getAddress().getAddress().getHostAddress());
         statement.executeUpdate();
-    }
+        }
 
     public static Object getFromTable(String uniqueColumn, String uniqueValue, String lookingFor, String inTable) throws SQLException
-    {
+        {
         Connection c = getConnection();
         PreparedStatement statement = c.prepareStatement("SELECT * FROM `" + inTable + "` WHERE `" + uniqueColumn + "` = ?");
         statement.setString(1, uniqueValue);
         ResultSet res = statement.executeQuery();
         if (res.next())
-        {
+            {
             return res.getObject(lookingFor);
-        }
+            }
         return null;
-    }
+        }
 
     public static boolean playerExists(String playerName) throws SQLException
-    {
+        {
         return getFromTable("playerName", playerName, "playerName", "players") != null;
-    }
+        }
 
     public static String getIp(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return null;
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "ip", "players");
         if (obj instanceof String)
-        {
+            {
             return (String) obj;
-        }
+            }
         return null;
-    }
+        }
 
     public static String getLoginMessage(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return null;
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "loginMessage", "players");
         if (obj instanceof String)
-        {
+            {
             return (String) obj;
-        }
+            }
         return null;
-    }
+        }
 
     public static String getRank(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return "Op";
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "rank", "players");
         if (obj instanceof String)
-        {
+            {
             return (String) obj;
-        }
+            }
         return "Op";
-    }
+        }
 
     public static String getTag(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return "&7[&c" + getRank(playerName) + "&7]";
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "tag", "players");
         if (obj instanceof String)
-        {
+            {
             return (String) obj;
-        }
+            }
         return "&7[&c" + getRank(playerName) + "&7]";
-    }
+        }
 
     public static String getNick(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return playerName;
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "nick", "players");
         if (obj instanceof String)
-        {
+            {
             return (String) obj;
-        }
+            }
         return playerName;
-    }
+        }
 
     public static boolean hasDoomHammer(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return false;
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "doomHammer", "players");
         if (obj instanceof Boolean)
-        {
+            {
             return (Boolean) obj;
-        }
+            }
         return false;
-    }
+        }
 
     public static boolean isGod(String playerName) throws SQLException
-    {
-        if (!playerExists(playerName))
         {
+        if (!playerExists(playerName))
+            {
             return false;
-        }
+            }
         Object obj = getFromTable("playerName", playerName, "godMode", "players");
         if (obj instanceof Boolean)
-        {
+            {
             return (Boolean) obj;
-        }
+            }
         return false;
-    }
+        }
 
     public static void setNickname(String playerName, String nickname) throws SQLException
-    {
+        {
         //For sake of simplicity, this method will replace & with §, so players can also have colors in their nicks.
         if (!playerExists(playerName))
-        {
+            {
             return;
-        }
+            }
 
         Connection c = getConnection();
         PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `nick` = ? WHERE `playerName` = ?");
         statement.setString(1, nickname.replaceAll("&", "§"));
         statement.setString(2, playerName);
         statement.executeUpdate();
-    }
+        }
 
     public static void setTag(String playerName, String tag) throws SQLException
-    {
+        {
         //For sake of simplicity, this method will replace & with §, so players can also have colors in their nicks.
         if (!playerExists(playerName))
-        {
+            {
             return;
-        }
+            }
 
         Connection c = getConnection();
         PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `tag` = ? WHERE `playerName` = ?");
         statement.setString(1, tag.replaceAll("&", "§"));
         statement.setString(2, playerName);
         statement.executeUpdate();
+        }
     }
-}

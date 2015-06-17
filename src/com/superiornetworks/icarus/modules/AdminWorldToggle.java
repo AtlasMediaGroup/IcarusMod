@@ -10,23 +10,23 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class AdminWorldToggle extends IcarusModule implements Listener
-{
+    {
 
     public AdminWorldToggle(IcarusMod plugin)
-    {
+        {
         super(plugin);
-    }
+        }
 
     @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event)
-    {
+        {
         Player player = event.getPlayer();
         if (!ICM_Utils.MANAGERS.contains(player.getName()) && event.getTo().getWorld() == Bukkit.getWorld("adminworld") && !IcarusMod.config.getBoolean("toggles.AdminWorld"))
-        {
+            {
             playerMsg(player, "&cAdminWorld is currently disabled.");
             event.setCancelled(true);
             player.teleport(Bukkit.getWorlds().get(0).getSpawnLocation());
+            }
         }
-    }
 
-}
+    }

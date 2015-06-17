@@ -17,7 +17,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 
 public class IcarusMod extends BukkitPlugin
-{
+    {
 
     public static IcarusMod plugin;
     public BukkitCommandHandler handler;
@@ -44,7 +44,7 @@ public class IcarusMod extends BukkitPlugin
 
     @Override
     public void onLoad()
-    {
+        {
         plugin = this;
         this.handler = new BukkitCommandHandler(plugin);
 
@@ -60,11 +60,11 @@ public class IcarusMod extends BukkitPlugin
         commandBlockModule = new CommandBlockModule(plugin);
         commandSpyModule = new CommandSpyModule(plugin);
         imposterModule = new ImposterModule(plugin);
-    }
+        }
 
     @Override
     public void onEnable()
-    {
+        {
         // Bukkit Lib Important Stuff
         BukkitLib.init(plugin);
         handler.setCommandLocation(Command_ban.class.getPackage());
@@ -76,34 +76,34 @@ public class IcarusMod extends BukkitPlugin
 
         boolean error = false;
         if (config.getString("hostname") == null)
-        {
+            {
             LoggerUtils.severe(plugin, "Hostname is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
-        }
+            }
         if (config.getString("port") == null)
-        {
+            {
             LoggerUtils.severe(plugin, "Port is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
-        }
+            }
         if (config.getString("database") == null)
-        {
+            {
             LoggerUtils.severe(plugin, "Database is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
-        }
+            }
         if (config.getString("username") == null)
-        {
+            {
             LoggerUtils.severe(plugin, "Username is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
-        }
+            }
         if (config.getString("password") == null)
-        {
+            {
             LoggerUtils.severe(plugin, "Password is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
-        }
+            }
 
         final PluginManager pm = plugin.getServer().getPluginManager();
         if (!error)
-        {
+            {
             // Listeners
             pm.registerEvents(new PlayerListener(plugin), plugin);
 
@@ -111,41 +111,41 @@ public class IcarusMod extends BukkitPlugin
             //Create MySQL
             mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
             try
-            {
+                {
                 //Generate Default Tables
                 ICM_SqlHandler.generateTables();
                 ICM_Settings.generateDefaultSettings();
-            }
+                }
             catch (SQLException ex)
-            {
+                {
                 plugin.getLogger().severe(ex.getLocalizedMessage());
-            }
+                }
 
             //Enable Commands
             ICM_CommandRegistry.registerCommands();
 
             // The All Clear
             LoggerUtils.info(plugin, "has been enabled with no problems.");
-        }
+            }
         else
-        {
+            {
             Bukkit.broadcastMessage("IcarusMod had an issue loading up, please check your logs for more info, on first start, this is normal!");
             pm.disablePlugin(plugin);
-        }
+            }
 
-    }
+        }
 
     @Override
     public void onDisable()
-    {
+        {
         // All clear, its disabled! Woot
         LoggerUtils.info(plugin, "has been disabled with no problems.");
-    }
+        }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-    {
+        {
         // BukkitLib Magic here, making commands work!
         return handler.handleCommand(sender, cmd, commandLabel, args);
+        }
     }
-}

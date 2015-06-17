@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CommandParameters
-{
+    {
 
     String name();
 
@@ -17,4 +17,4 @@ public @interface CommandParameters
     String aliases() default "";
 
     Rank rank() default Rank.OP;
-}
+    }

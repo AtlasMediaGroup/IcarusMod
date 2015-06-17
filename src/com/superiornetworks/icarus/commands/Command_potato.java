@@ -13,12 +13,12 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandParameters(name = "potato", description = "Give everyone potatoes!", usage = "/potato", rank = ICM_Rank.Rank.SUPER)
 public class Command_potato
-{
+    {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-    {
-        for (Player p : Bukkit.getOnlinePlayers())
         {
+        for (Player p : Bukkit.getOnlinePlayers())
+            {
             Inventory inv = p.getInventory();
 
             ItemStack item = new ItemStack(Material.BAKED_POTATO, 1);
@@ -28,7 +28,7 @@ public class Command_potato
             item.setItemMeta(im);
             inv.addItem(item);
             p.sendMessage(ChatColor.GOLD + "Much potato, such yum.");
-        }
+            }
         return true;
+        }
     }
-}

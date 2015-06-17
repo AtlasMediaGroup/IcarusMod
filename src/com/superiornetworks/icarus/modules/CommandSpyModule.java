@@ -12,35 +12,35 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class CommandSpyModule extends IcarusModule implements Listener
-{
+    {
 
     public CommandSpyModule(IcarusMod plugin)
-    {
+        {
         super(plugin);
-    }
+        }
 
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event)
-    {
-        if (event.isCancelled())
         {
+        if (event.isCancelled())
+            {
             return;
-        }
+            }
         ChatColor colour = ChatColor.GRAY;
         List<String> alertCommands = Arrays.asList("//set", "//replace", "//remove", "/ci", "/clear");
         for (String alert : alertCommands)
-        {
+            {
             if (event.getMessage().toLowerCase().startsWith(alert))
-            {
+                {
                 colour = ChatColor.RED;
+                }
             }
-        }
         for (Player player : Bukkit.getOnlinePlayers())
-        {
-            if (ICM_Rank.getRank(event.getPlayer()).level < ICM_Rank.getRank(player).level)
             {
+            if (ICM_Rank.getRank(event.getPlayer()).level < ICM_Rank.getRank(player).level)
+                {
                 player.sendMessage(colour + event.getPlayer().getName() + ": " + event.getMessage().toLowerCase());
+                }
             }
         }
     }
-}

@@ -10,86 +10,85 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener
-{
+    {
 
     private final IcarusMod plugin;
 
     public PlayerListener(IcarusMod plugin)
-    {
+        {
         this.plugin = plugin;
-    }
+        }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onUncancelledPlayerJoin(PlayerJoinEvent event)
-    {
+        {
         plugin.famousWarning.onUncancelledPlayerJoin(event);
         plugin.developmentMode.onUncancelledPlayerJoin(event);
         plugin.joinModule.onPlayerJoin(event);
-    }
+        }
 
     @EventHandler
     public void onCommandPreprocess(PlayerCommandPreprocessEvent event)
-    {
+        {
         plugin.commandBlockModule.onCommandPreprocess(event);
         plugin.commandSpyModule.onCommandPreprocess(event);
         plugin.imposterModule.onCommandPreprocess(event);
-    }
+        }
 
     @EventHandler
     public void onPlayerLoginEvent(PlayerJoinEvent event)
-    {
+        {
         plugin.joinModule.onPlayerJoin(event);
-    }
+        }
 
     @EventHandler
     public void onPlayerMoveEvent(PlayerMoveEvent event)
-    {
+        {
         plugin.adminWorldToggle.onPlayerMoveEvent(event);
         plugin.imposterModule.onPlayerMoveEvent(event);
-    }
+        }
 
     @EventHandler
     public void onEntityHit(EntityDamageByEntityEvent event)
-    {
+        {
         plugin.creativePVP.onEntityHit(event);
-    }
+        }
 
     @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerQuit(PlayerQuitEvent event)
-    {
+        {
         plugin.busySystem.onPlayerQuit(event);
         plugin.developmentMode.onPlayerQuit(event);
         plugin.joinModule.onPlayerQuit(event);
-    }
+        }
 
     @EventHandler(ignoreCancelled = true, priority = EventPriority.NORMAL)
     public void onPlayerChat(AsyncPlayerChatEvent event)
-    {
+        {
         plugin.busySystem.onPlayerChat(event);
 
-    }
+        }
 
     @EventHandler
     public void onChatEvent(AsyncPlayerChatEvent event)
-    {
+        {
         plugin.chatModule.onChat(event);
-    }
+        }
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event)
-    {
+        {
         plugin.creativePVP.onEntityDamage(event);
-    }
+        }
 
     @EventHandler
     public void onPlayerUseItem(PlayerInteractEvent event)
-    {
+        {
         plugin.doomHammer.onPlayerUseItem(event);
-    }
+        }
 
-}
+    }
