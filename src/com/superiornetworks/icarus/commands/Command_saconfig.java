@@ -109,11 +109,11 @@ public class Command_saconfig
             {
                 if (ICM_Rank.isRankOrHigher(player, ICM_Rank.getRank(sender)) && sender instanceof Player)
                 {
-                    sender.sendMessage("You can only remove someone from admin if they are a lower rank than you.");
+                    sender.sendMessage("You may only remove someone from admin if they are a lower rank than you.");
                     return true;
                 }
                 ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.OP);
-                ICM_Utils.adminAction(sender.getName(), "removing " + player.getName() + " from the admin list.", true);
+                ICM_Utils.adminAction(sender.getName(), "Removiong " + player.getName() + " from the admin list.", true);
                 return true;
             }
             if (args[0].equalsIgnoreCase("add"))
@@ -134,7 +134,7 @@ public class Command_saconfig
                     }
                 }
                 ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.SUPER);
-                ICM_Utils.adminAction(sender.getName(), "adding " + player.getName() + " to Super Admin.", false);
+                ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to Super Admin.", false);
                 return true;
             }
             return false;
@@ -169,7 +169,7 @@ public class Command_saconfig
             }
             if (!ICM_Rank.isRankOrHigher(sender, level))
             {
-                sender.sendMessage(ChatColor.RED + "You can only add someone to a rank that's lower than yours.");
+                sender.sendMessage(ChatColor.RED + "You may only add someone to a rank that's lower than yours.");
                 return true;
             }
             if (ICM_Rank.getRank(player).level == -1)
@@ -188,7 +188,7 @@ public class Command_saconfig
                 }
             }
             ICM_Rank.setRank(player.getName(), ICM_Rank.getFromLevel(level));
-            ICM_Utils.adminAction(sender.getName(), "adding " + player.getName() + " to " + ICM_Rank.getFromLevel(level).name + ".", false);
+            ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to " + ICM_Rank.getFromLevel(level).name + ".", false);
             return true;
         }
         return false;
