@@ -16,9 +16,9 @@ public class Command_potato
     {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-        {
+    {
         for (Player p : Bukkit.getOnlinePlayers())
-            {
+        {
             Inventory inv = p.getInventory();
 
             ItemStack item = new ItemStack(Material.BAKED_POTATO, 1);
@@ -28,7 +28,7 @@ public class Command_potato
             item.setItemMeta(im);
             inv.addItem(item);
             p.sendMessage(ChatColor.GOLD + "Much potato, such yum.");
-            }
-        return true;
         }
+        return true;
+    }
     }

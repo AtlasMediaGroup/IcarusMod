@@ -13,20 +13,20 @@ public class Command_opall
     {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-        {
+    {
         if (args.length != 0)
-            {
+        {
             return false;
-            }
+        }
         ICM_Utils.adminAction(sender.getName(), "Opping all online players.", false);
         //Uncomment these lines of code when non-op and op ranks have been added.
         for (Player p : Bukkit.getOnlinePlayers())
-            {
+        {
             if (!p.isOp())
-                {
+            {
                 p.sendMessage(ChatColor.YELLOW + "You are now op.");
                 p.setOp(true);
-                }
+            }
 
             //if (ICM_Rank.isRank(Rank.NonOp)
             //{
@@ -35,7 +35,7 @@ public class Command_opall
             //statement.setString(1, p.getName());
             //}
             //To prevent security breaches, it may be a good idea to block certain charecters in join names, if not alreayd done by MC.
-            }
-        return true;
         }
+        return true;
+    }
     }

@@ -16,23 +16,23 @@ public class ChatModule extends IcarusModule implements Listener
     {
 
     public ChatModule(IcarusMod plugin)
-        {
+    {
         super(plugin);
-        }
+    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent event)
-        {
+    {
         String message = event.getMessage();
         event.setMessage(ICM_Utils.colour(message));
         Player player = event.getPlayer();
         try
-            {
+        {
             player.setDisplayName(ICM_Utils.colour(ICM_SqlHandler.getTag(player.getName()) + "&r " + ICM_SqlHandler.getNick(player.getName()) + "&r"));
-            }
-        catch (SQLException ex)
-            {
-            Logger.getLogger(ChatModule.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
+        catch (SQLException ex)
+        {
+            Logger.getLogger(ChatModule.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     }

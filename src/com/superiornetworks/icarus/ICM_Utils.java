@@ -46,7 +46,7 @@ public class ICM_Utils
     public static final String NO_PERMS_MESSAGE = (ChatColor.DARK_RED + "Sorry, you do not have the required permissions to access this command. If you feel this is in error, please contact a server manager or developer ASAP!");
 
     public static ItemStack getDoomHammer()
-        {
+    {
         ItemStack banhammer = new ItemStack(Material.GOLD_AXE, 1);
         banhammer.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 10);
         ItemMeta banhammermeta = banhammer.getItemMeta();
@@ -54,69 +54,69 @@ public class ICM_Utils
         banhammermeta.setDisplayName(ChatColor.RED + "DoomHammer!");
         banhammer.setItemMeta(banhammermeta);
         return banhammer;
-        }
+    }
 
     public static ChatColor getRandomChatColour()
-        {
+    {
         Random random = new Random();
         return COLOURS.get(random.nextInt(COLOURS.size()));
-        }
+    }
 
     public static String colour(String string)
-        {
+    {
         string = ChatColor.translateAlternateColorCodes('&', string);
         string = string.replaceAll("&-", getRandomChatColour().toString());
         return string;
-        }
+    }
 
     public static String aOrAn(String string)
-        {
+    {
         if (string.toLowerCase().matches("^[aeiou].*"))
-            {
+        {
             return "an";
-            }
-        return "a";
         }
+        return "a";
+    }
 
     public static void adminAction(String name, String message, boolean isRed)
-        {
+    {
         Bukkit.broadcastMessage((isRed ? ChatColor.RED : ChatColor.AQUA) + name + " - " + message);
-        }
+    }
 
     public static void playerMsg(CommandSender player, String message)
-        {
+    {
         player.sendMessage(colour(message));
-        }
+    }
 
     public static String buildMessage(String[] args, int startat)
-        {
+    {
         String message = "";
         for (int i = startat; i < args.length; i++)
-            {
+        {
             String arg = args[i] + " ";
             message = message + arg;
-            }
-        return message;
         }
+        return message;
+    }
 
     //Please note that with titles, you must ALWAYS send the title first, and the subtitle second.
     public static void sendTitle(Player player, String message, int fadein, int stay, int fadeout)
-        {
+    {
         CraftPlayer craftplayer = (CraftPlayer) player;
         PlayerConnection connection = craftplayer.getHandle().playerConnection;
         String finalmessage = message.replaceAll("&", "§");
         IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + finalmessage + "\"}");
         PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle, fadein, stay, fadeout);
         connection.sendPacket(title);
-        }
+    }
 
     public static void sendSubtitle(Player player, String message, int fadein, int stay, int fadeout)
-        {
+    {
         CraftPlayer craftplayer = (CraftPlayer) player;
         PlayerConnection connection = craftplayer.getHandle().playerConnection;
         String finalmessage = message.replaceAll("&", "§");
         IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + finalmessage + "\"}");
         PacketPlayOutTitle subtitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatTitle, fadein, stay, fadeout);
         connection.sendPacket(subtitle);
-        }
+    }
     }

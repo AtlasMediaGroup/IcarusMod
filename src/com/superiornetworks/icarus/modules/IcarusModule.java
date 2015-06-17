@@ -10,8 +10,8 @@ public class IcarusModule
     protected final Server server;
 
     public IcarusModule(IcarusMod plugin)
-        {
+    {
         this.plugin = plugin;
         this.server = plugin.getServer();
-        }
+    }
     }

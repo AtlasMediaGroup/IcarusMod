@@ -10,11 +10,11 @@ public class ActionbarAPI
     {
 
     public static void sendActionBar(Player p, String msg)
-        {
+    {
         String s = ChatColor.translateAlternateColorCodes('&', msg);
         IChatBaseComponent icbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + s + "\"}");
         PacketPlayOutChat bar = new PacketPlayOutChat(icbc, (byte) 2);
         ((CraftPlayer) p).getHandle().playerConnection.sendPacket(bar);
-        }
+    }
 
     }

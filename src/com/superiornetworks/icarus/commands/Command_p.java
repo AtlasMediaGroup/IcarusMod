@@ -12,8 +12,8 @@ public class Command_p
     {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-        {
+    {
         SeniorAdminChat.chat(sender, StringUtils.join(args, " "));
         return true;
-        }
+    }
     }

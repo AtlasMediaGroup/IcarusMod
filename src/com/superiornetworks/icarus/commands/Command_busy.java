@@ -11,10 +11,10 @@ public class Command_busy
     {
 
     public boolean onCommand(CommandSender sender, Command cmnd, String string, String[] args)
-        {
+    {
 
         Player player = (Player) sender;
         BusySystem.toggleBusyPlayer(player);
         return true;
-        }
+    }
     }

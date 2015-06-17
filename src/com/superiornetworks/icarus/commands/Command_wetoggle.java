@@ -14,31 +14,31 @@ public class Command_wetoggle
     {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
-        {
+    {
         if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
-            {
+        {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;
-            }
+        }
         PluginManager pm = Bukkit.getServer().getPluginManager();
         Plugin we = Bukkit.getServer().getPluginManager().getPlugin("WorldEdit");
 
         if (we == null)
-            {
+        {
             return true;
-            }
+        }
 
         if (we.isEnabled())
-            {
+        {
             sender.sendMessage(ChatColor.GREEN + "WorldEdit disabled!");
             pm.disablePlugin(we);
             return true;
-            }
+        }
         else
-            {
+        {
             sender.sendMessage(ChatColor.GREEN + "WorldEdit enabled!");
             pm.enablePlugin(we);
-            }
-        return true;
         }
+        return true;
+    }
     }

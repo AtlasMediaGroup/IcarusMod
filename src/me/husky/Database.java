@@ -25,9 +25,9 @@ public abstract class Database
      * @param plugin Plugin instance
      */
     protected Database(Plugin plugin)
-        {
+    {
         this.plugin = plugin;
-        }
+    }
 
     /**
      * Opens a connection with the database

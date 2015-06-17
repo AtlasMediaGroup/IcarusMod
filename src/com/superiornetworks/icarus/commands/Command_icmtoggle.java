@@ -12,34 +12,34 @@ public class Command_icmtoggle
     {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
-        {
+    {
         if (args.length == 0)
-            {
+        {
             playerMsg(sender, ChatColor.AQUA + "Possible toggles:");
             for (String toggle : IcarusMod.config.getConfigurationSection("toggles").getKeys(false))
-                {
-                playerMsg(sender, " - " + (IcarusMod.config.getBoolean("toggles." + toggle) ? ChatColor.GREEN : ChatColor.RED) + toggle);
-                }
-            return true;
-            }
-        if (args.length == 1)
             {
+                playerMsg(sender, " - " + (IcarusMod.config.getBoolean("toggles." + toggle) ? ChatColor.GREEN : ChatColor.RED) + toggle);
+            }
+            return true;
+        }
+        if (args.length == 1)
+        {
             for (String toggle : IcarusMod.config.getConfigurationSection("toggles").getKeys(false))
-                {
+            {
                 if (args[0].equalsIgnoreCase(toggle))
-                    {
+                {
                     IcarusMod.config.set("toggles." + toggle, !IcarusMod.config.getBoolean("toggles." + toggle));
                     playerMsg(sender, ChatColor.GOLD + "Toggled " + toggle + (IcarusMod.config.getBoolean("toggles." + toggle) ? " on." : " off."));
                     return true;
-                    }
                 }
+            }
             playerMsg(sender, ChatColor.AQUA + "Possible toggles:");
             for (String toggle : IcarusMod.config.getConfigurationSection("toggles").getKeys(false))
-                {
+            {
                 playerMsg(sender, " - " + (IcarusMod.config.getBoolean("toggles." + toggle) ? ChatColor.GREEN : ChatColor.RED) + toggle);
-                }
-            return true;
             }
-        return false;
+            return true;
         }
+        return false;
+    }
     }
