@@ -40,7 +40,6 @@ public class IcarusMod extends BukkitPlugin
     public JoinModule joinModule;
     public CommandBlockModule commandBlockModule;
     public CommandSpyModule commandSpyModule;
-    public LoginModule loginModule;
     public ImposterModule imposterModule;
 
     @Override
@@ -60,7 +59,6 @@ public class IcarusMod extends BukkitPlugin
         joinModule = new JoinModule(plugin);
         commandBlockModule = new CommandBlockModule(plugin);
         commandSpyModule = new CommandSpyModule(plugin);
-        loginModule = new LoginModule(plugin);
         imposterModule = new ImposterModule(plugin);
     }
 

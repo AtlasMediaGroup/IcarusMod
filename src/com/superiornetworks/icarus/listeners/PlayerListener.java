@@ -41,9 +41,9 @@ public class PlayerListener implements Listener
     }
 
     @EventHandler
-    public void onPlayerLoginEvent(PlayerLoginEvent event)
+    public void onPlayerLoginEvent(PlayerJoinEvent event)
     {
-        plugin.loginModule.onPlayerLoginEvent(event);
+        plugin.joinModule.onPlayerJoin(event);
     }
 
     @EventHandler
