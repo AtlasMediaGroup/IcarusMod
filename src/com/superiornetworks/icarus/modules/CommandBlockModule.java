@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class CommandBlockModule extends IcarusModule implements Listener
-    {
+{
 
     public CommandBlockModule(IcarusMod plugin)
     {
@@ -38,4 +38,4 @@ public class CommandBlockModule extends IcarusModule implements Listener
             Logger.getLogger(CommandBlockModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    }
+}

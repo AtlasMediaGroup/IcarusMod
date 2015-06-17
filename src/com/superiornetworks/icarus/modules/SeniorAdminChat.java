@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class SeniorAdminChat extends IcarusModule
-    {
+{
 
     public SeniorAdminChat(IcarusMod plugin)
     {
@@ -25,4 +25,4 @@ public class SeniorAdminChat extends IcarusModule
             }
         }
     }
-    }
+}

@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class ICM_Utils
-    {
+{
 
     public static final ArrayList<Player> IMPOSTERS = new ArrayList<>();
     public static final List<String> MANAGERS = Arrays.asList("Wild1145", "Camzie99");
@@ -100,6 +100,7 @@ public class ICM_Utils
     }
 
     //Please note that with titles, you must ALWAYS send the title first, and the subtitle second.
+    @Deprecated
     public static void sendTitle(Player player, String message, int fadein, int stay, int fadeout)
     {
         CraftPlayer craftplayer = (CraftPlayer) player;
@@ -110,6 +111,7 @@ public class ICM_Utils
         connection.sendPacket(title);
     }
 
+    @Deprecated
     public static void sendSubtitle(Player player, String message, int fadein, int stay, int fadeout)
     {
         CraftPlayer craftplayer = (CraftPlayer) player;
@@ -119,4 +121,4 @@ public class ICM_Utils
         PacketPlayOutTitle subtitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatTitle, fadein, stay, fadeout);
         connection.sendPacket(subtitle);
     }
-    }
+}

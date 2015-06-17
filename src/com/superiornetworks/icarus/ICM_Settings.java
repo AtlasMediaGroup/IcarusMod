@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ICM_Settings
-    {
+{
 
     public static boolean settingExists(String settingName) throws SQLException
     {
@@ -114,4 +114,4 @@ public class ICM_Settings
             statement.setString(2, settingName);
         }
     }
-    }
+}

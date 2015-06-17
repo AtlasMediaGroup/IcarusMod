@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 public class CreativePVP extends IcarusModule implements Listener
-    {
+{
 
     public CreativePVP(IcarusMod plugin)
     {
@@ -68,4 +68,4 @@ public class CreativePVP extends IcarusModule implements Listener
         }
     }
 
-    }
+}

@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "opall", description = "Op all non-op players online.", usage = "/opall", rank = ICM_Rank.Rank.SUPER)
 public class Command_opall
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
@@ -38,4 +38,4 @@ public class Command_opall
         }
         return true;
     }
-    }
+}

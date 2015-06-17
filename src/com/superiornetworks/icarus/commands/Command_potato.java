@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandParameters(name = "potato", description = "Give everyone potatoes!", usage = "/potato", rank = ICM_Rank.Rank.SUPER)
 public class Command_potato
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
@@ -31,4 +31,4 @@ public class Command_potato
         }
         return true;
     }
-    }
+}

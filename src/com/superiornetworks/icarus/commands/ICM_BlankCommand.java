@@ -9,7 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 public class ICM_BlankCommand extends ICM_Command
-    {
+{
 
     Class clazz;
     Object object;
@@ -42,4 +42,4 @@ public class ICM_BlankCommand extends ICM_Command
         return false;
     }
 
-    }
+}

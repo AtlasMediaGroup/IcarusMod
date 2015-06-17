@@ -15,7 +15,7 @@ import org.bukkit.command.CommandSender;
 
 @CommandParameters(name = "setlogin", description = "Set your custom login message.", usage = "/setlogin <off:message>", rank = ICM_Rank.Rank.SUPER)
 public class Command_setlogin
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -47,4 +47,4 @@ public class Command_setlogin
         }
         return true;
     }
-    }
+}

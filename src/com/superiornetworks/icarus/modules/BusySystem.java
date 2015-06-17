@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class BusySystem extends IcarusModule implements Listener
-    {
+{
 
     public BusySystem(IcarusMod plugin)
     {
@@ -96,4 +96,4 @@ public class BusySystem extends IcarusModule implements Listener
             }
         }
     }
-    }
+}

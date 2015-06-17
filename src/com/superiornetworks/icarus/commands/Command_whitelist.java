@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "whitelist", description = "Manage whitelist", usage = "/whitelist <on : off> | <add : remove> <player>", rank = ICM_Rank.Rank.SUPER)
 public class Command_whitelist
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -73,4 +73,4 @@ public class Command_whitelist
         }
         return false;
     }
-    }
+}

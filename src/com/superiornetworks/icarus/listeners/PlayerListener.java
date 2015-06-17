@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerListener implements Listener
-    {
+{
 
     private final IcarusMod plugin;
 
@@ -91,4 +91,4 @@ public class PlayerListener implements Listener
         plugin.doomHammer.onPlayerUseItem(event);
     }
 
-    }
+}

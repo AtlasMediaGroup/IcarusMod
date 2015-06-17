@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class ImposterModule extends IcarusModule implements Listener
-    {
+{
 
     public ImposterModule(IcarusMod plugin)
     {
@@ -36,4 +36,4 @@ public class ImposterModule extends IcarusModule implements Listener
             event.setCancelled(true);
         }
     }
-    }
+}

@@ -23,7 +23,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 public class DoomHammer extends IcarusModule implements Listener
-    {
+{
 
     public DoomHammer(IcarusMod plugin)
     {
@@ -67,7 +67,7 @@ public class DoomHammer extends IcarusModule implements Listener
                     final LivingEntity le = (LivingEntity) e;
                     le.setVelocity(le.getVelocity().add(new Vector(0, 3, 0)));
                     new BukkitRunnable()
-                        {
+                    {
                         @Override
                         public void run()
                         {
@@ -75,7 +75,7 @@ public class DoomHammer extends IcarusModule implements Listener
                             le.getWorld().strikeLightningEffect(le.getLocation());
                             le.setHealth(0d);
                         }
-                        }.runTaskLater(IcarusMod.plugin, 20L * 2L);
+                    }.runTaskLater(IcarusMod.plugin, 20L * 2L);
 
                 }
                 event.setCancelled(true);
@@ -87,4 +87,4 @@ public class DoomHammer extends IcarusModule implements Listener
         }
     }
 
-    }
+}

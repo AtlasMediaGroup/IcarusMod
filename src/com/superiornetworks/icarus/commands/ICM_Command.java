@@ -18,7 +18,7 @@ import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.command.TabExecutor;
 
 public abstract class ICM_Command implements CommandExecutor, TabExecutor
-    {
+{
 
     protected static CommandMap cmap;
     protected final String command;
@@ -168,7 +168,7 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
     }
 
     public final class ReflectCommand extends Command
-        {
+    {
 
         private ICM_Command exe = null;
 
@@ -211,5 +211,5 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
             }
             return null;
         }
-        }
     }
+}

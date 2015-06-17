@@ -11,7 +11,7 @@ import org.bukkit.plugin.PluginManager;
 
 @CommandParameters(name = "wetoggle", description = "Toggles the worldedit plugin between enabled and disabled.", usage = "/wetoggle", rank = ICM_Rank.Rank.SUPER)
 public class Command_wetoggle
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -41,4 +41,4 @@ public class Command_wetoggle
         }
         return true;
     }
-    }
+}

@@ -13,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatModule extends IcarusModule implements Listener
-    {
+{
 
     public ChatModule(IcarusMod plugin)
     {
@@ -35,4 +35,4 @@ public class ChatModule extends IcarusModule implements Listener
             Logger.getLogger(ChatModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    }
+}

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class DevelopmentMode extends IcarusModule implements Listener
-    {
+{
 
     public DevelopmentMode(IcarusMod plugin)
     {
@@ -23,10 +23,10 @@ public class DevelopmentMode extends IcarusModule implements Listener
     private static DevMode currentMode;
 
     public static enum DevMode
-        {
+    {
 
         DEV_ONLY, ADMIN_ONLY, EVERYONE, OFF;
-        }
+    }
 
     public static boolean isInMode(DevMode mode)
     {
@@ -86,4 +86,4 @@ public class DevelopmentMode extends IcarusModule implements Listener
             noQuitMessage.remove(playername);
         }
     }
-    }
+}

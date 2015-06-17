@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 public class ICM_CommandBlock
-    {
+{
 
     public static boolean isBlocked(CommandSender sender, String command) throws SQLException
     {
@@ -82,4 +82,4 @@ public class ICM_CommandBlock
         }
         return (Boolean) obj;
     }
-    }
+}

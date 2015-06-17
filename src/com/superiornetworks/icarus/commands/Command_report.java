@@ -20,7 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 @CommandParameters(name = "report", description = "Report another player for breaking the rules.", usage = "/report <player> <reason>", rank = ICM_Rank.Rank.OP)
 public class Command_report
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -93,4 +93,4 @@ public class Command_report
 
     }
 
-    }
+}

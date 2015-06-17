@@ -7,9 +7,11 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.ICM_Whitelist;
 import com.superiornetworks.icarus.IcarusMod;
+import space.paulcodes.otherapis.TitlesAPI;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -19,7 +21,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class JoinModule extends IcarusModule implements Listener
-    {
+{
 
     public JoinModule(IcarusMod plugin)
     {
@@ -71,8 +73,8 @@ public class JoinModule extends IcarusModule implements Listener
 
             String title = ICM_Settings.getString("settingName", "title-message-on-join", "string");
             String subtitle = ICM_Settings.getString("settingName", "subtitle-message-on-join", "string");
-            ICM_Utils.sendTitle(player, title, 2, 2, 2);
-            ICM_Utils.sendSubtitle(player, subtitle, 2, 2, 2);
+            TitlesAPI.sendTitle(player, title, 2, 2, 2, ChatColor.BLACK);
+            TitlesAPI.sendSubtitle(player, PacketPlayOutTitle.EnumTitleAction.TITLE, subtitle, 2, 2, 2, ChatColor.BLACK);
         }
 
         catch (SQLException ex)
@@ -90,4 +92,4 @@ public class JoinModule extends IcarusModule implements Listener
         }
 
     }
-    }
+}

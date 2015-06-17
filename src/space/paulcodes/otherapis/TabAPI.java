@@ -3,7 +3,7 @@ package space.paulcodes.otherapis;
 import org.bukkit.entity.Player;
 
 public class TabAPI
-    {
+{
 
     public static void setPlayerTab(String prefix, Player p)
     {
@@ -11,4 +11,4 @@ public class TabAPI
         p.setPlayerListName(p.getCustomName());
     }
 
-    }
+}

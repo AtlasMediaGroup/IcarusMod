@@ -17,7 +17,7 @@ import me.husky.Database;
  * @author tips48
  */
 public class SQLite extends Database
-    {
+{
 
     private final String dbLocation;
 
@@ -104,4 +104,4 @@ public class SQLite extends Database
         }
     }
 
-    }
+}

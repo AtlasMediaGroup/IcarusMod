@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "doomhammer", description = "Toggle your doomhammer mode.", usage = "/doomhammer", rank = ICM_Rank.Rank.MANAGER)
 public class Command_doomhammer
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -58,4 +58,4 @@ public class Command_doomhammer
         }
         return true;
     }
-    }
+}

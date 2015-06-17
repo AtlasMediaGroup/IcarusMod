@@ -7,7 +7,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class ActionbarAPI
-    {
+{
 
     public static void sendActionBar(Player p, String msg)
     {
@@ -17,4 +17,4 @@ public class ActionbarAPI
         ((CraftPlayer) p).getHandle().playerConnection.sendPacket(bar);
     }
 
-    }
+}

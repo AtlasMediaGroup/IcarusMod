@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class CommandSpyModule extends IcarusModule implements Listener
-    {
+{
 
     public CommandSpyModule(IcarusMod plugin)
     {
@@ -43,4 +43,4 @@ public class CommandSpyModule extends IcarusModule implements Listener
             }
         }
     }
-    }
+}

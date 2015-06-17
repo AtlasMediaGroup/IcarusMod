@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 
 @CommandParameters(name = "icmtoggle", description = "Toggle IcarusMod features.", usage = "/toggle <feature>", rank = ICM_Rank.Rank.MANAGER)
 public class Command_icmtoggle
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -42,4 +42,4 @@ public class Command_icmtoggle
         }
         return false;
     }
-    }
+}

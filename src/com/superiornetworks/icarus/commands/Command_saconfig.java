@@ -21,7 +21,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "saconfig", description = "Access and change admin information", usage = "/saconfig <list | <add | delete> <username>>", rank = ICM_Rank.Rank.OP)
 public class Command_saconfig
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -194,4 +194,4 @@ public class Command_saconfig
         return false;
     }
 
-    }
+}

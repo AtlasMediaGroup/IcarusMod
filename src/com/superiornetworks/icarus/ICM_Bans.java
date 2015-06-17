@@ -8,7 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class ICM_Bans
-    {
+{
 
     public static void addBan(String player, CommandSender sender, String reason) throws SQLException
     {
@@ -91,4 +91,4 @@ public class ICM_Bans
     {
         return ICM_SqlHandler.getFromTable("playerName", player, "playerName", "bans") != null;
     }
-    }
+}

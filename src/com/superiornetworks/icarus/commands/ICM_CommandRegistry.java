@@ -16,7 +16,7 @@ import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
 
 public class ICM_CommandRegistry
-    {
+{
 
     private static CommandMap cmap = getCommandMap();
 
@@ -100,4 +100,4 @@ public class ICM_CommandRegistry
         return getCommandMap();
     }
 
-    }
+}

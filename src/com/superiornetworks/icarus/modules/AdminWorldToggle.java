@@ -10,7 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class AdminWorldToggle extends IcarusModule implements Listener
-    {
+{
 
     public AdminWorldToggle(IcarusMod plugin)
     {
@@ -29,4 +29,4 @@ public class AdminWorldToggle extends IcarusModule implements Listener
         }
     }
 
-    }
+}

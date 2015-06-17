@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ICM_Whitelist
-    {
+{
 
     public static boolean whitelist = false;
 
@@ -44,4 +44,4 @@ public class ICM_Whitelist
         statement.setString(1, player);
         statement.executeUpdate();
     }
-    }
+}

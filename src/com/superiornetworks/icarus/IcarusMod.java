@@ -17,7 +17,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 
 public class IcarusMod extends BukkitPlugin
-    {
+{
 
     public static IcarusMod plugin;
     public BukkitCommandHandler handler;
@@ -148,4 +148,4 @@ public class IcarusMod extends BukkitPlugin
         // BukkitLib Magic here, making commands work!
         return handler.handleCommand(sender, cmd, commandLabel, args);
     }
-    }
+}

@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 
 @CommandParameters(name = "unban", description = "Unban a player.", usage = "/unban <player>", rank = ICM_Rank.Rank.SUPER)
 public class Command_unban
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -37,4 +37,4 @@ public class Command_unban
             return false;
         }
     }
-    }
+}

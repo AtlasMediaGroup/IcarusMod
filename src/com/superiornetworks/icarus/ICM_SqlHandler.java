@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import org.bukkit.entity.Player;
 
 public class ICM_SqlHandler
-    {
+{
 
     public static Connection getConnection()
     {
@@ -223,4 +223,4 @@ public class ICM_SqlHandler
         statement.setString(2, playerName);
         statement.executeUpdate();
     }
-    }
+}

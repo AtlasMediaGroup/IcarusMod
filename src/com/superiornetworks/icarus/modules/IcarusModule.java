@@ -4,7 +4,7 @@ import com.superiornetworks.icarus.IcarusMod;
 import org.bukkit.Server;
 
 public class IcarusModule
-    {
+{
 
     protected final IcarusMod plugin;
     protected final Server server;
@@ -14,4 +14,4 @@ public class IcarusModule
         this.plugin = plugin;
         this.server = plugin.getServer();
     }
-    }
+}

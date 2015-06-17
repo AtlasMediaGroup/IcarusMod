@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ICM_Config
-    {
+{
 
     private final String fileName;
     private final JavaPlugin plugin;
@@ -86,4 +86,4 @@ public class ICM_Config
         }
     }
 
-    }
+}

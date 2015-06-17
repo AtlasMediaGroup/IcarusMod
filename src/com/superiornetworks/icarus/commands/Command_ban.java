@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "ban", description = "Ban a bad player.", usage = "/ban <player> <reason>", rank = ICM_Rank.Rank.SUPER)
 public class Command_ban
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -55,4 +55,4 @@ public class Command_ban
             return false;
         }
     }
-    }
+}

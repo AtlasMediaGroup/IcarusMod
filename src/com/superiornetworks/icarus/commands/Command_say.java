@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "say", description = "Have a message? Use the power ot shout it loud with the say command.", usage = "/say", rank = ICM_Rank.Rank.SUPER)
 public class Command_say
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -53,4 +53,4 @@ public class Command_say
         player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName());
         return true;
     }
-    }
+}

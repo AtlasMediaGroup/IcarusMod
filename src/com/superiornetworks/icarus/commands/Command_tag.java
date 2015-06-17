@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 
 @CommandParameters(name = "tag", description = "Set your tag.", usage = "/<command> <set:playername> <tag>", rank = ICM_Rank.Rank.OP)
 public class Command_tag
-    {
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
@@ -89,4 +89,4 @@ public class Command_tag
         }
         return true;
     }
-    }
+}

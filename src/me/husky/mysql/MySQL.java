@@ -18,7 +18,7 @@ import me.husky.Database;
  * @author tips48
  */
 public class MySQL extends Database
-    {
+{
 
     private final String user;
     private final String database;
@@ -167,4 +167,4 @@ public class MySQL extends Database
 
     }
 
-    }
+}

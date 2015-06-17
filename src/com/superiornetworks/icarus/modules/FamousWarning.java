@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class FamousWarning extends IcarusModule
-    {
+{
 
     public FamousWarning(IcarusMod plugin)
     {
@@ -26,4 +26,4 @@ public class FamousWarning extends IcarusModule
 
     }
 
-    }
+}
