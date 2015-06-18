@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 
 public class TitlesAPI {
 
-    public static void sendTitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime, ChatColor color) {
-        IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\",color:" + color.name().toLowerCase() + "}");
+    public static void sendTitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime) {
+        IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\"" + "}");
 
         PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, chatTitle);
         PacketPlayOutTitle length = new PacketPlayOutTitle(fadeInTime, showTime, fadeOutTime);
@@ -18,8 +18,8 @@ public class TitlesAPI {
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
     }
 
-    public static void sendSubtitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime, ChatColor color) {
-        IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\",color:" + color.name().toLowerCase() + "}");
+    public static void sendSubtitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime) {
+        IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\"" + "}");
 
         PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, chatTitle);
         PacketPlayOutTitle length = new PacketPlayOutTitle(fadeInTime, showTime, fadeOutTime);
