@@ -6,11 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class TitlesAPI
-{
+public class TitlesAPI {
 
-    public static void sendTitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime, ChatColor color)
-    {
+    public static void sendTitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime, ChatColor color) {
         IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\",color:" + color.name().toLowerCase() + "}");
 
         PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, chatTitle);
@@ -20,8 +18,7 @@ public class TitlesAPI
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
     }
 
-    public static void sendSubtitle(Player player, PacketPlayOutTitle.EnumTitleAction titleType, String text, int fadeInTime, int showTime, int fadeOutTime, ChatColor color)
-    {
+    public static void sendSubtitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime, ChatColor color) {
         IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\",color:" + color.name().toLowerCase() + "}");
 
         PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, chatTitle);

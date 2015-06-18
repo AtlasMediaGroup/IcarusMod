@@ -7,6 +7,7 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.ICM_Whitelist;
 import com.superiornetworks.icarus.IcarusMod;
+import space.paulcodes.API;
 import space.paulcodes.otherapis.TitlesAPI;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,8 +74,9 @@ public class JoinModule extends IcarusModule implements Listener
 
             String title = ICM_Settings.getString("settingName", "title-message-on-join", "string");
             String subtitle = ICM_Settings.getString("settingName", "subtitle-message-on-join", "string");
-            TitlesAPI.sendTitle(player, title, 2, 2, 2, ChatColor.BLACK);
-            TitlesAPI.sendSubtitle(player, PacketPlayOutTitle.EnumTitleAction.TITLE, subtitle, 2, 2, 2, ChatColor.BLACK);
+            TitlesAPI.sendTitle(player, title, 20, 20, 20, ChatColor.BLACK);
+            TitlesAPI.sendSubtitle(player, subtitle, 20, 20, 20, ChatColor.BLACK);
+            API.setRankColor(player);
         }
 
         catch (SQLException ex)
