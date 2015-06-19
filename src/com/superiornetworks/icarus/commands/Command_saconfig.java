@@ -113,7 +113,7 @@ public class Command_saconfig
                     return true;
                 }
                 ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.OP);
-                ICM_Utils.adminAction(sender.getName(), "Removiong " + player.getName() + " from the admin list.", true);
+                ICM_Utils.adminAction(sender.getName(), "Removing " + player.getName() + " from the admin list.", true);
                 return true;
             }
             if (args[0].equalsIgnoreCase("add"))
