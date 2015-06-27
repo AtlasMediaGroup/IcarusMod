@@ -1,7 +1,6 @@
 #IcarusMod
-###What is the _IcarusMod_?
-
 [![Join the chat at https://gitter.im/Superior-Development/IcarusMod](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Superior-Development/IcarusMod?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+###What is the _IcarusMod_?
 The IcarusMod is an all-op Bukkit plugin created for the _**Superior Freedom Network**_.
 ####Features
  - MySQL Configuration Files
