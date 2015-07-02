@@ -11,7 +11,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name="smite",description="The most basic form of disciplinary action.",usage="/smite <player>",rank=ICM_Rank.Rank.SUPER)
+@CommandParameters(name="smite",description="The most basic form of disciplinary action.",usage="/smite <player> <reason:optional>",rank=ICM_Rank.Rank.SUPER)
 public class Command_smite
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
