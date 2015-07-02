@@ -52,8 +52,16 @@ public class Command_smite
         player.setHealth(0D);
         player.setOp(false);
         player.setGameMode(GameMode.SURVIVAL);
+        
+        if (smiteReason == null) {
+        Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.);
+        player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName());
+        }
+        
+    } else {
         Bukkit.broadcastMessage(ChatColor.RED + player.getName() + " has been very naughty, indeed.\nReason - " + ChatColor.YELLOW + smiteReason);
-        player.sendMessage(ChatColor.RED + "You were smitten by: " + sender.getName() ", Reason - " + ChatColor.YELLOW + smiteReason);
+        player.sendMessage(ChatColor.RED + "You were smitted by: " + sender.getName() + " Reason - " + ChatColor.YELLOW + smiteReason):
+    }
         return true;
     }
 }
