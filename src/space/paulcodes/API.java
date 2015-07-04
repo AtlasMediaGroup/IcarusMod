@@ -4,17 +4,16 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import space.paulcodes.otherapis.TabAPI;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class API {
-
-    public static ChatColor checkPlayerColor(Player p) {
-        try {
-            switch (ICM_SqlHandler.getRank(p.getName())) {
+public class API 
+{
+    public static ChatColor checkPlayerColor(Player p) 
+    {
+        try 
+        {
+            switch (ICM_SqlHandler.getRank(p.getName())) 
+            {
                 case "Super Admin":
                     return ChatColor.AQUA;
                 case "Telnet Admin":
@@ -28,14 +27,16 @@ public class API {
                 default:
                     return ChatColor.GRAY;
             }
-        }catch(SQLException ex) {
+        }
+        catch(SQLException ex) 
+        {
             ex.printStackTrace();
         }
         return ChatColor.DARK_GRAY;
     }
 
-    public static void setRankColor(Player p) {
+    public static void setRankColor(Player p) 
+    {
         TabAPI.setPlayerTab(checkPlayerColor(p), p);
     }
-
 }

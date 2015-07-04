@@ -21,7 +21,7 @@ public class Command_tag
     {
         try
         {
-            if (args.length > 2)
+            if (args.length < 2)
             {
                 return false;
             }

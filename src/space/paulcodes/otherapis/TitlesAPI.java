@@ -2,13 +2,13 @@ package space.paulcodes.otherapis;
 
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
-import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-public class TitlesAPI {
-
-    public static void sendTitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime) {
+public class TitlesAPI 
+{
+    public static void sendTitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime) 
+    {
         IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\"" + "}");
 
         PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TITLE, chatTitle);
@@ -18,7 +18,8 @@ public class TitlesAPI {
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
     }
 
-    public static void sendSubtitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime) {
+    public static void sendSubtitle(Player player, String text, int fadeInTime, int showTime, int fadeOutTime) 
+    {
         IChatBaseComponent chatTitle = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + text + "\"" + "}");
 
         PacketPlayOutTitle title = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.SUBTITLE, chatTitle);
@@ -27,5 +28,4 @@ public class TitlesAPI {
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(title);
         ((CraftPlayer) player).getHandle().playerConnection.sendPacket(length);
     }
-
 }

@@ -8,7 +8,6 @@ import java.net.URLConnection;
 
 public class JSONFetchAPI
 {
-
     public static synchronized String getStringFromURL(String URL)
     {
         try
@@ -27,5 +26,4 @@ public class JSONFetchAPI
             return null;
         }
     }
-
 }

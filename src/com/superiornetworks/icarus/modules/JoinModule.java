@@ -74,8 +74,8 @@ public class JoinModule extends IcarusModule implements Listener
 
             String title = ICM_Settings.getString("settingName", "title-message-on-join", "string");
             String subtitle = ICM_Settings.getString("settingName", "subtitle-message-on-join", "string");
-            TitlesAPI.sendTitle(player, title, 20, 20, 20, ChatColor.BLACK);
-            TitlesAPI.sendSubtitle(player, subtitle, 20, 20, 20, ChatColor.BLACK);
+            TitlesAPI.sendTitle(player, title, 20, 20, 20);
+            TitlesAPI.sendSubtitle(player, subtitle, 20, 20, 20);
             API.setRankColor(player);
         }
 
