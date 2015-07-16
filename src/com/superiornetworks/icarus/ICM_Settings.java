@@ -41,6 +41,12 @@ public class ICM_Settings
             PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('news', NULL, NULL, '§fNo news at the moment!')");
             statement.executeUpdate();
         }
+        if (!settingExists("adminworld-toggled"))
+        {
+            Connection c = getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('adminworld-toggled', NULL, '1', NULL)");
+            statement.executeUpdate();
+        }
         //To add: network-wide lockdown, whitelist, adminmode, and more.
     }
 
