@@ -2,10 +2,7 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Settings;
-import static com.superiornetworks.icarus.ICM_SqlHandler.getConnection;
 import com.superiornetworks.icarus.ICM_Utils;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -33,26 +30,97 @@ public class Command_icmtoggle
                         sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
                         return true;
                     }
-                    Connection c = getConnection();
-                    PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `boolean` = ? WHERE `settingName` = 'adminworld-toggled'");
-                    if (ICM_Settings.getBoolean("settingName", "adminworld-toggled", "boolean"))
+                    boolean enabled;
+                    if (ICM_Settings.getBoolean("adminworld-toggled"))
                     {
-                        statement.setBoolean(1, false);
-                        statement.executeUpdate();
+                        enabled = false;
+                        ICM_Settings.updateSetting("adminworld-toggled", enabled);
                         sender.sendMessage("§aAdminworld successfully disabled.");
                         return true;
                     }
                     else
                     {
-                        statement.setBoolean(1, true);
-                        statement.executeUpdate();
+                        enabled = true;
+                        ICM_Settings.updateSetting("adminworld-toggled", enabled);
                         sender.sendMessage("§aAdminworld successfully enabled.");
+                        return true;
+                    }
+                }
+                else if (args[0].equalsIgnoreCase("fluidspread"))
+                {
+                    boolean enabled;
+                    if (ICM_Settings.getBoolean("fluidspread-toggled"))
+                    {
+                        enabled = false;
+                        ICM_Settings.updateSetting("fluidspread-toggled", enabled);
+                        sender.sendMessage("§aFluid spread successfully disabled.");
+                        return true;
+                    }
+                    else
+                    {
+                        enabled = true;
+                        ICM_Settings.updateSetting("fluidspread-toggled", enabled);
+                        sender.sendMessage("§aFluid spread successfully enabled.");
+                        return true;
+                    }
+                }
+                else if (args[0].equalsIgnoreCase("fluidplace"))
+                {
+                    boolean enabled;
+                    if (ICM_Settings.getBoolean("fluidplace-toggled"))
+                    {
+                        enabled = false;
+                        ICM_Settings.updateSetting("fluidplace-toggled", enabled);
+                        sender.sendMessage("§aFluid place successfully disabled.");
+                        return true;
+                    }
+                    else
+                    {
+                        enabled = true;
+                        ICM_Settings.updateSetting("fluidplace-toggled", enabled);
+                        sender.sendMessage("§aFluid place successfully enabled.");
+                        return true;
+                    }
+                }
+                else if (args[0].equalsIgnoreCase("explosives"))
+                {
+                    boolean enabled;
+                    if (ICM_Settings.getBoolean("explosives-toggled"))
+                    {
+                        enabled = false;
+                        ICM_Settings.updateSetting("explosives-toggled", enabled);
+                        sender.sendMessage("§aExplosives successfully disabled.");
+                        return true;
+                    }
+                    else
+                    {
+                        enabled = true;
+                        ICM_Settings.updateSetting("explosives-toggled", enabled);
+                        sender.sendMessage("§aExplosives successfully enabled.");
+                        return true;
+                    }
+                }
+                else if (args[0].equalsIgnoreCase("fire"))
+                {
+                    boolean enabled;
+                    if (ICM_Settings.getBoolean("fire-toggled"))
+                    {
+                        enabled = false;
+                        ICM_Settings.updateSetting("fire-toggled", enabled);
+                        sender.sendMessage("§aFire successfully disabled.");
+                        return true;
+                    }
+                    else
+                    {
+                        enabled = true;
+                        ICM_Settings.updateSetting("fire-toggled", enabled);
+                        sender.sendMessage("§aFire successfully enabled.");
                         return true;
                     }
                 }
                 else
                 {
-                    sender.sendMessage("§7Possible toggles:\n adminworld");
+                    sender.sendMessage("§7Possible toggles:\n - adminworld\n - fluidspread\n - fluidplace\n - explosives\n - fire");
                     return true;
                 }
             }

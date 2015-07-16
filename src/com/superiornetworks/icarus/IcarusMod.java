@@ -41,6 +41,7 @@ public class IcarusMod extends BukkitPlugin
     public CommandBlockModule commandBlockModule;
     public CommandSpyModule commandSpyModule;
     public ImposterModule imposterModule;
+    public BlockControl blockControl;
 
     @Override
     public void onLoad()
@@ -60,6 +61,7 @@ public class IcarusMod extends BukkitPlugin
         commandBlockModule = new CommandBlockModule(plugin);
         commandSpyModule = new CommandSpyModule(plugin);
         imposterModule = new ImposterModule(plugin);
+        blockControl = new BlockControl(plugin);
     }
 
     @Override

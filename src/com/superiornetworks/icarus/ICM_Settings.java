@@ -47,13 +47,37 @@ public class ICM_Settings
             PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('adminworld-toggled', NULL, '1', NULL)");
             statement.executeUpdate();
         }
+        if (!settingExists("explosives-toggled"))
+        {
+            Connection c = getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('explosives-toggled', NULL, '0', NULL)");
+            statement.executeUpdate();
+        }
+        if (!settingExists("fluidspread-toggled"))
+        {
+            Connection c = getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('fluidspread-toggled', NULL, '0', NULL)");
+            statement.executeUpdate();
+        }
+        if (!settingExists("fluidplace-toggled"))
+        {
+            Connection c = getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('fluidplace-toggled', NULL, '0', NULL)");
+            statement.executeUpdate();
+        }
+        if (!settingExists("fire-toggled"))
+        {
+            Connection c = getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `settings` (`settingName`, `int`, `boolean`, `string`) VALUES ('fire-toggled', NULL, '0', NULL)");
+            statement.executeUpdate();
+        }
         //To add: network-wide lockdown, whitelist, adminmode, and more.
     }
 
     //The reason we have these methods is so that we do not have to run instanceof checks every time a setting is checked.
-    public static String getString(String uniqueColumn, String uniqueValue, String lookingFor) throws SQLException
+    public static String getString(String settingName) throws SQLException
     {
-        Object obj = ICM_SqlHandler.getFromTable(uniqueColumn, uniqueValue, lookingFor, "settings");
+        Object obj = ICM_SqlHandler.getFromTable("settingName", settingName, "string", "settings");
         if (obj instanceof String)
         {
             return (String) obj;
@@ -61,9 +85,9 @@ public class ICM_Settings
         return "No string found. Please contact a developer.";
     }
 
-    public static Integer getInt(String uniqueColumn, String uniqueValue, String lookingFor) throws SQLException
+    public static Integer getInt(String settingName) throws SQLException
     {
-        Object obj = ICM_SqlHandler.getFromTable(uniqueColumn, uniqueValue, lookingFor, "settings");
+        Object obj = ICM_SqlHandler.getFromTable("settingName", settingName, "int", "settings");
         if (obj instanceof Integer)
         {
             return (Integer) obj;
@@ -71,9 +95,9 @@ public class ICM_Settings
         return 0;
     }
 
-    public static boolean getBoolean(String uniqueColumn, String uniqueValue, String lookingFor) throws SQLException
+    public static boolean getBoolean(String settingName) throws SQLException
     {
-        Object obj = ICM_SqlHandler.getFromTable(uniqueColumn, uniqueValue, lookingFor, "settings");
+        Object obj = ICM_SqlHandler.getFromTable("settingName", settingName, "boolean", "settings");
         if (obj instanceof Boolean)
         {
             return (Boolean) obj;
@@ -94,6 +118,7 @@ public class ICM_Settings
             PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `string` = ? WHERE `settingName` = ?");
             statement.setString(1, string);
             statement.setString(2, settingName);
+            statement.executeUpdate();
         }
         else if (obj instanceof Boolean)
         {
@@ -106,6 +131,7 @@ public class ICM_Settings
             PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `boolean` = ? WHERE `settingName` = ?");
             statement.setBoolean(1, bool);
             statement.setString(2, settingName);
+            statement.executeUpdate();
         }
         else if (obj instanceof Integer)
         {
@@ -118,6 +144,7 @@ public class ICM_Settings
             PreparedStatement statement = c.prepareStatement("UPDATE `settings` SET `int` = ? WHERE `settingName` = ?");
             statement.setInt(1, integer);
             statement.setString(2, settingName);
+            statement.executeUpdate();
         }
     }
 }
