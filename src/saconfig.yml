@@ -1,0 +1,13 @@
+# IcurusMod superadmin.yml
+# Created by Superior_tL
+#
+
+saconfig list:
+    username: Admin
+    is_activated: true
+    telnet_admin: true
+    senior_admin: true
+    ips:
+    - 0.0.0.0
+    uuid:
+    - ''
