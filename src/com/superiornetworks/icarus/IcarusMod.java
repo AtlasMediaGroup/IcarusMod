@@ -11,9 +11,11 @@ import net.pravian.bukkitlib.command.BukkitCommandHandler;
 import net.pravian.bukkitlib.implementation.BukkitPlugin;
 import net.pravian.bukkitlib.util.LoggerUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
 public class IcarusMod extends BukkitPlugin
@@ -43,7 +45,6 @@ public class IcarusMod extends BukkitPlugin
     public ImposterModule imposterModule;
     public BlockControl blockControl;
 
-    @Override
     public void onLoad()
     {
         plugin = this;
@@ -64,7 +65,6 @@ public class IcarusMod extends BukkitPlugin
         blockControl = new BlockControl(plugin);
     }
 
-    @Override
     public void onEnable()
     {
         // Bukkit Lib Important Stuff
@@ -132,22 +132,24 @@ public class IcarusMod extends BukkitPlugin
         else
         {
             Bukkit.broadcastMessage("IcarusMod had an issue loading up, please check your logs for more info, on first start, this is normal!");
-            pm.disablePlugin(plugin);
+            pm.disablePlugin((Plugin) plugin);
         }
 
     }
 
-    @Override
     public void onDisable()
     {
         // All clear, its disabled! Woot
         LoggerUtils.info(plugin, "has been disabled with no problems.");
     }
 
-    @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         // BukkitLib Magic here, making commands work!
         return handler.handleCommand(sender, cmd, commandLabel, args);
+    }
+
+    public Server getServer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
