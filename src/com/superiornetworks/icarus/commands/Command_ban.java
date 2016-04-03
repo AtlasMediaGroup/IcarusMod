@@ -4,6 +4,7 @@ import com.superiornetworks.icarus.ICM_Bans;
 import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang3.ArrayUtils;
@@ -13,7 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "ban", description = "Ban a bad player.", usage = "/ban <player> <reason>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "ban", description = "Ban a bad player for 24 hours.", usage = "/ban <player> <reason>", rank = ICM_Rank.Rank.SUPER)
 public class Command_ban
 {
 
@@ -40,12 +41,12 @@ public class Command_ban
 
         try
         {
-            if (ICM_Bans.isBanned(playerName))
+            if (ICM_Bans.isBanned(player))
             {
                 ICM_Utils.playerMsg(sender, "&cThat player is already banned.");
                 return true;
             }
-            ICM_Bans.addBan(playerName, sender, reason);
+            ICM_Bans.addBan(player, sender, reason, TimeUnit.MILLISECONDS.convert(24, TimeUnit.HOURS));
             ICM_Utils.adminAction(sender.getName(), "Banning " + playerName + ". Reason: " + reason, true);
             return true;
         }

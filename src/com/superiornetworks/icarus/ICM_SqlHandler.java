@@ -48,7 +48,8 @@ public class ICM_SqlHandler
                       + "`playerName` VARCHAR(16) NOT NULL UNIQUE,"
                       + "`banReason` TEXT,"
                       + "`ip` VARCHAR(64),"
-                      + "`time` TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+                      + "`time` BIGINT,"
+                      + "`bantime` BIGINT"
                       + ")";
         String commands = "CREATE TABLE IF NOT EXISTS `commands` ("
                           + "`commandName` VARCHAR(64) NOT NULL UNIQUE,"

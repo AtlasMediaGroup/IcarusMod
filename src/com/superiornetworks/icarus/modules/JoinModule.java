@@ -7,12 +7,9 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.ICM_Whitelist;
 import com.superiornetworks.icarus.IcarusMod;
-import space.paulcodes.API;
-import space.paulcodes.otherapis.TitlesAPI;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -20,6 +17,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import space.paulcodes.API;
+import space.paulcodes.otherapis.TitlesAPI;
 
 public class JoinModule extends IcarusModule implements Listener
 {
@@ -38,10 +37,10 @@ public class JoinModule extends IcarusModule implements Listener
 
         try
         {
-            if (ICM_Bans.isBanned(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+            if (ICM_Bans.isBanned(event.getPlayer()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
             {
                 noQuitMessage.add(player.getName());
-                player.kickPlayer("§c§lYou are banned!\nYou were banned for: §e" + ICM_Bans.getReason(player.getName()) + "\n§c§lBanned by: §e" + ICM_Bans.getBanner(player.getName()));
+                player.kickPlayer("§c§lYou are banned!\nYou were banned for: §e" + ICM_Bans.getReason(player) + "\n§c§lBanned by: §e" + ICM_Bans.getBanner(player));
             }
 
             if (ICM_Whitelist.whitelist)
