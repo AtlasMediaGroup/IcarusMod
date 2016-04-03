@@ -1,6 +1,7 @@
 package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Rank;
+import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
