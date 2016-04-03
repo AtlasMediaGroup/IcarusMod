@@ -73,6 +73,7 @@ public class IcarusMod extends BukkitPlugin
 
         // More YAML Setting Up and information.
         icmconfig = new ICM_Config(plugin, "config.yml");
+        icmconfig = new ICM_Config(plugin, "saconfig.yml");
         icmconfig.saveDefaultConfig();
         config = icmconfig.getConfig();
 
