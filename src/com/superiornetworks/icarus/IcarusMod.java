@@ -71,7 +71,7 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
         handler = new SimpleCommandHandler(plugin);
         handler.setCommandClassPrefix("Command_");
         handler.loadFrom(Command_say.class.getPackage());
-        handler.registerAll();
+        handler.registerAll(fallbackPrefix, true);
 
         // More YAML Setting Up and information.
         icmconfig = new ICM_Config(plugin, "config.yml");
