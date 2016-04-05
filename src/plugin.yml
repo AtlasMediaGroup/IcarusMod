@@ -50,4 +50,4 @@ commands:
     usage: /<command> <message>
   smite:
     description: Smite a naughty player.
-    usage: /<command> <player>
+    usage: /<command> <player> <reason>
