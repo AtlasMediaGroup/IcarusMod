@@ -30,6 +30,10 @@ public class Command_report
         }
         Player player = Bukkit.getPlayer(args[0]);
         String Reported;
+        if (player == null) {
+            sender.sendMessage(ChatColor.RED + "Could not find player!");
+            return true;
+        }
         if (player != null)
         {
             Reported = player.getName();
