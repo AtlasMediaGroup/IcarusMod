@@ -5,8 +5,7 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import net.pravian.bukkitlib.util.ChatUtils;
-import net.pravian.bukkitlib.util.PlayerUtils;
+import net.pravian.aero.util.ChatUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -29,7 +28,7 @@ public class Command_report
         {
             return false;
         }
-        Player player = PlayerUtils.getPlayer(args[0]);
+        Player player = Bukkit.getPlayer(args[0]);
         String Reported;
         if (player != null)
         {

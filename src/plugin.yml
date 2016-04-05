@@ -3,6 +3,7 @@ version: 1.0
 description: The custom plugin for the Superior Freedom Network!
 authors: [Wild1145, Camzie99, Hockeyfan360, Paul19988]
 main: com.superiornetworks.icarus.IcarusMod
+softdepend: [Aero]
 
 commands:
   icarusmod:
