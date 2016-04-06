@@ -63,7 +63,7 @@ public class Command_report
         }
         for (Player admin : Bukkit.getOnlinePlayers())
         {
-            if (ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
+            if (ICM_Rank.isRankOrHigher(admin, ICM_Rank.Rank.SUPER))
             {
                 admin.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &a" + sender.getName() + " &4has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
