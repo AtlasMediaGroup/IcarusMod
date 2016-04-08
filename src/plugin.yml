@@ -51,3 +51,7 @@ commands:
   smite:
     description: Smite a naughty player.
     usage: /<command> <player>
+  stop:
+    description: Stop the server.
+    usage: /<command>
+  
