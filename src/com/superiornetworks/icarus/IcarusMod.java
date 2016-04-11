@@ -1,26 +1,25 @@
 package com.superiornetworks.icarus;
 
-import com.superiornetworks.icarus.commands.Command_ban;
+import com.superiornetworks.icarus.commands.Command_say;
 import com.superiornetworks.icarus.commands.ICM_CommandRegistry;
 import com.superiornetworks.icarus.listeners.PlayerListener;
 import com.superiornetworks.icarus.modules.*;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
-import net.pravian.bukkitlib.BukkitLib;
-import net.pravian.bukkitlib.command.BukkitCommandHandler;
-import net.pravian.bukkitlib.implementation.BukkitPlugin;
-import net.pravian.bukkitlib.util.LoggerUtils;
+import net.pravian.aero.command.handler.AeroCommandHandler;
+import net.pravian.aero.command.handler.SimpleCommandHandler;
+import net.pravian.aero.plugin.AeroPlugin;
+import net.pravian.aero.util.Loggers;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 
-public class IcarusMod extends BukkitPlugin
+public class IcarusMod extends AeroPlugin<IcarusMod>
 {
 
     public static IcarusMod plugin;
-    public BukkitCommandHandler handler;
+    
+    public static AeroCommandHandler handler;
 
     // MySQL  
     public static MySQL mySQL;
@@ -44,10 +43,9 @@ public class IcarusMod extends BukkitPlugin
     public BlockControl blockControl;
 
     @Override
-    public void onLoad()
+    public void load()
     {
         plugin = this;
-        this.handler = new BukkitCommandHandler(plugin);
 
         // Module Loading
         famousWarning = new FamousWarning(plugin);
@@ -65,11 +63,15 @@ public class IcarusMod extends BukkitPlugin
     }
 
     @Override
-    public void onEnable()
+    public void enable()
     {
-        // Bukkit Lib Important Stuff
-        BukkitLib.init(plugin);
-        handler.setCommandLocation(Command_ban.class.getPackage());
+        IcarusMod.plugin = this;
+        
+        //Command Registration Stuff
+        handler = new SimpleCommandHandler(plugin);
+        handler.setCommandClassPrefix("Command_");
+        handler.loadFrom(Command_say.class.getPackage());
+        handler.registerAll();
 
         // More YAML Setting Up and information.
         icmconfig = new ICM_Config(plugin, "config.yml");
@@ -79,27 +81,27 @@ public class IcarusMod extends BukkitPlugin
         boolean error = false;
         if (config.getString("hostname") == null)
         {
-            LoggerUtils.severe(plugin, "Hostname is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Hostname is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
         if (config.getString("port") == null)
         {
-            LoggerUtils.severe(plugin, "Port is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Port is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
         if (config.getString("database") == null)
         {
-            LoggerUtils.severe(plugin, "Database is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Database is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
         if (config.getString("username") == null)
         {
-            LoggerUtils.severe(plugin, "Username is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Username is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
         if (config.getString("password") == null)
         {
-            LoggerUtils.severe(plugin, "Password is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Password is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
 
@@ -127,7 +129,7 @@ public class IcarusMod extends BukkitPlugin
             ICM_CommandRegistry.registerCommands();
 
             // The All Clear
-            LoggerUtils.info(plugin, "has been enabled with no problems.");
+            Loggers.info(plugin, "has been enabled with no problems.");
         }
         else
         {
@@ -138,16 +140,10 @@ public class IcarusMod extends BukkitPlugin
     }
 
     @Override
-    public void onDisable()
+    public void disable()
     {
+        IcarusMod.plugin = null;
         // All clear, its disabled! Woot
-        LoggerUtils.info(plugin, "has been disabled with no problems.");
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
-    {
-        // BukkitLib Magic here, making commands work!
-        return handler.handleCommand(sender, cmd, commandLabel, args);
+        Loggers.info(plugin, "has been disabled with no problems.");
     }
 }
