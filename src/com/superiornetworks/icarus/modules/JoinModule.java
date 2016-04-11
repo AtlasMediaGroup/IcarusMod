@@ -1,6 +1,7 @@
 package com.superiornetworks.icarus.modules;
 
 import com.superiornetworks.icarus.ICM_Bans;
+import com.superiornetworks.icarus.ICM_PanelLogger;
 import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Settings;
 import com.superiornetworks.icarus.ICM_SqlHandler;
@@ -10,12 +11,16 @@ import com.superiornetworks.icarus.IcarusMod;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerLoginEvent.Result;
 import org.bukkit.event.player.PlayerQuitEvent;
 import space.paulcodes.API;
 import space.paulcodes.otherapis.TitlesAPI;
@@ -31,33 +36,57 @@ public class JoinModule extends IcarusModule implements Listener
     static List<String> noQuitMessage = new ArrayList<>();
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event)
+    public void onPlayerLogin(PlayerLoginEvent event)
     {
         Player player = event.getPlayer();
-
+        ICM_PanelLogger.log(ICM_PanelLogger.MessageType.CONNECT, event.getPlayer().getName(), "Attempted to login");
         try
         {
-            if (ICM_Bans.isBanned(event.getPlayer()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+            if(!ICM_SqlHandler.playerExists(player.getName()))
             {
-                noQuitMessage.add(player.getName());
-                player.kickPlayer("§c§lYou are banned!\nYou were banned for: §e" + ICM_Bans.getReason(player) + "\n§c§lBanned by: §e" + ICM_Bans.getBanner(player));
+                ICM_SqlHandler.generateNewPlayer(player, event.getRealAddress().getHostAddress());
+            }
+            
+            if(ICM_Bans.isBanned(event.getPlayer()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+            {
+                event.disallow(Result.KICK_BANNED, "§c§lYou are banned!\nYou were banned for: §e" + ICM_Bans.getReason(player) + "\n§c§lBanned by: §e" + ICM_Bans.getBanner(player));
             }
 
-            if (ICM_Whitelist.whitelist)
+            if(ICM_Whitelist.whitelist)
             {
-                if (!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+                if(!ICM_SqlHandler.playerExists(player.getName()))
                 {
-                    noQuitMessage.add(player.getName());
-                    player.kickPlayer("§f§lThe server is currently whitelisted. Please check back later.");
+                    event.disallow(Result.KICK_WHITELIST, "§f§lThe server is currently whitelisted. Please check back later.");
+                    return;
+                }
+                else if(!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+                {
+                    event.disallow(Result.KICK_WHITELIST, "§f§lThe server is currently whitelisted. Please check back later.");
                 }
             }
 
-            if (!ICM_SqlHandler.playerExists(player.getName()))
+            if(ICM_Rank.getRank(event.getPlayer()).level == -1)
             {
-                ICM_SqlHandler.generateNewPlayer(player);
-                Bukkit.broadcastMessage(ICM_Utils.getRandomChatColour() + player.getName() + " is a new player!");
+                Bukkit.broadcastMessage(ChatColor.RED + "WARNING: " + event.getPlayer().getName() + " is an imposter. Admins, please deal with this in an appropriate manner.");
             }
-            else if (ICM_SqlHandler.getLoginMessage(player.getName()) != null && !"".equals(ICM_SqlHandler.getLoginMessage(player.getName())))
+
+        }
+
+        catch(SQLException ex)
+        {
+            plugin.getLogger().severe(ex.getMessage());
+            plugin.getLogger().severe(ex.getSQLState());
+        }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event)
+    {
+        try
+        {
+            Player player = event.getPlayer();
+
+            if(ICM_SqlHandler.getLoginMessage(player.getName()) != null && !"".equals(ICM_SqlHandler.getLoginMessage(player.getName())))
             {
                 event.setJoinMessage(ICM_Utils.colour(ICM_SqlHandler.getLoginMessage(player.getName())));
             }
@@ -65,32 +94,22 @@ public class JoinModule extends IcarusModule implements Listener
             {
                 event.setJoinMessage(ChatColor.AQUA + player.getName() + " is " + ICM_Utils.aOrAn(ICM_SqlHandler.getRank(player.getName())) + " " + ICM_SqlHandler.getRank(player.getName()));
             }
-
-            if (ICM_Rank.getRank(event.getPlayer()).level == -1)
-            {
-                Bukkit.broadcastMessage(ChatColor.RED + "WARNING: " + event.getPlayer().getName() + " is an imposter. Admins, please deal with this in an appropriate manner.");
-            }
-
+            
             String title = ICM_Settings.getString("title-message-on-join");
             String subtitle = ICM_Settings.getString("subtitle-message-on-join");
             TitlesAPI.sendTitle(player, title, 20, 20, 20);
             TitlesAPI.sendSubtitle(player, subtitle, 20, 20, 20);
             API.setRankColor(player);
         }
-
-        catch (SQLException ex)
+        catch(SQLException ex)
         {
-            plugin.getLogger().severe(ex.getLocalizedMessage());
+            Logger.getLogger(JoinModule.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event)
     {
-        if (noQuitMessage.contains(event.getPlayer().getName()))
-        {
-            event.setQuitMessage(null);
-        }
-
+        ICM_PanelLogger.log(ICM_PanelLogger.MessageType.DISCONNECT, event.getPlayer().getName(), event.getQuitMessage());
     }
 }

@@ -112,7 +112,7 @@ public class Command_saconfig
                     sender.sendMessage("You may only remove someone from admin if they are a lower rank than you.");
                     return true;
                 }
-                ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.OP);
+                ICM_Rank.setRank(player, ICM_Rank.Rank.OP, sender);
                 ICM_Utils.adminAction(sender.getName(), "Removing " + player.getName() + " from the admin list.", true);
                 return true;
             }
@@ -133,7 +133,7 @@ public class Command_saconfig
                         Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                ICM_Rank.setRank(player.getName(), ICM_Rank.Rank.SUPER);
+                ICM_Rank.setRank(player, ICM_Rank.Rank.SUPER, sender);
                 ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to Super Admin.", false);
                 return true;
             }
@@ -160,7 +160,7 @@ public class Command_saconfig
             catch (Exception ex)
             {
                 String rank = StringUtils.join(ArrayUtils.subarray(args, 2, args.length), " ");
-                level = ICM_Rank.getFromName(rank).level;
+                level = ICM_Rank.nameToRank(rank).level;
             }
             if (level == 0)
             {
@@ -187,8 +187,8 @@ public class Command_saconfig
                     Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            ICM_Rank.setRank(player.getName(), ICM_Rank.getFromLevel(level));
-            ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to " + ICM_Rank.getFromLevel(level).name + ".", false);
+            ICM_Rank.setRank(player, ICM_Rank.levelToRank(level), sender);
+            ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to " + ICM_Rank.levelToRank(level).name + ".", false);
             return true;
         }
         return false;

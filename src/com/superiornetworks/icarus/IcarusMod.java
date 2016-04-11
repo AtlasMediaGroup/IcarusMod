@@ -1,13 +1,11 @@
 package com.superiornetworks.icarus;
 
-import com.superiornetworks.icarus.commands.Command_say;
 import com.superiornetworks.icarus.commands.ICM_CommandRegistry;
 import com.superiornetworks.icarus.listeners.PlayerListener;
 import com.superiornetworks.icarus.modules.*;
 import java.sql.SQLException;
 import me.husky.mysql.MySQL;
 import net.pravian.aero.command.handler.AeroCommandHandler;
-import net.pravian.aero.command.handler.SimpleCommandHandler;
 import net.pravian.aero.plugin.AeroPlugin;
 import net.pravian.aero.util.Loggers;
 import org.bukkit.Bukkit;
@@ -67,11 +65,14 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
     {
         IcarusMod.plugin = this;
         
-        //Command Registration Stuff
+        //Handles logs from the server
+        Bukkit.getServer().getLogger().addHandler(new ICM_LoggerHandler());
+        
+        /*//Command Registration Stuff
         handler = new SimpleCommandHandler(plugin);
         handler.setCommandClassPrefix("Command_");
         handler.loadFrom(Command_say.class.getPackage());
-        handler.registerAll(handler.getCommandClassPrefix(), true);
+        handler.registerAll();*/
 
         // More YAML Setting Up and information.
         icmconfig = new ICM_Config(plugin, "config.yml");

@@ -1,5 +1,6 @@
 package com.superiornetworks.icarus.modules;
 
+import com.superiornetworks.icarus.ICM_PanelLogger;
 import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.IcarusMod;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ public class CommandSpyModule extends IcarusModule implements Listener
         {
             return;
         }
+        ICM_PanelLogger.log(ICM_PanelLogger.MessageType.CMD, event.getPlayer().getName(), event.getMessage());
         ChatColor colour = ChatColor.GRAY;
         List<String> alertCommands = Arrays.asList("//set", "//replace", "//remove", "/ci", "/clear");
         for (String alert : alertCommands)
