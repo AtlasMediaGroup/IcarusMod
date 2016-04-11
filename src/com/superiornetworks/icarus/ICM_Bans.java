@@ -39,7 +39,7 @@ public class ICM_Bans
         statement.executeUpdate();
     }
 
-    public static void removeBan(CommandSender sender, OfflinePlayer player) throws SQLException
+    public static void removeBanWithCheck(CommandSender sender, OfflinePlayer player) throws SQLException
     {
         if(!isBanned(player) && sender != null)
         {
@@ -47,12 +47,17 @@ public class ICM_Bans
         }
         else
         {
-            Connection c = ICM_SqlHandler.getConnection();
-            PreparedStatement statement = c.prepareStatement("DELETE FROM `bans` WHERE `playerName` = ? OR `ip` = ?");
-            statement.setString(1, player.getName());
-            statement.setString(2, ICM_SqlHandler.getIp(player.getName()));
-            statement.executeUpdate();
+            removeBan(sender, player);
         }
+    }
+
+    public static void removeBan(CommandSender sender, OfflinePlayer player) throws SQLException
+    {
+        Connection c = ICM_SqlHandler.getConnection();
+        PreparedStatement statement = c.prepareStatement("DELETE FROM `bans` WHERE `playerName` = ? OR `ip` = ?");
+        statement.setString(1, player.getName());
+        statement.setString(2, ICM_SqlHandler.getIp(player.getName()));
+        statement.executeUpdate();
     }
 
     public static String getReason(OfflinePlayer player) throws SQLException
@@ -131,7 +136,7 @@ public class ICM_Bans
             }
             if(System.currentTimeMillis() - time < bantime)
             {
-                removeBan(null, player);
+                removeBanWithCheck(null, player);
                 return false;
             }
             return true;

@@ -29,7 +29,7 @@ public class Command_unban
                 ICM_Utils.playerMsg(sender, "&cThat player is not banned.");
                 return true;
             }
-            ICM_Bans.removeBan(sender, player);
+            ICM_Bans.removeBanWithCheck(sender, player);
             ICM_Utils.adminAction(sender.getName(), "Unbanning " + name + ".", true);
             return true;
         }
