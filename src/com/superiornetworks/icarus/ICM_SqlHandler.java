@@ -171,7 +171,7 @@ public class ICM_SqlHandler
         {
             return (String) obj;
         }
-        return "&7[&c" + getRank(playerName) + "&7]";
+        return null;
     }
 
     public static String getNick(String playerName) throws SQLException
@@ -185,7 +185,7 @@ public class ICM_SqlHandler
         {
             return (String) obj;
         }
-        return playerName;
+        return null;
     }
 
     public static boolean hasDoomHammer(String playerName) throws SQLException
@@ -218,7 +218,7 @@ public class ICM_SqlHandler
 
     public static void setNickname(String playerName, String nickname) throws SQLException
     {
-        //For sake of simplicity, this method will replace & with §, so players can also have colors in their nicks.
+        //No need to replace & with § as the ICM_Utils.colour method handles this.
         if(!playerExists(playerName))
         {
             return;
@@ -226,14 +226,16 @@ public class ICM_SqlHandler
 
         Connection c = getConnection();
         PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `nick` = ? WHERE `playerName` = ?");
-        statement.setString(1, nickname.replaceAll("&", "§"));
+        statement.setString(1, nickname);
         statement.setString(2, playerName);
         statement.executeUpdate();
+        
+        ICM_Rank.nicks.clear();
     }
 
     public static void setTag(String playerName, String tag) throws SQLException
     {
-        //For sake of simplicity, this method will replace & with §, so players can also have colors in their nicks.
+        //No need to replace & with § as the ICM_Utils.colour method handles this.
         if(!playerExists(playerName))
         {
             return;
@@ -241,8 +243,10 @@ public class ICM_SqlHandler
 
         Connection c = getConnection();
         PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `tag` = ? WHERE `playerName` = ?");
-        statement.setString(1, tag.replaceAll("&", "§"));
+        statement.setString(1, tag);
         statement.setString(2, playerName);
         statement.executeUpdate();
+        
+        ICM_Rank.tags.clear();
     }
 }

@@ -209,7 +209,7 @@ public class ICM_Rank
         if(tags.containsKey(player.getName()))
         {
             String tag = tags.get(player.getName());
-            if("&r".equalsIgnoreCase(tag) || tag == null || "off&r".equalsIgnoreCase(tag))
+            if("".equalsIgnoreCase(tag) || tag == null || "off".equalsIgnoreCase(tag) || "default".equals(tag))
             {
                 tags.put(player.getName(), getRank(player).actag);
                 return getRank(player).actag;
@@ -218,8 +218,8 @@ public class ICM_Rank
         }
         try
         {
-            String tag = ICM_SqlHandler.getTag(player.getUniqueId().toString());
-            if("&r".equals(tag) || tag == null || "off&r".equals(tag))
+            String tag = ICM_SqlHandler.getTag(player.getName());
+            if("".equals(tag) || tag == null || "off".equals(tag) || "default".equals(tag))
             {
                 tags.put(player.getName(), getRank(player).actag);
                 return getRank(player).actag;
@@ -240,7 +240,7 @@ public class ICM_Rank
         if(nicks.containsKey(player.getName()))
         {
             String nick = nicks.get(player.getName());
-            if("&r".equalsIgnoreCase(nick) || nick == null || "off&r".equalsIgnoreCase(nick))
+            if("".equalsIgnoreCase(nick) || nick == null || "off".equalsIgnoreCase(nick))
             {
                 nicks.put(player.getName(), player.getName());
                 return player.getName();
@@ -249,8 +249,8 @@ public class ICM_Rank
         }
         try
         {
-            String nick = ICM_SqlHandler.getNick(player.getUniqueId().toString());
-            if("&r".equalsIgnoreCase(nick) || nick == null || "off&r".equalsIgnoreCase(nick))
+            String nick = ICM_SqlHandler.getNick(player.getName());
+            if("".equalsIgnoreCase(nick) || nick == null || "off".equalsIgnoreCase(nick))
             {
                 nicks.put(player.getName(), player.getName());
                 return player.getName();

@@ -9,6 +9,7 @@ import net.minecraft.server.v1_9_R1.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_9_R1.PacketPlayOutTitle;
 import net.minecraft.server.v1_9_R1.PacketPlayOutTitle.EnumTitleAction;
 import net.minecraft.server.v1_9_R1.PlayerConnection;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -88,15 +89,10 @@ public class ICM_Utils
         player.sendMessage(colour(message));
     }
 
-    public static String buildMessage(String[] args, int startat)
+    public static String buildMessage(String[] args, int startindex)
     {
-        String message = "";
-        for (int i = startat; i < args.length; i++)
-        {
-            String arg = args[i] + " ";
-            message = message + arg;
-        }
-        return message;
+        //Not certain why a complex method was used for this before, this does the exact same thing.
+        return StringUtils.join(args, " ", startindex, args.length);
     }
 
     //Please note that with titles, you must ALWAYS send the title first, and the subtitle second.

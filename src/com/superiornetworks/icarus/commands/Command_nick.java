@@ -13,8 +13,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "tag", description = "Set your tag.", usage = "/<command> <set:playername> <tag>", rank = ICM_Rank.Rank.OP)
-public class Command_tag
+@CommandParameters(name = "nick", description = "Set your nick.", usage = "/<command> <set:playername> <nick>", rank = ICM_Rank.Rank.OP)
+public class Command_nick
 {
 
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
@@ -30,7 +30,7 @@ public class Command_tag
             {
                 if (sender instanceof ConsoleCommandSender)
                 {
-                    sender.sendMessage(ChatColor.DARK_RED + "You can only set your tag in game.");
+                    sender.sendMessage(ChatColor.DARK_RED + "You can only set your nick in game.");
                     return true;
                 }
                 String tag = ICM_Utils.buildMessage(args, 1);
@@ -42,11 +42,11 @@ public class Command_tag
                 }
                 if (tag.length() > 25)
                 {
-                    sender.sendMessage(ChatColor.DARK_RED + "Tags cannot be larger than 25 charecters.");
+                    sender.sendMessage(ChatColor.DARK_RED + "Nicks cannot be larger than 25 charecters.");
                     return true;
                 }
-                ICM_SqlHandler.setTag(sender.getName(), tag);
-                sender.sendMessage(ChatColor.GREEN + "Your tag is now: " + tag);
+                ICM_SqlHandler.setNickname(sender.getName(), tag);
+                sender.sendMessage(ChatColor.GREEN + "Your nick is now: " + tag);
             }
             else
             {
@@ -70,11 +70,11 @@ public class Command_tag
                 }
                 if (tag.length() > 25)
                 {
-                    sender.sendMessage(ChatColor.DARK_RED + "Tags cannot be larger than 25 charecters.");
+                    sender.sendMessage(ChatColor.DARK_RED + "Nicks cannot be larger than 25 charecters.");
                     return true;
                 }
-                ICM_SqlHandler.setTag(args[0], tag);
-                sender.sendMessage(ChatColor.GREEN + "You set that player's tag to: " + tag);
+                ICM_SqlHandler.setNickname(args[0], tag);
+                sender.sendMessage(ChatColor.GREEN + "You set that player's nick to: " + tag);
                 Player p = Bukkit.getServer().getPlayer(args[0]);
                 if (p != null)
                 {
@@ -85,7 +85,7 @@ public class Command_tag
         catch (SQLException ex)
         {
             sender.sendMessage(ChatColor.DARK_RED + "Something went horribly wrong, please notify a developer of IcarusMod.");
-            Logger.getLogger(Command_tag.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Command_nick.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
