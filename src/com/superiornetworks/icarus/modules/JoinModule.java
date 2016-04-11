@@ -100,6 +100,10 @@ public class JoinModule extends IcarusModule implements Listener
             TitlesAPI.sendTitle(player, title, 20, 20, 20);
             TitlesAPI.sendSubtitle(player, subtitle, 20, 20, 20);
             API.setRankColor(player);
+            if(ICM_Rank.getRank(player) == ICM_Rank.Rank.OP)
+            {
+                player.setOp(true);
+            }
         }
         catch(SQLException ex)
         {
