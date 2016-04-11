@@ -2,8 +2,7 @@ package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Rank.Rank;
-import com.superiornetworks.icarus.ICM_Utils;
-import static com.superiornetworks.icarus.IcarusMod.plugin;
+import com.superiornetworks.icarus.IcarusMod;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,7 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
 {
 
     protected static CommandMap cmap;
-    protected final String command;
+    public final String command;
     protected final String description;
     protected final List<String> alias;
     protected final String usage;
@@ -81,23 +80,23 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
     public void register()
     {
         ReflectCommand cmd = new ReflectCommand(this.command);
-        if (this.alias != null)
+        if(this.alias != null)
         {
             cmd.setAliases(this.alias);
         }
-        if (this.description != null)
+        if(this.description != null)
         {
             cmd.setDescription(this.description);
         }
-        if (this.usage != null)
+        if(this.usage != null)
         {
             cmd.setUsage(this.usage);
         }
-        if (this.permMessage != null)
+        if(this.permMessage != null)
         {
             cmd.setPermissionMessage(this.permMessage);
         }
-        if (!getCommandMap().register("", cmd))
+        if(!getCommandMap().register("", cmd))
         {
             this.unRegisterBukkitCommand(Bukkit.getPluginCommand(cmd.getName()));
             getCommandMap().register("", cmd);
@@ -107,7 +106,7 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
 
     final CommandMap getCommandMap()
     {
-        if (cmap == null)
+        if(cmap == null)
         {
             try
             {
@@ -116,12 +115,12 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
                 cmap = (CommandMap) f.get(Bukkit.getServer());
                 return getCommandMap();
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 e.printStackTrace();
             }
         }
-        else if (cmap != null)
+        else if(cmap != null)
         {
             return cmap;
         }
@@ -136,7 +135,7 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
     }
 
     private Object getPrivateField(Object object, String field) throws SecurityException,
-                                                                       NoSuchFieldException, IllegalArgumentException, IllegalAccessException
+            NoSuchFieldException, IllegalArgumentException, IllegalAccessException
     {
         Class<?> clazz = object.getClass();
         Field objectField = clazz.getDeclaredField(field);
@@ -150,18 +149,18 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
     {
         try
         {
-            Object result = getPrivateField(plugin.getServer().getPluginManager(), "commandMap");
+            Object result = getPrivateField(IcarusMod.plugin.getServer().getPluginManager(), "commandMap");
             SimpleCommandMap commandMap = (SimpleCommandMap) result;
             Object map = getPrivateField(commandMap, "knownCommands");
             @SuppressWarnings("unchecked")
             HashMap<String, Command> knownCommands = (HashMap<String, Command>) map;
             knownCommands.remove(cmd.getName());
-            for (String alias : cmd.getAliases())
+            for(String registeredalias : cmd.getAliases())
             {
-                knownCommands.remove(alias);
+                knownCommands.remove(registeredalias);
             }
         }
-        catch (SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e)
+        catch(SecurityException | IllegalArgumentException | NoSuchFieldException | IllegalAccessException e)
         {
             e.printStackTrace();
         }
@@ -185,14 +184,14 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
         @Override
         public boolean execute(CommandSender sender, String commandLabel, String[] args)
         {
-            if (exe != null)
+            if(exe != null)
             {
-                if (!ICM_Rank.isRankOrHigher(sender, rank))
+                if(!ICM_Rank.isEqualOrHigher(ICM_Rank.getRank(sender), rank))
                 {
-                    sender.sendMessage(ChatColor.RED + "You must be " + ICM_Utils.aOrAn(rank.name) + " " + rank.name + " to use this command.");
+                    sender.sendMessage(ChatColor.RED + "You must be " + rank.name + " to use this command.");
                     return true;
                 }
-                if (!exe.onCommand(sender, this, commandLabel, args))
+                if(!exe.onCommand(sender, this, commandLabel, args))
                 {
                     sender.sendMessage(this.usageMessage.replaceAll("<command>", command));
                     return false;
@@ -205,7 +204,7 @@ public abstract class ICM_Command implements CommandExecutor, TabExecutor
         @Override
         public List<String> tabComplete(CommandSender sender, String alias, String[] args)
         {
-            if (exe != null)
+            if(exe != null)
             {
                 return exe.onTabComplete(sender, this, alias, args);
             }

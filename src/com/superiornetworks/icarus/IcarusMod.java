@@ -18,6 +18,8 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
     public static IcarusMod plugin;
     
     public static AeroCommandHandler handler;
+    
+    public static ICM_CommandRegistry registry;
 
     // MySQL  
     public static MySQL mySQL;
@@ -65,8 +67,6 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
     {
         IcarusMod.plugin = this;
         
-        //Handles logs from the server
-        Bukkit.getServer().getLogger().addHandler(new ICM_LoggerHandler());
         
         /*//Command Registration Stuff
         handler = new SimpleCommandHandler(plugin);
@@ -127,9 +127,12 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
             }
 
             //Enable Commands
-            ICM_CommandRegistry.registerCommands();
+            registry = new ICM_CommandRegistry();
 
             // The All Clear
+            
+            //Handles logs from the server
+            Bukkit.getServer().getLogger().addHandler(new ICM_LoggerHandler());
             Loggers.info(plugin, "has been enabled with no problems.");
         }
         else
@@ -143,6 +146,7 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
     @Override
     public void disable()
     {
+        registry.unregisterCommands();
         IcarusMod.plugin = null;
         // All clear, its disabled! Woot
         Loggers.info(plugin, "has been disabled with no problems.");

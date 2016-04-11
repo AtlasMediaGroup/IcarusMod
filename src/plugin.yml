@@ -51,3 +51,6 @@ commands:
   smite:
     description: Smite a naughty player.
     usage: /<command> <player>
+  nick:
+    description: Set someone's nickname.
+    usage: /<command> <set:playername> <nick>

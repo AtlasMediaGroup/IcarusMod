@@ -113,6 +113,11 @@ public class ICM_Rank
     {
         return getRank(player).level >= rank;
     }
+    
+    public static boolean isEqualOrHigher(Rank rank, Rank rank2)
+    {
+        return rank.level >= rank2.level;
+    }
 
     public static boolean isRank(CommandSender player, Rank rank)
     {
@@ -275,7 +280,7 @@ public class ICM_Rank
         {
             if(sender == null)
             {
-                ICM_SqlHandler.updateInTable("UUID", player.getUniqueId().toString(), rank.name, "RANK", "PLAYERS");
+                ICM_SqlHandler.updateInTable("playerName", player.getName(), rank.name, "rank", "players");
                 ranks.put(player.getName(), rank);
                 if(nicks.containsKey(player.getName()))
                 {
@@ -312,7 +317,7 @@ public class ICM_Rank
             {
                 message = sender.getName() + " has demoted " + player.getName() + " to the clearance level of 0 as an Op.\nWe hope any issues are resolved shortly.";
             }
-            ICM_SqlHandler.updateInTable("UUID", player.getUniqueId().toString(), rank.name, "RANK", "PLAYERS");
+            ICM_SqlHandler.updateInTable("playerName", player.getName(), rank.name, "rank", "players");
             ranks.put(player.getName(), rank);
             if(nicks.containsKey(player.getName()))
             {

@@ -1,10 +1,12 @@
 package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.IcarusMod;
-import java.io.IOException;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.security.CodeSource;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,19 +15,27 @@ import java.util.zip.ZipInputStream;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandMap;
-import org.bukkit.command.PluginCommand;
 
 public class ICM_CommandRegistry
 {
-
-    private static CommandMap cmap = getCommandMap();
+    private CommandMap cmap = getCommandMap();
+    private final ArrayList<String> commands = new ArrayList<>();
 
     public ICM_CommandRegistry()
     {
         registerCommands();
     }
+    
+    public void unregisterCommands()
+    {
+        for(String name : commands)
+        {
+            Command cmd = cmap.getCommand(name);
+            cmd.unregister(cmap);
+        }
+    }
 
-    public static void registerCommands()
+    public void registerCommands()
     {
         try
         {
@@ -50,34 +60,29 @@ public class ICM_CommandRegistry
                                 CommandParameters params = (CommandParameters) annotation;
                                 ICM_Command command = new ICM_BlankCommand(params.name(), params.usage(), params.description(), Arrays.asList(params.aliases().split(", ")), params.rank(), commandClass);
                                 command.register();
+                                commands.add(params.name());
                             }
-                        }
-                        catch (ClassNotFoundException ex)
+                            else
+                            {
+                                Constructor construct = commandClass.getConstructor();
+                                ICM_Command command = (ICM_Command) construct.newInstance();
+                                command.register();
+                                commands.add(command.command);
+                            }
+                        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex)
                         {
-
+                            Bukkit.broadcastMessage("" + ex);
                         }
                     }
                 }
             }
-        }
-        catch (IOException | NoSuchMethodException ex)
+        } catch (Exception ex)
         {
-            IcarusMod.plugin.getLogger().severe(ex.getLocalizedMessage());
+            IcarusMod.plugin.getPluginLogger().severe(ex.getLocalizedMessage());
         }
     }
 
-    public static boolean isICMCommand(String name)
-    {
-        Command cmd = cmap.getCommand(name);
-        if (!(cmd instanceof PluginCommand))
-        {
-            return true;
-        }
-        PluginCommand command = (PluginCommand) cmd;
-        return command.getPlugin() == IcarusMod.plugin;
-    }
-
-    private static CommandMap getCommandMap()
+    private CommandMap getCommandMap()
     {
         if (cmap == null)
         {
@@ -87,8 +92,7 @@ public class ICM_CommandRegistry
                 f.setAccessible(true);
                 cmap = (CommandMap) f.get(Bukkit.getServer());
                 return getCommandMap();
-            }
-            catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e)
+            } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e)
             {
                 e.printStackTrace();
             }
