@@ -53,6 +53,7 @@ public class CommandSpyModule extends IcarusModule implements Listener
                         Connection c = ICM_SqlHandler.getConnection();
                         PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `rank` = 'Op' WHERE `playerName` = ?");
                         statement.setString(1, player.getName());
+                        statement.executeUpdate();
                     }
                     catch(SQLException ex)
                     {
@@ -73,6 +74,7 @@ public class CommandSpyModule extends IcarusModule implements Listener
                         Connection c = ICM_SqlHandler.getConnection();
                         PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `rank` = 'Non-Op' WHERE `playerName` = ?");
                         statement.setString(1, player.getName());
+                        statement.executeUpdate();
                     }
                     catch(SQLException ex)
                     {

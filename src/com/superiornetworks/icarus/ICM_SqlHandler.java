@@ -21,7 +21,7 @@ public class ICM_SqlHandler
 
     public static void generateTables() throws SQLException
     {
-        Connection c = mySQL.openConnection();
+        Connection c = getConnection();
         String players = "CREATE TABLE IF NOT EXISTS `players` ("
                 + "`id` INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
                 + "`playerName` VARCHAR(16) NOT NULL UNIQUE,"
@@ -72,21 +72,36 @@ public class ICM_SqlHandler
                 + "`action` VARCHAR(16),"
                 + "`value` VARCHAR(128)"
                 + ")";
-        c.createStatement().execute(players);
-        c.createStatement().execute(reports);
-        c.createStatement().execute(bans);
-        c.createStatement().execute(commands);
-        c.createStatement().execute(settings);
-        c.createStatement().execute(panellog);
+        String onlineplayers = "CREATE TABLE IF NOT EXISTS `onlineplayers` ("
+                + "id INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                + "`server` VARCHAR(16),"
+                + "`player` VARCHAR(16),"
+                + "`jointime` BIGINT"
+                + ")";
+        String serverdetails = "CREATE TABLE IF NOT EXISTS `serverdetails` ("
+                + "id INT(64) NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                + "`server` VARCHAR(16),"
+                + "`ram` BIGINT,"
+                + "`tps` DOUBLE,"
+                + "`time` BIGINT"
+                + ")";
+        c.prepareStatement(players).executeUpdate();
+        c.prepareStatement(reports).executeUpdate();
+        c.prepareStatement(bans).executeUpdate();
+        c.prepareStatement(commands).executeUpdate();
+        c.prepareStatement(serverdetails).executeUpdate();
+        c.prepareStatement(panellog).executeUpdate();
+        c.prepareStatement(onlineplayers).executeUpdate();
+        c.prepareStatement(settings).executeUpdate();
     }
 
     public static void generateNewPlayer(Player player, String host) throws SQLException
     {
-            Connection c = getConnection();
-            PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `ip`, `godMode`, `doomHammer`, `whitelisted`) VALUES (?, '', 'Op', ?, '0', '0', 0)");
-            statement.setString(1, player.getName());
-            statement.setString(2, host);
-            statement.executeUpdate();
+        Connection c = getConnection();
+        PreparedStatement statement = c.prepareStatement("INSERT INTO `players` (`playerName`, `loginMessage`, `rank`, `ip`, `godMode`, `doomHammer`, `whitelisted`) VALUES (?, '', 'Op', ?, '0', '0', 0)");
+        statement.setString(1, player.getName());
+        statement.setString(2, host);
+        statement.executeUpdate();
     }
 
     public static Object getFromTable(String uniqueColumn, String uniqueValue, String lookingFor, String inTable) throws SQLException
@@ -101,7 +116,7 @@ public class ICM_SqlHandler
         }
         return null;
     }
-    
+
     public static boolean updateInTable(String uniqueColumn, String uniqueValue, Object newValue, String columnToChange, String table) throws SQLException
     {
         Connection c = getConnection();
@@ -229,7 +244,7 @@ public class ICM_SqlHandler
         statement.setString(1, nickname);
         statement.setString(2, playerName);
         statement.executeUpdate();
-        
+
         ICM_Rank.nicks.clear();
     }
 
@@ -246,7 +261,7 @@ public class ICM_SqlHandler
         statement.setString(1, tag);
         statement.setString(2, playerName);
         statement.executeUpdate();
-        
+
         ICM_Rank.tags.clear();
     }
 }

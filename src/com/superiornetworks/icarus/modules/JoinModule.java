@@ -8,6 +8,8 @@ import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.ICM_Whitelist;
 import com.superiornetworks.icarus.IcarusMod;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +106,14 @@ public class JoinModule extends IcarusModule implements Listener
             {
                 player.setOp(true);
             }
+            
+            //Log this user into the online players table.
+            Connection c = ICM_SqlHandler.getConnection();
+            PreparedStatement statement = c.prepareStatement("INSERT INTO `onlineplayers` (`server`, `player`, `jointime`) VALUES (?, ?, ?)");
+            statement.setString(1, IcarusMod.config.getString("serveridentifier"));
+            statement.setString(2, player.getName());
+            statement.setLong(3, System.currentTimeMillis());
+            statement.executeUpdate();
         }
         catch(SQLException ex)
         {

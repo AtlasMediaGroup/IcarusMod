@@ -25,41 +25,36 @@ public class Command_saconfig
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
-        if (args.length == 1)
+        if(args.length == 1)
         {
-            if (args[0].equalsIgnoreCase("list"))
+            if(args[0].equalsIgnoreCase("list"))
             {
                 try
                 {
                     ArrayList<String> sadmins = new ArrayList<>();
-                    ArrayList<String> tadmins = new ArrayList<>();
                     ArrayList<String> sradmins = new ArrayList<>();
                     ArrayList<String> devs = new ArrayList<>();
                     ArrayList<String> managers = new ArrayList<>();
                     ArrayList<ArrayList<String>> arrays = new ArrayList<>();
                     arrays.add(sadmins);
-                    arrays.add(tadmins);
                     arrays.add(sradmins);
                     arrays.add(devs);
                     arrays.add(managers);
-                    for (ArrayList<String> array : arrays)
+                    for(ArrayList<String> array : arrays)
                     {
                         Collections.sort(array, String.CASE_INSENSITIVE_ORDER);
                     }
                     Connection c = ICM_SqlHandler.getConnection();
-                    PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `rank` != 'Op'");
+                    PreparedStatement statement = c.prepareStatement("SELECT * FROM `players` WHERE `rank` != 'Op' AND `rank` != 'Non-Op'");
                     ResultSet res = statement.executeQuery();
                     int number = 0;
-                    while (res.next())
+                    while(res.next())
                     {
                         number++;
-                        switch (res.getString("rank"))
+                        switch(res.getString("rank"))
                         {
                             case "Super Admin":
                                 sadmins.add(res.getString("playerName"));
-                                break;
-                            case "Telnet Admin":
-                                tadmins.add(res.getString("playerName"));
                                 break;
                             case "Senior Admin":
                                 sradmins.add(res.getString("playerName"));
@@ -78,8 +73,6 @@ public class Command_saconfig
                     sender.sendMessage(ChatColor.GOLD + "  - Total Admins: " + number);
                     sender.sendMessage(ChatColor.AQUA + "    - Super Admins:");
                     sender.sendMessage("        - " + StringUtils.join(sadmins, ", "));
-                    sender.sendMessage(ChatColor.DARK_GREEN + "    - Telnet Admins:");
-                    sender.sendMessage("        - " + StringUtils.join(tadmins, ", "));
                     sender.sendMessage(ChatColor.LIGHT_PURPLE + "    - Senior Admins:");
                     sender.sendMessage("        - " + StringUtils.join(sradmins, ", "));
                     sender.sendMessage(ChatColor.DARK_PURPLE + "    - Developers:");
@@ -88,7 +81,7 @@ public class Command_saconfig
                     sender.sendMessage("        - " + StringUtils.join(managers, ", "));
                     return true;
                 }
-                catch (SQLException ex)
+                catch(SQLException ex)
                 {
                     sender.sendMessage(ChatColor.RED + "An SQL error has occured, please contact a developer!");
                     Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,17 +90,17 @@ public class Command_saconfig
             return false;
         }
         Player player;
-        if (args.length == 2)
+        if(args.length == 2)
         {
             player = Bukkit.getPlayer(args[1]);
-            if (player == null)
+            if(player == null)
             {
                 sender.sendMessage("Player: " + args[1] + " is not online.");
                 return true;
             }
-            if (args[0].equalsIgnoreCase("delete"))
+            if(args[0].equalsIgnoreCase("delete"))
             {
-                if (ICM_Rank.isRankOrHigher(player, ICM_Rank.getRank(sender)) && sender instanceof Player)
+                if(ICM_Rank.isRankOrHigher(player, ICM_Rank.getRank(sender)) && sender instanceof Player)
                 {
                     sender.sendMessage("You may only remove someone from admin if they are a lower rank than you.");
                     return true;
@@ -116,9 +109,9 @@ public class Command_saconfig
                 ICM_Utils.adminAction(sender.getName(), "Removing " + player.getName() + " from the admin list.", true);
                 return true;
             }
-            if (args[0].equalsIgnoreCase("add"))
+            if(args[0].equalsIgnoreCase("add"))
             {
-                if (ICM_Rank.getRank(player).level == -1)
+                if(ICM_Rank.getRank(player).level == -1)
                 {
                     try
                     {
@@ -128,26 +121,25 @@ public class Command_saconfig
                         statement2.setString(2, player.getName());
                         statement2.executeUpdate();
                     }
-                    catch (SQLException ex)
+                    catch(SQLException ex)
                     {
                         Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 ICM_Rank.setRank(player, ICM_Rank.Rank.SUPER, sender);
-                ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to Super Admin.", false);
                 return true;
             }
             return false;
         }
-        if (args.length >= 3)
+        if(args.length >= 3)
         {
-            if (!args[0].equalsIgnoreCase("add"))
+            if(!args[0].equalsIgnoreCase("add"))
             {
                 sender.sendMessage("You only need 2 arguments for a removal.");
                 return true;
             }
             player = Bukkit.getPlayer(args[1]);
-            if (player == null)
+            if(player == null)
             {
                 sender.sendMessage(args[1] + " is not online.");
                 return true;
@@ -157,22 +149,22 @@ public class Command_saconfig
             {
                 level = Integer.parseInt(args[2]);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 String rank = StringUtils.join(ArrayUtils.subarray(args, 2, args.length), " ");
                 level = ICM_Rank.nameToRank(rank).level;
             }
-            if (level == 0)
+            if(level == 0)
             {
                 sender.sendMessage(StringUtils.join(ArrayUtils.subarray(args, 2, args.length), " ") + " is an invalid rank.");
                 return true;
             }
-            if (!ICM_Rank.isRankOrHigher(sender, level))
+            if(!ICM_Rank.isRankOrHigher(sender, level))
             {
                 sender.sendMessage(ChatColor.RED + "You may only add someone to a rank that's lower than yours.");
                 return true;
             }
-            if (ICM_Rank.getRank(player).level == -1)
+            if(ICM_Rank.getRank(player).level == -1)
             {
                 try
                 {
@@ -182,7 +174,7 @@ public class Command_saconfig
                     statement2.setString(2, player.getName());
                     statement2.executeUpdate();
                 }
-                catch (SQLException ex)
+                catch(SQLException ex)
                 {
                     Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
                 }

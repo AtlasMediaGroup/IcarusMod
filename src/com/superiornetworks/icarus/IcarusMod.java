@@ -118,6 +118,7 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
             try
             {
                 //Generate Default Tables
+                Bukkit.broadcastMessage("Generating all required tables.");
                 ICM_SqlHandler.generateTables();
                 ICM_Settings.generateDefaultSettings();
             }
@@ -133,6 +134,13 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
             
             //Handles logs from the server
             Bukkit.getServer().getLogger().addHandler(new ICM_LoggerHandler());
+            
+            //Handles data logging (TPS, RAM usage, Online Players)
+            ICM_TpsFinder tpsfinder = new ICM_TpsFinder();
+            tpsfinder.runTaskTimer(plugin, 0, 20L);
+            ICM_DetailLogger detaillogger = new ICM_DetailLogger();
+            detaillogger.runTaskTimer(plugin, 0, 20L * 15L);
+            
             Loggers.info(plugin, "has been enabled with no problems.");
         }
         else

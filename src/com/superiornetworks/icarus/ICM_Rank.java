@@ -317,6 +317,7 @@ public class ICM_Rank
             {
                 message = sender.getName() + " has demoted " + player.getName() + " to the clearance level of 0 as an Op.\nWe hope any issues are resolved shortly.";
             }
+            ICM_Utils.adminAction(sender.getName(), message, false);
             ICM_SqlHandler.updateInTable("playerName", player.getName(), rank.name, "rank", "players");
             ranks.put(player.getName(), rank);
             if(nicks.containsKey(player.getName()))

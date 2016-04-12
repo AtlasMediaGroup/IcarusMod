@@ -24,17 +24,18 @@ public class Command_report
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
 
-        if (args.length == 0)
+        if(args.length == 0)
         {
             return false;
         }
         Player player = Bukkit.getPlayer(args[0]);
         String Reported;
-        if (player == null) {
+        if(player == null)
+        {
             sender.sendMessage(ChatColor.RED + "Could not find player!");
             return true;
         }
-        if (player != null)
+        if(player != null)
         {
             Reported = player.getName();
         }
@@ -43,18 +44,15 @@ public class Command_report
             Reported = args[0];
         }
         String report_reason = null;
-        if (args.length < 2)
+        if(args.length < 2)
         {
             return false;
         }
-        else
+        else if(args.length >= 2)
         {
-            if (args.length >= 2)
-            {
-                report_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
-            }
+            report_reason = StringUtils.join(ArrayUtils.subarray(args, 1, args.length), " ");
         }
-        if (player == sender)
+        if(player == sender)
         {
             sender.sendMessage(ChatColor.DARK_RED + "For some god awful reason, you have attempted to report yourself... Exactly why you have tried that, nobody knows. However what we do know is... You're just damn right stupid... Have a cookie.");
             final ItemStack heldItem = new ItemStack(Material.COOKIE);
@@ -65,14 +63,14 @@ public class Command_report
             player.getInventory().setItem(firstEmpty, heldItem);
             return true;
         }
-        for (Player admin : Bukkit.getOnlinePlayers())
+        for(Player admin : Bukkit.getOnlinePlayers())
         {
-            if (ICM_Rank.isRankOrHigher(admin, ICM_Rank.Rank.SUPER))
+            if(ICM_Rank.isRankOrHigher(admin, ICM_Rank.Rank.SUPER))
             {
                 admin.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &a" + sender.getName() + " &4has reported " + Reported + " - " + player.getAddress().getAddress().getHostAddress() + " &4with the reason &2" + report_reason + "&4."));
             }
         }
-        if (player != null)
+        if(player != null)
         {
             player.sendMessage(ChatUtils.colorize("&8[&4IcarusMod&8] &4" + "You have been reported with the following reason: " + "&5" + report_reason + " &4an administrator will review this soon."));
         }
@@ -88,7 +86,7 @@ public class Command_report
             statement.setString(4, player.getAddress().getAddress().getHostAddress());
             statement.executeUpdate();
         }
-        catch (SQLException ex)
+        catch(SQLException ex)
         {
 
         }
