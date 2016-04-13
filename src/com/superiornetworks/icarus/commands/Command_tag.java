@@ -4,11 +4,8 @@ import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -20,10 +17,6 @@ import org.bukkit.entity.Player;
 public class Command_tag
 {
 
-public static final List<String> BLACKLIST = Arrays.asList(new String[]
-    {
-        "admin", "owner", "moderator", "developer", "console", "mod", "&k", "&0", "&m", "&n", "&o"
-    });
     
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
@@ -34,10 +27,6 @@ public static final List<String> BLACKLIST = Arrays.asList(new String[]
                 return false;
             }
             
-            if (args[0].equalsIgnoreCase("blacklist")) {
-                sender.sendMessage(StringUtils.join(BLACKLIST, ChatColor.WHITE + ", "));
-                return true;
-            }
 
             if (args[0].equalsIgnoreCase("set"))
             {
@@ -86,10 +75,14 @@ public static final List<String> BLACKLIST = Arrays.asList(new String[]
                     sender.sendMessage(ChatColor.DARK_RED + "Tags cannot be larger than 25 charecters.");
                     return true;
                 }
-                for (String blacklist : BLACKLIST) {
-                    if (tag.contains(blacklist) && !ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER)) {
-                       sender.sendMessage(ChatColor.DARK_RED + "Illegal characters have been detected!\n(If you are unsure what's blacklisted, do /tag blacklist)");
-                       return true; 
+                for (String blacklist : ((String) ICM_SqlHandler.getFromTable("settingName", "blacklist", "string", "settings")).split(", ")) {
+                    if (tag.toLowerCase().contains(blacklist.toLowerCase()) && !ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER)) {
+                        sender.sendMessage(ChatColor.DARK_RED + "Illegal characters have been detected!\n(If you are unsure what's blacklisted, do /tag blacklist)");
+                        return true;
+                    }
+                    if (args[0].equalsIgnoreCase("blacklist")) {
+                        sender.sendMessage(blacklist);
+                        return true;
                     }
                 }
                 
