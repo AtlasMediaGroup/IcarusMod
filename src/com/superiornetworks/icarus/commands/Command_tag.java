@@ -19,7 +19,7 @@ public class Command_tag
 
 public static final List<String> BLACKLIST = Arrays.asList(new String[]
     {
-        "admin", "owner", "moderator", "developer", "console", "mod", "&k", "&0", "m", "n", "o"
+        "admin", "owner", "moderator", "developer", "console", "mod", "&k", "&0", "&m", "&n", "&o"
     });
     
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
