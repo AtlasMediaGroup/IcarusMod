@@ -30,7 +30,7 @@ public class ICM_SqlHandler
                 + "`loginMessage` TEXT,"
                 + "`rank` TEXT,"
                 + "`ip` VARCHAR(64),"
-                + "`commandSpyOn` BOOLEAN,"
+                + "`inAC` BOOLEAN,"
                 + "`godMode` BOOLEAN,"
                 + "`doomHammer` BOOLEAN,"
                 + "`whitelisted` BOOLEAN"
