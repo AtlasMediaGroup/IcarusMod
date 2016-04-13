@@ -27,13 +27,13 @@ public class Command_o {
                 if (!ICM_SqlHandler.inAC(player.getName())) {
                     playerMsg(sender, "&7Toggling adminchat: On");
                     Connection c = ICM_SqlHandler.getConnection();
-                    PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `commandSpyOn` = TRUE WHERE `playerName` = ?");
+                    PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `inAC` = TRUE WHERE `playerName` = ?");
                     statement.setString(1, player.getName());
                     statement.executeUpdate();
                 } else {
                     playerMsg(sender, "&7Toggling adminchat: Off");
                     Connection c = ICM_SqlHandler.getConnection();
-                    PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `commandSpyOn` = FALSE WHERE `playerName` = ?");
+                    PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `inAC` = FALSE WHERE `playerName` = ?");
                     statement.setString(1, player.getName());
                     statement.executeUpdate();
                 }
