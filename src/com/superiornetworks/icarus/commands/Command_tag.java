@@ -4,8 +4,11 @@ import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -31,8 +34,8 @@ public static final List<String> BLACKLIST = Arrays.asList(new String[]
                 return false;
             }
             
-            if (args[0]).equalsIgnoreCase("blacklist") {
-                sender.sendMessage(StringUtils.Join(BLACKLIST, ChatColor.WHITE + ", ")
+            if (args[0].equalsIgnoreCase("blacklist")) {
+                sender.sendMessage(StringUtils.join(BLACKLIST, ChatColor.WHITE + ", "));
                 return true;
             }
 
@@ -84,7 +87,7 @@ public static final List<String> BLACKLIST = Arrays.asList(new String[]
                     return true;
                 }
                 for (String blacklist : BLACKLIST) {
-                    if (tag.contains(blacklist) {
+                    if (tag.contains(blacklist) && !ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER)) {
                        sender.sendMessage(ChatColor.DARK_RED + "Illegal characters have been detected!\n(If you are unsure what's blacklisted, do /tag blacklist)");
                        return true; 
                     }

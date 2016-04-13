@@ -4,8 +4,11 @@ import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.ICM_Utils;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -13,10 +16,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "nick", description = "Set your nick.", usage = "/<command> <set:playername> <nick>", rank = ICM_Rank.Rank.OP)
+@CommandParameters(name = "nick", description = "Set your nick.", usage = "/<command> <set:playername:blacklist> <nick>", rank = ICM_Rank.Rank.OP)
 public class Command_nick
 {
 
+    public static final List<String> BLACKLIST = Arrays.asList(new String[]
+    {
+        "admin", "owner", "moderator", "developer", "console", "mod", "&k", "&0", "&m", "&n", "&o"
+    });
+    
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
         try
@@ -25,7 +33,12 @@ public class Command_nick
             {
                 return false;
             }
-
+            
+            if (args[0].equalsIgnoreCase("blacklist")) {
+                sender.sendMessage(StringUtils.join(BLACKLIST, ChatColor.WHITE + ", "));
+                return true;
+            }
+            
             if (args[0].equalsIgnoreCase("set"))
             {
                 if (sender instanceof ConsoleCommandSender)
@@ -33,24 +46,23 @@ public class Command_nick
                     sender.sendMessage(ChatColor.DARK_RED + "You can only set your nick in game.");
                     return true;
                 }
-                String tag = ICM_Utils.buildMessage(args, 1);
+                String nick = ICM_Utils.buildMessage(args, 1);
 
-                if (tag.contains("`") || tag.contains("'"))
+                if (nick.contains("`") || nick.contains("'"))
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot use these charecters: ` or '");
                     return true;
                 }
-                if (tag.length() > 25)
+                if (nick.length() > 25)
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "Nicks cannot be larger than 25 charecters.");
                     return true;
                 }
-                ICM_SqlHandler.setNickname(sender.getName(), tag);
-                sender.sendMessage(ChatColor.GREEN + "Your nick is now: " + tag);
+                ICM_SqlHandler.setNickname(sender.getName(), nick);
+                sender.sendMessage(ChatColor.GREEN + "Your nick is now: " + nick);
             }
             else
             {
-
                 if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
                 {
                     sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
@@ -61,24 +73,33 @@ public class Command_nick
                     sender.sendMessage(ChatColor.DARK_RED + "That player has not joined before.");
                     return true;
                 }
+                
 
-                String tag = ICM_Utils.buildMessage(args, 1);
-                if (tag.contains("`") || tag.contains("'"))
+
+                String nick = ICM_Utils.buildMessage(args, 1);
+                if (nick.contains("`") || nick.contains("'"))
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot use these charecters: ` or '");
                     return true;
                 }
-                if (tag.length() > 25)
+                if (nick.length() > 25)
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "Nicks cannot be larger than 25 charecters.");
                     return true;
                 }
-                ICM_SqlHandler.setNickname(args[0], tag);
-                sender.sendMessage(ChatColor.GREEN + "You set that player's nick to: " + tag);
+                for (String blacklist : BLACKLIST) {
+                    if (nick.contains(blacklist) && !ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER)) {
+                       sender.sendMessage(ChatColor.DARK_RED + "Illegal characters have been detected!\n(If you are unsure what's blacklisted, do /nick blacklist)");
+                       return true; 
+                    }
+                }
+                
+                ICM_SqlHandler.setNickname(args[0], nick);
+                sender.sendMessage(ChatColor.GREEN + "You set that player's nick to: " + nick);
                 Player p = Bukkit.getServer().getPlayer(args[0]);
                 if (p != null)
                 {
-                    p.sendMessage(ChatColor.GREEN + "Your tag was changed by: " + sender.getName() + " to: " + tag);
+                    p.sendMessage(ChatColor.GREEN + "Your nick was changed by: " + sender.getName() + " to: " + nick);
                 }
             }
         }
