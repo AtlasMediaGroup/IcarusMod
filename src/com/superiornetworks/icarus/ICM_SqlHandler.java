@@ -238,7 +238,7 @@ public class ICM_SqlHandler
         {
             return false;
         }
-        Object obj = getFromTable("playerName", playerName, "commandSpyOn", "players");
+        Object obj = getFromTable("playerName", playerName, "inAC", "players");
         if(obj instanceof Boolean)
         {
             return (Boolean) obj;
