@@ -1,6 +1,7 @@
 package com.superiornetworks.icarus.modules;
 
 import com.superiornetworks.icarus.ICM_Rank;
+import com.superiornetworks.icarus.ICM_SqlHandler;
 import com.superiornetworks.icarus.IcarusMod;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -21,7 +22,7 @@ public class AdminChat extends IcarusModule
             if (ICM_Rank.isRankOrHigher(onlineadmins, ICM_Rank.Rank.SUPER))
             {
                 // Some strange ass colour codes being used here...
-                onlineadmins.sendMessage("§f[§bADMIN§f] §c" + sender.getName() + ICM_Rank.getRank(sender).actag + "§f: §b " + message);
+                onlineadmins.sendMessage("§f[§bADMIN§f] §c" + ICM_SqlHandler.getNick(sender) + ICM_Rank.getRank(sender).actag + "§f: §b " + message);
             }
         }
     }
