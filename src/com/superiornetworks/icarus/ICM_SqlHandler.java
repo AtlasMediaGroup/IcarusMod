@@ -231,7 +231,6 @@ public class ICM_SqlHandler
         return false;
     }
     
-
     public static void setNickname(String playerName, String nickname) throws SQLException
     {
         //No need to replace & with § as the ICM_Utils.colour method handles this.
