@@ -15,22 +15,29 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 @CommandParameters(name = "o", description = "Toggle or use adminchat.", usage = "/o [message]", rank = ICM_Rank.Rank.SUPER)
-public class Command_o {
+public class Command_o 
+{
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (args.length == 0) {
-            try {
-                if (!(sender instanceof Player)) {
+        if (args.length == 0) 
+        {
+            try 
+            {
+                if (!(sender instanceof Player))
+                {
                     return true;
                 }
                 Player player = (Player) sender;
-                if (!ICM_SqlHandler.inAC(player.getName())) {
+                if (!ICM_SqlHandler.inAC(player.getName())) 
+                {
                     playerMsg(sender, "&7Toggling adminchat: On");
                     Connection c = ICM_SqlHandler.getConnection();
                     PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `inAC` = TRUE WHERE `playerName` = ?");
                     statement.setString(1, player.getName());
                     statement.executeUpdate();
-                } else {
+                } 
+                else 
+                {
                     playerMsg(sender, "&7Toggling adminchat: Off");
                     Connection c = ICM_SqlHandler.getConnection();
                     PreparedStatement statement = c.prepareStatement("UPDATE `players` SET `inAC` = FALSE WHERE `playerName` = ?");
@@ -38,13 +45,16 @@ public class Command_o {
                     statement.executeUpdate();
                 }
                 return true;
-            } catch (SQLException ex) {
+              } 
+                catch (SQLException ex)
+                {
                 Logger.getLogger(Command_o.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                }
             return true;
         }
 
-        if (args.length >= 1) {
+        if (args.length >= 1) 
+        {
             AdminChat.AdminChatMsg(sender, StringUtils.join(args, " "));
             return true;
         }
