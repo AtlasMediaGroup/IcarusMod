@@ -1,7 +1,7 @@
 package com.superiornetworks.icarus.modules;
 
+import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Settings;
-import com.superiornetworks.icarus.ICM_Utils;
 import static com.superiornetworks.icarus.ICM_Utils.playerMsg;
 import com.superiornetworks.icarus.IcarusMod;
 import java.sql.SQLException;
@@ -25,7 +25,7 @@ public class AdminWorldToggle extends IcarusModule implements Listener
         Player player = event.getPlayer();
         try
         {
-            if (!ICM_Utils.MANAGERS.contains(player.getName()) && event.getTo().getWorld() == Bukkit.getWorld("adminworld") && !ICM_Settings.getBoolean("adminworld-toggled"))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.MANAGER) && event.getTo().getWorld() == Bukkit.getWorld("adminworld") && !ICM_Settings.getBoolean("adminworld-toggled"))
             {
                 playerMsg(player, "&cAdminWorld is currently disabled.");
                 event.setCancelled(true);

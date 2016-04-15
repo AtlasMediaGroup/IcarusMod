@@ -1,7 +1,6 @@
 package com.superiornetworks.icarus.commands;
 
 import com.superiornetworks.icarus.ICM_Rank;
-import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DevelopmentMode.DevMode;
 import org.bukkit.Bukkit;
@@ -19,7 +18,7 @@ public class Command_devmode
         if (args[0].equalsIgnoreCase("everyone"))
         {
             DevelopmentMode.setMode(DevMode.EVERYONE);
-            sender.sendMessage(ChatColor.GREEN + "Developement mode has been enabled, anyone who joins will get a warning.");
+            sender.sendMessage(ChatColor.GREEN + "Development mode has been enabled, anyone who joins will get a warning.");
             Bukkit.broadcastMessage(ChatColor.DARK_RED + "Development mode has been enabled. This could result in unexpected errors. Please report such errors to a developer.");
             return true;
         }
@@ -30,10 +29,10 @@ public class Command_devmode
             {
                 if (!ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.SUPER))
                 {
-                    p.kickPlayer(ChatColor.DARK_RED + "Developement mode has been enabled, only admins are allowed online.");
+                    p.kickPlayer(ChatColor.DARK_RED + "Development mode has been enabled, only admins are allowed online.");
                 }
             }
-            sender.sendMessage(ChatColor.GREEN + "Developement mode has been enabled, only admins can join.");
+            sender.sendMessage(ChatColor.GREEN + "Development mode has been enabled, only admins can join.");
             Bukkit.broadcastMessage(ChatColor.DARK_RED + "Development mode has been enabled. This could result in unexpected errors. Please report such errors to a developer.");
             return true;
         }
@@ -42,12 +41,12 @@ public class Command_devmode
             DevelopmentMode.setMode(DevMode.DEV_ONLY);
             for (Player p : Bukkit.getOnlinePlayers())
             {
-                if (!ICM_Utils.DEVELOPERS.contains(p.getName()))
+                if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.DEVELOPER))
                 {
-                    p.kickPlayer(ChatColor.DARK_RED + "Developement mode has been enabled, only developers are allowed online.");
+                    p.kickPlayer(ChatColor.DARK_RED + "Development mode has been enabled, only developers are allowed online.");
                 }
             }
-            sender.sendMessage(ChatColor.GREEN + "Developement mode has been enabled, only developers can join.");
+            sender.sendMessage(ChatColor.GREEN + "Development mode has been enabled, only developers can join.");
             Bukkit.broadcastMessage(ChatColor.DARK_RED + "Development mode has been enabled. This could result in unexpected errors.");
             return true;
         }
