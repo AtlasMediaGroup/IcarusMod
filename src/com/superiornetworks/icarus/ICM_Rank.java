@@ -58,18 +58,18 @@ public class ICM_Rank
                     OfflinePlayer offplayer = Bukkit.getOfflinePlayer(player.getName().replaceAll("[^A-Za-z0-9_]", ""));
                     if(offplayer == null)
                     {
-                        ranks.put(player.getName(), Rank.SUPER);
-                        return Rank.SUPER;
+                        ranks.put(player.getName(), Rank.SENIOR);
+                        return Rank.SENIOR;
                     }
                     for(Rank rank : Rank.values())
                     {
-                        if(ICM_SqlHandler.getRank(offplayer.getUniqueId().toString()).equalsIgnoreCase((rank.name)))
+                        if(ICM_SqlHandler.getRank(player.getName()).equalsIgnoreCase((rank.name)))
                         {
                             return rank;
                         }
                     }
-                    ranks.put(player.getName(), Rank.SUPER);
-                    return Rank.SUPER;
+                    ranks.put(player.getName(), Rank.SENIOR);
+                    return Rank.SENIOR;
                 }
             }
             if(ICM_Utils.IMPOSTERS.contains((Player) player))
@@ -84,7 +84,7 @@ public class ICM_Rank
             {
                 for(Rank rank : Rank.values())
                 {
-                    if(ICM_SqlHandler.getRank(((Player) player).getUniqueId().toString()).equalsIgnoreCase(rank.name))
+                    if(ICM_SqlHandler.getRank(((Player) player).getName()).equalsIgnoreCase(rank.name))
                     {
                         ranks.put(player.getName(), rank);
                         return rank;
@@ -149,11 +149,11 @@ public class ICM_Rank
             {
                 for(Rank rank : Rank.values())
                 {
-                    if(!ICM_SqlHandler.playerExists(player.getUniqueId().toString()))
+                    if(!ICM_SqlHandler.playerExists(player.getName()))
                     {
                         return Rank.OP;
                     }
-                    if(ICM_SqlHandler.getRank(player.getUniqueId().toString()).equalsIgnoreCase(rank.name))
+                    if(ICM_SqlHandler.getRank(player.getName()).equalsIgnoreCase(rank.name))
                     {
                         return rank;
                     }
