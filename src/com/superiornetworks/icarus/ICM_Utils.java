@@ -24,7 +24,7 @@ public class ICM_Utils
 {
 
     public static final ArrayList<Player> IMPOSTERS = new ArrayList<>();
-    public static final List<String> MANAGERS = Arrays.asList("Wild1145", "Camzie99");
+    public static final List<String> MANAGERS = Arrays.asList("Wild1145", "Varuct", "thecjgcjg");
     public static final List<String> COMMUNITYTEAM = Arrays.asList("");
     public static final List<String> DEVELOPERS = Arrays.asList("Wild1145", "Camzie99", "Hockeyfan360");
     public static final List<ChatColor> COLOURS = Arrays.asList(

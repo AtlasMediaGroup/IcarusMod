@@ -4,7 +4,6 @@ import com.superiornetworks.icarus.ICM_Rank;
 import com.superiornetworks.icarus.ICM_Utils;
 import com.superiornetworks.icarus.modules.DevelopmentMode;
 import com.superiornetworks.icarus.modules.DevelopmentMode.DevMode;
-import com.superiornetworks.icarus.ICM_Rank.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
