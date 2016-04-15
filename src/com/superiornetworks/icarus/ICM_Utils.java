@@ -4,17 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import net.minecraft.server.v1_9_R1.IChatBaseComponent;
-import net.minecraft.server.v1_9_R1.IChatBaseComponent.ChatSerializer;
-import net.minecraft.server.v1_9_R1.PacketPlayOutTitle;
-import net.minecraft.server.v1_9_R1.PacketPlayOutTitle.EnumTitleAction;
-import net.minecraft.server.v1_9_R1.PlayerConnection;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_9_R1.entity.CraftPlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +19,6 @@ public class ICM_Utils
 
     public static final ArrayList<Player> IMPOSTERS = new ArrayList<>();
     public static final List<String> MANAGERS = Arrays.asList("Wild1145", "Varuct", "thecjgcjg");
-    public static final List<String> COMMUNITYTEAM = Arrays.asList("");
     public static final List<String> DEVELOPERS = Arrays.asList("Wild1145", "Camzie99", "Hockeyfan360");
     public static final List<ChatColor> COLOURS = Arrays.asList(
             ChatColor.DARK_BLUE,
@@ -93,28 +86,5 @@ public class ICM_Utils
     {
         //Not certain why a complex method was used for this before, this does the exact same thing.
         return StringUtils.join(args, " ", startindex, args.length);
-    }
-
-    //Please note that with titles, you must ALWAYS send the title first, and the subtitle second.
-    @Deprecated
-    public static void sendTitle(Player player, String message, int fadein, int stay, int fadeout)
-    {
-        CraftPlayer craftplayer = (CraftPlayer) player;
-        PlayerConnection connection = craftplayer.getHandle().playerConnection;
-        String finalmessage = message.replaceAll("&", "§");
-        IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + finalmessage + "\"}");
-        PacketPlayOutTitle title = new PacketPlayOutTitle(EnumTitleAction.TITLE, chatTitle, fadein, stay, fadeout);
-        connection.sendPacket(title);
-    }
-
-    @Deprecated
-    public static void sendSubtitle(Player player, String message, int fadein, int stay, int fadeout)
-    {
-        CraftPlayer craftplayer = (CraftPlayer) player;
-        PlayerConnection connection = craftplayer.getHandle().playerConnection;
-        String finalmessage = message.replaceAll("&", "§");
-        IChatBaseComponent chatTitle = ChatSerializer.a("{\"text\": \"" + finalmessage + "\"}");
-        PacketPlayOutTitle subtitle = new PacketPlayOutTitle(EnumTitleAction.SUBTITLE, chatTitle, fadein, stay, fadeout);
-        connection.sendPacket(subtitle);
     }
 }
