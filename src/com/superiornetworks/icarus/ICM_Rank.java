@@ -38,19 +38,27 @@ public class ICM_Rank
     public static HashMap<String, String> nicks = new HashMap<>();
     public static HashMap<String, String> tags = new HashMap<>();
 
+    public static boolean shouldCache()
+    {
+        return (IcarusMod.config.contains("toggles.caching") && IcarusMod.config.getBoolean("toggles.caching"));
+    }
+
     public static Rank getRank(CommandSender player)
     {
         try
         {
             if(!(player instanceof Player))
             {
-                if(ranks.containsKey(player.getName()))
+                if(ranks.containsKey(player.getName()) && shouldCache())
                 {
                     return ranks.get(player.getName());
                 }
                 if("Console".equalsIgnoreCase(player.getName()))
                 {
-                    ranks.put(player.getName(), Rank.SENIOR);
+                    if(shouldCache())
+                    {
+                        ranks.put(player.getName(), Rank.SENIOR);
+                    }
                     return Rank.SENIOR;
                 }
                 else
@@ -58,7 +66,10 @@ public class ICM_Rank
                     OfflinePlayer offplayer = Bukkit.getOfflinePlayer(player.getName().replaceAll("[^A-Za-z0-9_]", ""));
                     if(offplayer == null)
                     {
-                        ranks.put(player.getName(), Rank.SENIOR);
+                        if(shouldCache())
+                        {
+                            ranks.put(player.getName(), Rank.SENIOR);
+                        }
                         return Rank.SENIOR;
                     }
                     for(Rank rank : Rank.values())
@@ -68,7 +79,10 @@ public class ICM_Rank
                             return rank;
                         }
                     }
-                    ranks.put(player.getName(), Rank.SENIOR);
+                    if(shouldCache())
+                    {
+                        ranks.put(player.getName(), Rank.SENIOR);
+                    }
                     return Rank.SENIOR;
                 }
             }
@@ -76,7 +90,7 @@ public class ICM_Rank
             {
                 return Rank.IMPOSTER;
             }
-            if(ranks.containsKey(player.getName()))
+            if(ranks.containsKey(player.getName()) && shouldCache())
             {
                 return ranks.get(player.getName());
             }
@@ -86,7 +100,10 @@ public class ICM_Rank
                 {
                     if(ICM_SqlHandler.getRank(((Player) player).getName()).equalsIgnoreCase(rank.name))
                     {
-                        ranks.put(player.getName(), rank);
+                        if(shouldCache())
+                        {
+                            ranks.put(player.getName(), rank);
+                        }
                         return rank;
                     }
                 }
@@ -100,7 +117,10 @@ public class ICM_Rank
         {
             IcarusMod.plugin.getPluginLogger().severe(ex.getLocalizedMessage());
         }
-        ranks.put(player.getName(), Rank.OP);
+        if(shouldCache())
+        {
+            ranks.put(player.getName(), Rank.OP);
+        }
         return Rank.OP;
     }
 
@@ -113,7 +133,7 @@ public class ICM_Rank
     {
         return getRank(player).level >= rank;
     }
-    
+
     public static boolean isEqualOrHigher(Rank rank, Rank rank2)
     {
         return rank.level >= rank2.level;
@@ -198,9 +218,12 @@ public class ICM_Rank
             ICM_Utils.IMPOSTERS.remove(player);
             ICM_SqlHandler.updateInTable("playerName", player.getName(), false, "imposter", "players");
             ICM_SqlHandler.updateInTable("playerName", player.getName(), player.getAddress().getHostString(), "ip", "players");
-            ranks.clear();
-            nicks.clear();
-            tags.clear();
+            if(shouldCache())
+            {
+                ranks.clear();
+                nicks.clear();
+                tags.clear();
+            }
             Bukkit.broadcastMessage(ChatColor.BLUE + player.getName() + ChatColor.GOLD + " has been verified as an admin!");
         }
         catch(SQLException | CommandException ex)
@@ -211,7 +234,7 @@ public class ICM_Rank
 
     public static String getTag(Player player)
     {
-        if(tags.containsKey(player.getName()))
+        if(tags.containsKey(player.getName()) && shouldCache())
         {
             String tag = tags.get(player.getName());
             if("".equalsIgnoreCase(tag) || tag == null || "off".equalsIgnoreCase(tag) || "default".equals(tag))
@@ -226,28 +249,40 @@ public class ICM_Rank
             String tag = ICM_SqlHandler.getTag(player.getName());
             if("".equals(tag) || tag == null || "off".equals(tag) || "default".equals(tag))
             {
-                tags.put(player.getName(), getRank(player).actag);
+                if(shouldCache())
+                {
+                    tags.put(player.getName(), getRank(player).actag);
+                }
                 return getRank(player).actag;
             }
-            tags.put(player.getName(), tag);
+            if(shouldCache())
+            {
+                tags.put(player.getName(), tag);
+            }
             return tag;
         }
         catch(Exception ex)
         {
             IcarusMod.plugin.getPluginLogger().severe(ex.getLocalizedMessage());
-            tags.put(player.getName(), getRank(player).actag);
+            if(shouldCache())
+            {
+                tags.put(player.getName(), getRank(player).actag);
+            }
             return getRank(player).actag;
         }
     }
 
     public static String getNick(Player player)
     {
-        if(nicks.containsKey(player.getName()))
+        if(nicks.containsKey(player.getName()) && shouldCache())
         {
             String nick = nicks.get(player.getName());
             if("".equalsIgnoreCase(nick) || nick == null || "off".equalsIgnoreCase(nick))
             {
-                nicks.put(player.getName(), player.getName());
+                if(shouldCache())
+                {
+                    nicks.put(player.getName(), player.getName());
+                }
                 return player.getName();
             }
             return nick;
@@ -257,19 +292,28 @@ public class ICM_Rank
             String nick = ICM_SqlHandler.getNick(player.getName());
             if("".equalsIgnoreCase(nick) || nick == null || "off".equalsIgnoreCase(nick))
             {
-                nicks.put(player.getName(), player.getName());
+                if(shouldCache())
+                {
+                    nicks.put(player.getName(), player.getName());
+                }
                 return player.getName();
             }
             else
             {
-                nicks.put(player.getName(), nick);
+                if(shouldCache())
+                {
+                    nicks.put(player.getName(), nick);
+                }
                 return nick;
             }
         }
         catch(Exception ex)
         {
             IcarusMod.plugin.getPluginLogger().severe(ex.getLocalizedMessage());
-            nicks.put(player.getName(), player.getName());
+            if(shouldCache())
+            {
+                nicks.put(player.getName(), player.getName());
+            }
             return player.getName();
         }
     }
@@ -281,14 +325,17 @@ public class ICM_Rank
             if(sender == null)
             {
                 ICM_SqlHandler.updateInTable("playerName", player.getName(), rank.name, "rank", "players");
-                ranks.put(player.getName(), rank);
-                if(nicks.containsKey(player.getName()))
+                if(shouldCache())
                 {
-                    nicks.remove(player.getName());
-                }
-                if(tags.containsKey(player.getName()))
-                {
-                    tags.remove(player.getName());
+                    ranks.put(player.getName(), rank);
+                    if(nicks.containsKey(player.getName()))
+                    {
+                        nicks.remove(player.getName());
+                    }
+                    if(tags.containsKey(player.getName()))
+                    {
+                        tags.remove(player.getName());
+                    }
                 }
                 return;
             }
@@ -312,21 +359,24 @@ public class ICM_Rank
                 sender.sendMessage(ChatColor.RED + rank.name + " is a lower rank than " + player.getName() + "'s current rank of " + getRank(player).name + ".");
                 return;
             }
-            String message = sender.getName() + " has promoted " + player.getName() + " to the clearance level of " + rank.level + " as " + rank.name + ".\nCongratulations! Please ensure you read the new lounges that you have access to for more details on your new rank!";
+            String message = sender.getName() + " has promoted " + player.getName() + " to the clearance level of " + rank.level + " as " + rank.name + ".";
             if(rank.equals(Rank.OP))
             {
                 message = sender.getName() + " has demoted " + player.getName() + " to the clearance level of 0 as an Op.\nWe hope any issues are resolved shortly.";
             }
             ICM_Utils.adminAction(sender.getName(), message, false);
             ICM_SqlHandler.updateInTable("playerName", player.getName(), rank.name, "rank", "players");
-            ranks.put(player.getName(), rank);
-            if(nicks.containsKey(player.getName()))
+            if(shouldCache())
             {
-                nicks.remove(player.getName());
-            }
-            if(tags.containsKey(player.getName()))
-            {
-                tags.remove(player.getName());
+                ranks.put(player.getName(), rank);
+                if(nicks.containsKey(player.getName()))
+                {
+                    nicks.remove(player.getName());
+                }
+                if(tags.containsKey(player.getName()))
+                {
+                    tags.remove(player.getName());
+                }
             }
         }
         catch(Exception ex)

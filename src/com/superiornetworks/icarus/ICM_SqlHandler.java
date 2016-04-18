@@ -124,7 +124,6 @@ public class ICM_SqlHandler
         statement.setObject(1, newValue);
         statement.setString(2, uniqueValue);
         int i = statement.executeUpdate();
-        c.commit();
         return i > 0;
     }
 

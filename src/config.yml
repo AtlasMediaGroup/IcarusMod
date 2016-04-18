@@ -12,7 +12,7 @@ username:
 password:
     
 serveridentifier:
-    
-#To be moved.
+
 toggles:
     AdminWorld: true
+    caching: false
