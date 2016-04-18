@@ -65,54 +65,49 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
     @Override
     public void enable()
     {
+        //Creates a reference to a plugin instance
         IcarusMod.plugin = this;
-        
-        
-        /*//Command Registration Stuff
-        handler = new SimpleCommandHandler(plugin);
-        handler.setCommandClassPrefix("Command_");
-        handler.loadFrom(Command_say.class.getPackage());
-        handler.registerAll();*/
 
         // More YAML Setting Up and information.
         icmconfig = new ICM_Config(plugin, "config.yml");
         icmconfig.saveDefaultConfig();
         config = icmconfig.getConfig();
 
+        //Check 
         boolean error = false;
-        if (config.getString("hostname") == null)
+        if (config.getString("hostname") == null || config.getString("hostname").equalsIgnoreCase(""))
         {
-            Loggers.severe(plugin, "Hostname is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Hostname is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("port") == null)
+        if (config.getString("port") == null || config.getString("port").equalsIgnoreCase(""))
         {
-            Loggers.severe(plugin, "Port is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Port is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("database") == null)
+        if (config.getString("database") == null || config.getString("database").equalsIgnoreCase(""))
         {
-            Loggers.severe(plugin, "Database is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Database is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("username") == null)
+        if (config.getString("username") == null || config.getString("username").equalsIgnoreCase(""))
         {
-            Loggers.severe(plugin, "Username is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Username is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("password") == null)
+        if (config.getString("password") == null || config.getString("password").equalsIgnoreCase(""))
         {
-            Loggers.severe(plugin, "Password is null in the config, please stop the server, ammend the fault and then restart. IcarusMod will not load until this error is resolved.");
+            Loggers.severe(plugin, "Password is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-
+        
         final PluginManager pm = plugin.getServer().getPluginManager();
         if (!error)
         {
             // Listeners
             pm.registerEvents(new PlayerListener(plugin), plugin);
 
-            // MySQL Stuffs
+            //Handling MySQL
             //Create MySQL
             mySQL = new MySQL(plugin, config.getString("hostname"), config.getString("port"), config.getString("database"), config.getString("username"), config.getString("password"));
             try
@@ -129,8 +124,6 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
 
             //Enable Commands
             registry = new ICM_CommandRegistry();
-
-            // The All Clear
             
             //Handles logs from the server
             Bukkit.getServer().getLogger().addHandler(new ICM_LoggerHandler());
@@ -141,6 +134,7 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
             ICM_DetailLogger detaillogger = new ICM_DetailLogger();
             detaillogger.runTaskTimer(plugin, 0, 20L * 15L);
             
+            //All clear
             Loggers.info(plugin, "has been enabled with no problems.");
         }
         else
@@ -154,6 +148,7 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
     @Override
     public void disable()
     {
+        //Unregistering custom commands
         registry.unregisterCommands();
         IcarusMod.plugin = null;
         // All clear, its disabled! Woot

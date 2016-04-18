@@ -23,7 +23,7 @@ public class ICM_TpsFinder extends BukkitRunnable
         int target = (tickcount - 1 - tickamount) % ticks.length;
         long elapsed = System.currentTimeMillis() - ticks[target];
 
-        return tickamount / (elapsed / 1000.0D);
+        return (tickamount / (elapsed / 1000.0D)) * 20;
     }
 
     public static long getElapsed(int tickID)
