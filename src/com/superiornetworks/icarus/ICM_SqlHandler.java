@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import net.pravian.aero.util.Loggers;
 import org.bukkit.entity.Player;
 
 public class ICM_SqlHandler
@@ -12,11 +13,30 @@ public class ICM_SqlHandler
 
     public static Connection getConnection()
     {
-        if(mySQL.checkConnection())
+        try
         {
-            return mySQL.getConnection();
+            if(mySQL.checkConnection())
+            {
+                try
+                {
+                    Connection c = mySQL.getConnection();
+                    c.setAutoCommit(false);
+                    return c;
+                }
+                catch(SQLException ex)
+                {
+                    Loggers.severe(IcarusMod.plugin, ex.getLocalizedMessage());
+                }
+            }
+            Connection c = mySQL.openConnection();
+            c.setAutoCommit(false);
+            return c;
         }
-        return mySQL.openConnection();
+        catch(SQLException ex)
+        {
+            Loggers.severe(IcarusMod.plugin, ex.getLocalizedMessage());
+        }
+        return null;
     }
 
     public static void generateTables() throws SQLException

@@ -23,7 +23,6 @@ public class ICM_DetailLogger extends BukkitRunnable
             double tps = ICM_TpsFinder.getTPS();
             long ram = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
             Connection c = ICM_SqlHandler.getConnection();
-            c.setAutoCommit(false);
             PreparedStatement statement = c.prepareStatement("INSERT INTO `serverdetails` (`server`, `ram`, `tps`, `time`) VALUES (?, ?, ?, ?)");
             statement.setString(1, id);
             statement.setLong(2, ram);
@@ -43,8 +42,6 @@ public class ICM_DetailLogger extends BukkitRunnable
             }
             prevplayers.clear();
             prevplayers.addAll(Bukkit.getOnlinePlayers());
-            c.commit();
-            c.setAutoCommit(true);
         }
         catch(SQLException ex)
         {

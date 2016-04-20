@@ -11,14 +11,15 @@ import net.pravian.aero.util.Loggers;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class IcarusMod extends AeroPlugin<IcarusMod>
 {
 
     public static IcarusMod plugin;
-    
+
     public static AeroCommandHandler handler;
-    
+
     public static ICM_CommandRegistry registry;
 
     // MySQL  
@@ -75,34 +76,34 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
 
         //Check 
         boolean error = false;
-        if (config.getString("hostname") == null || config.getString("hostname").equalsIgnoreCase(""))
+        if(config.getString("hostname") == null || config.getString("hostname").equalsIgnoreCase(""))
         {
             Loggers.severe(plugin, "Hostname is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("port") == null || config.getString("port").equalsIgnoreCase(""))
+        if(config.getString("port") == null || config.getString("port").equalsIgnoreCase(""))
         {
             Loggers.severe(plugin, "Port is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("database") == null || config.getString("database").equalsIgnoreCase(""))
+        if(config.getString("database") == null || config.getString("database").equalsIgnoreCase(""))
         {
             Loggers.severe(plugin, "Database is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("username") == null || config.getString("username").equalsIgnoreCase(""))
+        if(config.getString("username") == null || config.getString("username").equalsIgnoreCase(""))
         {
             Loggers.severe(plugin, "Username is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        if (config.getString("password") == null || config.getString("password").equalsIgnoreCase(""))
+        if(config.getString("password") == null || config.getString("password").equalsIgnoreCase(""))
         {
             Loggers.severe(plugin, "Password is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-        
+
         final PluginManager pm = plugin.getServer().getPluginManager();
-        if (!error)
+        if(!error)
         {
             // Listeners
             pm.registerEvents(new PlayerListener(plugin), plugin);
@@ -117,23 +118,55 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
                 ICM_SqlHandler.generateTables();
                 ICM_Settings.generateDefaultSettings();
             }
-            catch (SQLException ex)
+            catch(SQLException ex)
             {
                 plugin.getLogger().severe(ex.getLocalizedMessage());
             }
 
             //Enable Commands
             registry = new ICM_CommandRegistry();
-            
+
             //Handles logs from the server
             Bukkit.getServer().getLogger().addHandler(new ICM_LoggerHandler());
-            
+
             //Handles data logging (TPS, RAM usage, Online Players)
             ICM_TpsFinder tpsfinder = new ICM_TpsFinder();
-            tpsfinder.runTaskTimer(plugin, 0, 20L);
+            tpsfinder.runTaskTimerAsynchronously(plugin, 0, 20L * 15L);
             ICM_DetailLogger detaillogger = new ICM_DetailLogger();
-            detaillogger.runTaskTimer(plugin, 0, 20L * 15L);
-            
+            detaillogger.runTaskTimerAsynchronously(plugin, 0, 20L * 15L);
+
+            //Schedues auto cache refreshing every 15 seconds
+            if(ICM_Rank.shouldCache())
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        ICM_Rank.nicks.clear();
+                        ICM_Rank.tags.clear();
+                        ICM_Rank.ranks.clear();
+                    }
+                }.runTaskTimerAsynchronously(plugin, 0, 20L * 15L);
+            }
+
+            //Schedules MySQL to commit every 5 seconds, instantaneous commits may decrease performance
+            new BukkitRunnable()
+            {
+                @Override
+                public void run()
+                {
+                    try
+                    {
+                        ICM_SqlHandler.getConnection().commit();
+                    }
+                    catch(SQLException ex)
+                    {
+                        Loggers.severe(plugin, ex.getMessage());
+                    }
+                }
+            }.runTaskTimerAsynchronously(plugin, 0, 20L * 5L);
+
             //All clear
             Loggers.info(plugin, "has been enabled with no problems.");
         }
