@@ -136,7 +136,7 @@ public class ICM_Bans
             }
             if(System.currentTimeMillis() - time < bantime)
             {
-                removeBanWithCheck(null, player);
+                removeBan(null, player);
                 return false;
             }
             return true;
