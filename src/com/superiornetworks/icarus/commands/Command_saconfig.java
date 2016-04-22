@@ -180,7 +180,6 @@ public class Command_saconfig
                 }
             }
             ICM_Rank.setRank(player, ICM_Rank.levelToRank(level), sender);
-            ICM_Utils.adminAction(sender.getName(), "Adding " + player.getName() + " to " + ICM_Rank.levelToRank(level).name + ".", false);
             return true;
         }
         return false;
