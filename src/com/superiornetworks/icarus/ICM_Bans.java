@@ -54,7 +54,7 @@ public class ICM_Bans
     public static void removeBan(CommandSender sender, OfflinePlayer player) throws SQLException
     {
         Connection c = ICM_SqlHandler.getConnection();
-        PreparedStatement statement = c.prepareStatement("DELETE FROM `bans` WHERE `playerName` = ? OR `ip` = ?");
+        PreparedStatement statement = c.prepareStatement("DELETE FROM `bans` WHERE (`playerName` = ? OR `ip` = ?) AND `perm` != 1");
         statement.setString(1, player.getName());
         statement.setString(2, ICM_SqlHandler.getIp(player.getName()));
         statement.executeUpdate();
@@ -134,7 +134,7 @@ public class ICM_Bans
             {
                 return false;
             }
-            if(System.currentTimeMillis() - time < bantime)
+            if(System.currentTimeMillis() - time > bantime)
             {
                 removeBan(null, player);
                 return false;
