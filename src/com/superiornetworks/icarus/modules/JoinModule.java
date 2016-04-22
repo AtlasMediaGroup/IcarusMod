@@ -83,7 +83,7 @@ public class JoinModule extends IcarusModule implements Listener
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event)
+    public void onUncancelledPlayerJoin(PlayerJoinEvent event)
     {
         try
         {
@@ -97,7 +97,6 @@ public class JoinModule extends IcarusModule implements Listener
             {
                 event.setJoinMessage(ChatColor.AQUA + player.getName() + " is " + ICM_Utils.aOrAn(ICM_SqlHandler.getRank(player.getName())) + " " + ICM_SqlHandler.getRank(player.getName()));
             }
-            
             String title = ICM_Settings.getString("title-message-on-join");
             String subtitle = ICM_Settings.getString("subtitle-message-on-join");
             TitlesAPI.sendTitle(player, title, 20, 20, 20);

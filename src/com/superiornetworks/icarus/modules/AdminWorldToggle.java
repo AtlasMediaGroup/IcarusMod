@@ -25,7 +25,7 @@ public class AdminWorldToggle extends IcarusModule implements Listener
         Player player = event.getPlayer();
         try
         {
-            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.MANAGER) && event.getTo().getWorld() == Bukkit.getWorld("adminworld") && !ICM_Settings.getBoolean("adminworld-toggled"))
+            if (event.getTo().getWorld() == Bukkit.getWorld("adminworld") && !ICM_Settings.getBoolean("adminworld-toggled") && !ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.MANAGER))
             {
                 playerMsg(player, "&cAdminWorld is currently disabled.");
                 event.setCancelled(true);

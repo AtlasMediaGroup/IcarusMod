@@ -34,6 +34,7 @@ public class PlayerListener implements Listener
     {
         plugin.famousWarning.onUncancelledPlayerJoin(event);
         plugin.developmentMode.onUncancelledPlayerJoin(event);
+        plugin.joinModule.onUncancelledPlayerJoin(event);
     }
     
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
