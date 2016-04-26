@@ -54,6 +54,7 @@ public class Command_nick
                 if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
                 {
                     sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
+                    return true;
                 }
 
                 if (!ICM_SqlHandler.playerExists(args[0]))
