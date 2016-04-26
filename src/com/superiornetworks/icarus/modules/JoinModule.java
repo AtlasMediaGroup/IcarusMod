@@ -45,7 +45,8 @@ public class JoinModule extends IcarusModule implements Listener
         {
             if(!ICM_SqlHandler.playerExists(player.getName()))
             {
-                ICM_SqlHandler.generateNewPlayer(player, event.getRealAddress().getHostAddress());
+                //ICM_SqlHandler.generateNewPlayer(player, event.getRealAddress().getHostAddress());
+                ICM_SqlHandler.generateNewPlayer(player, event.getAddress().getHostAddress());
             }
             
             if(ICM_Bans.isBanned(event.getPlayer()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
