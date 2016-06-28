@@ -100,11 +100,7 @@ public class JoinModule extends IcarusModule implements Listener
             String subtitle = ICM_Settings.getString("subtitle-message-on-join");
             TitlesAPI.sendTitle(player, title, 20, 20, 20);
             TitlesAPI.sendSubtitle(player, subtitle, 20, 20, 20);
-            if(ICM_Rank.getRank(player) == ICM_Rank.Rank.OP)
-            {
-                player.setOp(true);
-            }
-            
+                        
             //TabAPI stuff, not currently in use.
             //API.setRankColor(player);
             //TabAPI.sendTabTitle(player, "&5&lWelcome to CJFreedom", "You are currently playing on " + IcarusMod.config.getString("serveridentifier"));
