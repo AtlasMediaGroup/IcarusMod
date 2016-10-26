@@ -34,11 +34,13 @@ public class Command_saconfig
                     ArrayList<String> sadmins = new ArrayList<>();
                     ArrayList<String> sradmins = new ArrayList<>();
                     ArrayList<String> devs = new ArrayList<>();
+                    ArrayList<String> exec = new ArrayList<>();
                     ArrayList<String> managers = new ArrayList<>();
                     ArrayList<ArrayList<String>> arrays = new ArrayList<>();
                     arrays.add(sadmins);
                     arrays.add(sradmins);
                     arrays.add(devs);
+                    arrays.add(exec);
                     arrays.add(managers);
                     for(ArrayList<String> array : arrays)
                     {
@@ -62,6 +64,9 @@ public class Command_saconfig
                             case "Developer":
                                 devs.add(res.getString("playerName"));
                                 break;
+                            case "Executive Admin":
+                                exec.add(res.getString("playerName"));
+                                break;
                             case "Manager":
                                 managers.add(res.getString("playerName"));
                                 break;
@@ -77,6 +82,8 @@ public class Command_saconfig
                     sender.sendMessage("        - " + StringUtils.join(sradmins, ", "));
                     sender.sendMessage(ChatColor.DARK_PURPLE + "    - Developers:");
                     sender.sendMessage("        - " + StringUtils.join(devs, ", "));
+                    sender.sendMessage(ChatColor.YELLOW + "    - Executive Admins::");
+                    sender.sendMessage("        - " + StringUtils.join(exec, ", "));
                     sender.sendMessage(ChatColor.GREEN + "    - Managers:");
                     sender.sendMessage("        - " + StringUtils.join(managers, ", "));
                     return true;
