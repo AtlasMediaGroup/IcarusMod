@@ -50,6 +50,7 @@ public class ICM_SqlHandler
                 + "`loginMessage` TEXT,"
                 + "`rank` TEXT,"
                 + "`ip` VARCHAR(64),"
+                + "`inAC` BOOLEAN,"
                 + "`godMode` BOOLEAN,"
                 + "`doomHammer` BOOLEAN,"
                 + "`whitelisted` BOOLEAN"
@@ -243,6 +244,20 @@ public class ICM_SqlHandler
             return false;
         }
         Object obj = getFromTable("playerName", playerName, "godMode", "players");
+        if(obj instanceof Boolean)
+        {
+            return (Boolean) obj;
+        }
+        return false;
+    }
+    
+    public static boolean inAC(String playerName) throws SQLException
+    {
+        if(!playerExists(playerName))
+        {
+            return false;
+        }
+        Object obj = getFromTable("playerName", playerName, "inAC", "players");
         if(obj instanceof Boolean)
         {
             return (Boolean) obj;
