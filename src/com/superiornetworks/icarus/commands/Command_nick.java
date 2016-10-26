@@ -69,7 +69,7 @@ public class Command_nick
                     sender.sendMessage(ChatColor.DARK_RED + "For security reasons, you cannot use these charecters: ` or '");
                     return true;
                 }
-                if (tag.length() > 25)
+                if (tag.replace("&", "").length() > 25)
                 {
                     sender.sendMessage(ChatColor.DARK_RED + "Nicks cannot be larger than 25 charecters.");
                     return true;
