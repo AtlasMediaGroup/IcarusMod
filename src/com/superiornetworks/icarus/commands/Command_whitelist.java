@@ -27,12 +27,14 @@ public class Command_whitelist
             if (args[0].equalsIgnoreCase("on"))
             {
                 ICM_Whitelist.whitelist = true;
+                ICM_Utils.adminAction(sender.getName(), "Enabling whitelist", false);
                 ICM_Utils.playerMsg(sender, "&aWhitelist turned on.");
                 return true;
             }
             if (args[0].equalsIgnoreCase("off"))
             {
                 ICM_Whitelist.whitelist = false;
+                ICM_Utils.adminAction(sender.getName(), "Disabling whitelist", false);
                 ICM_Utils.playerMsg(sender, "&cWhitelist turned off.");
                 return true;
             }
