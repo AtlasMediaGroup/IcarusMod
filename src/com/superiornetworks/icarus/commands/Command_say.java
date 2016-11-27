@@ -7,7 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name = "say", description = "Broadcast a message to everyone on the current server.", usage = "/say <message>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "say", description = "Broadcast a message to everyone on the current server.", usage = "/say <message>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_say
 {
 

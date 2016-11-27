@@ -9,7 +9,7 @@ import org.bukkit.command.CommandException;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "gcmd", description = "Make another player use a command.", usage = "/gcmd <playername> <command>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "gcmd", description = "Make another player use a command.", usage = "/gcmd <playername> <command>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_gcmd 
 {
     public boolean onCommand(CommandSender sender, Command cmd, String cL, String[] args)

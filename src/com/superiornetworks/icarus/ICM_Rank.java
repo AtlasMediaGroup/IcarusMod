@@ -15,7 +15,7 @@ public class ICM_Rank
     public enum Rank
     {
 
-        IMPOSTER(-1, "Imposter", "§3[IMP]"), NONOP(0, "Non-Op", "§c[Non-Op]"), OP(0, "Op", "§c[Op]"), SUPER(1, "Super Admin", "§b[SA]"), SENIOR(2, "Senior Admin", "§d[SrA]"), EXECUTIVE(3, "Executive Admin", "§6[EXEC]"), DEVELOPER(4, "Developer", "§5[Dev]"), MANAGER(5, "Manager", "§4[Manager]");
+        IMPOSTER(-1, "Imposter", "§3[IMP]"), NONOP(0, "Non-Op", "§c[Non-Op]"), OP(0, "Op", "§c[Op]"), ADMINISTRATOR(1, "Administrator", "§b[A]"), SENIOR(2, "Senior Administrator", "§d[SrA]"), EXECUTIVE(3, "Executive Admin", "§6[EXEC]"), DEVELOPER(4, "Developer", "§5[Dev]"), MANAGER(5, "Manager", "§4[Manager]");
 
         public int level;
         public String name;
@@ -362,7 +362,7 @@ public class ICM_Rank
             String message = sender.getName() + " has promoted " + player.getName() + " to the clearance level of " + rank.level + " as " + rank.name + ".";
             if(rank.equals(Rank.OP))
             {
-                message = sender.getName() + " has demoted " + player.getName() + " to the clearance level of 0 as an Op.\nWe hope any issues are resolved shortly.";
+                message = sender.getName() + " has demoted " + player.getName() + " to the clearance level of 0 as an Op.";
             }
             ICM_Utils.adminAction(sender.getName(), message, false);
             ICM_SqlHandler.updateInTable("playerName", player.getName(), rank.name, "rank", "players");

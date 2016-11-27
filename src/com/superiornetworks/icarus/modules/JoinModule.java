@@ -49,7 +49,7 @@ public class JoinModule extends IcarusModule implements Listener
                 ICM_SqlHandler.generateNewPlayer(player, event.getAddress().getHostAddress());
             }
             
-            if(ICM_Bans.isBanned(event.getPlayer()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+            if(ICM_Bans.isBanned(event.getPlayer()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.ADMINISTRATOR))
             {
                 event.disallow(Result.KICK_BANNED, "§c§lYou are banned!\nYou were banned for: §e" + ICM_Bans.getReason(player) + "\n§c§lBanned by: §e" + ICM_Bans.getBanner(player));
             }
@@ -61,7 +61,7 @@ public class JoinModule extends IcarusModule implements Listener
                     event.disallow(Result.KICK_WHITELIST, "§f§lThe server is currently whitelisted. Please check back later.");
                     return;
                 }
-                else if(!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.SUPER))
+                else if(!ICM_Whitelist.isWhitelisted(event.getPlayer().getName()) && !ICM_Rank.isRankOrHigher(event.getPlayer(), ICM_Rank.Rank.ADMINISTRATOR))
                 {
                     event.disallow(Result.KICK_WHITELIST, "§f§lThe server is currently whitelisted. Please check back later.");
                 }

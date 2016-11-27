@@ -27,7 +27,7 @@ public class Command_devmode
             DevelopmentMode.setMode(DevMode.ADMIN_ONLY);
             for (Player p : Bukkit.getOnlinePlayers())
             {
-                if (!ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.SUPER))
+                if (!ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.ADMINISTRATOR))
                 {
                     p.kickPlayer(ChatColor.DARK_RED + "Development mode has been enabled, only admins are allowed online.");
                 }

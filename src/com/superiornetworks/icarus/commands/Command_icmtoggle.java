@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name = "icmtoggle", description = "Toggle IcarusMod features.", usage = "/icmtoggle <feature>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "icmtoggle", description = "Toggle IcarusMod features.", usage = "/icmtoggle <feature>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_icmtoggle
 {
 

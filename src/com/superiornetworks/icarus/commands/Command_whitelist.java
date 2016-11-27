@@ -12,7 +12,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "whitelist", description = "Manage whitelist", usage = "/whitelist <on : off> | <add : remove> <player>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "whitelist", description = "Manage whitelist", usage = "/whitelist <on : off> | <add : remove> <player>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_whitelist
 {
 

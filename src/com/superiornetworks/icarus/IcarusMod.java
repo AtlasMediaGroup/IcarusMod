@@ -101,7 +101,7 @@ public class IcarusMod extends AeroPlugin<IcarusMod>
             Loggers.severe(plugin, "Password is null in the config, please stop the server, amend the fault and then restart. IcarusMod will not load until this error is resolved.");
             error = true;
         }
-
+        
         final PluginManager pm = plugin.getServer().getPluginManager();
         if(!error)
         {

@@ -19,7 +19,7 @@ public class AdminChat extends IcarusModule
     {
         for (Player p : Bukkit.getOnlinePlayers())
         {
-            if (ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.SUPER))
+            if (ICM_Rank.isRankOrHigher(p, ICM_Rank.Rank.ADMINISTRATOR))
             {
                 // Some strange ass colour codes being used here...
                 p.sendMessage("§f[§bADMIN§f] §4" + sender.getName() + ChatColor.GRAY + " [" + ChatColor.DARK_PURPLE + ICM_Rank.getRank(sender) + ChatColor.GRAY + "] "+ ChatColor.AQUA + message);

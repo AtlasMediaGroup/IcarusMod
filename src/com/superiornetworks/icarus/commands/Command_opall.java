@@ -13,7 +13,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "opall", description = "Op all non-op players online.", usage = "/opall", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "opall", description = "Op all non-op players online.", usage = "/opall", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_opall
 {
 

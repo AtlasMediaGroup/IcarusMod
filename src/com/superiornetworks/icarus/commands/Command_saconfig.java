@@ -133,7 +133,7 @@ public class Command_saconfig
                         Logger.getLogger(Command_saconfig.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                ICM_Rank.setRank(player, ICM_Rank.Rank.SUPER, sender);
+                ICM_Rank.setRank(player, ICM_Rank.Rank.ADMINISTRATOR, sender);
                 return true;
             }
             return false;

@@ -14,7 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "ban", description = "Ban a bad player for 24 hours.", usage = "/ban <player> <reason>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "ban", description = "Ban a bad player for 24 hours.", usage = "/ban <player> <reason>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_ban
 {
 

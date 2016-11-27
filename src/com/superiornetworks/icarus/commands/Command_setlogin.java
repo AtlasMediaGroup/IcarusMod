@@ -13,7 +13,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name = "setlogin", description = "Set your custom login message.", usage = "/setlogin <off:message>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "setlogin", description = "Set your custom login message.", usage = "/setlogin <off:message>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_setlogin
 {
 

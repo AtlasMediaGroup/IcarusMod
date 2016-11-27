@@ -9,13 +9,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
-@CommandParameters(name = "wetoggle", description = "Toggles the worldedit plugin between enabled and disabled.", usage = "/wetoggle", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "wetoggle", description = "Toggles the worldedit plugin between enabled and disabled.", usage = "/wetoggle", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_wetoggle
 {
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
-        if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
+        if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.ADMINISTRATOR))
         {
             sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
             return true;

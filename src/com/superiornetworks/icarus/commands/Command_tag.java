@@ -51,7 +51,7 @@ public class Command_tag
             else
             {
 
-                if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.SUPER))
+                if (!ICM_Rank.isRankOrHigher(sender, ICM_Rank.Rank.ADMINISTRATOR))
                 {
                     sender.sendMessage(ICM_Utils.NO_PERMS_MESSAGE);
                     return true;

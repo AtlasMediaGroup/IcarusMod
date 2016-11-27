@@ -61,7 +61,7 @@ public class BusySystem extends IcarusModule implements Listener
                 return;
             }
 
-            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.ADMINISTRATOR))
             {
                 return;
             }
@@ -85,7 +85,7 @@ public class BusySystem extends IcarusModule implements Listener
                 continue;
             }
 
-            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.ADMINISTRATOR))
             {
                 return;
             }

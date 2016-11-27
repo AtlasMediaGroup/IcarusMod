@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-@CommandParameters(name = "pie", description = "Give everybody pie!", usage = "/pie", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "pie", description = "Give everybody pie!", usage = "/pie", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_pie
 {
 

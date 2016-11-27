@@ -7,7 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 //This will likely be changed to a better admin chat method reminiscent of the FOPM: R's
-@CommandParameters(name = "p", description = "Send a message to admin chat.", usage = "/o <message>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "p", description = "Send a message to admin chat.", usage = "/o <message>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_o
 {
 

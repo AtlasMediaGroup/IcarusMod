@@ -14,7 +14,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "tempban", description = "Ban a bad player for a termporary amount of time.", usage = "/tempban <player> <time> <h | m> <reason>", rank = ICM_Rank.Rank.SUPER, aliases="tban")
+@CommandParameters(name = "tempban", description = "Ban a bad player for a termporary amount of time.", usage = "/tempban <player> <time> <h | m> <reason>", rank = ICM_Rank.Rank.ADMINISTRATOR, aliases="tban")
 public class Command_tempban
 {
 

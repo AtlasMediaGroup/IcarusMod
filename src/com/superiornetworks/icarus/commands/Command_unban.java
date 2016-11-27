@@ -10,7 +10,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-@CommandParameters(name = "unban", description = "Unban a player.", usage = "/unban <player>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "unban", description = "Unban a player.", usage = "/unban <player>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_unban
 {
 

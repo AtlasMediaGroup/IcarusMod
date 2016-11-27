@@ -10,7 +10,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "smite", description = "Someone being a pain? Take em' down.", usage = "/smite <playername> <reason>", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "smite", description = "Someone being a pain? Take em' down.", usage = "/smite <playername> <reason>", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_smite
 {
 

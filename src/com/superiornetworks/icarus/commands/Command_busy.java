@@ -6,7 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandParameters(name = "busy", description = "Toggle your busy status to on/off.", usage = "/busy", rank = ICM_Rank.Rank.SUPER)
+@CommandParameters(name = "busy", description = "Toggle your busy status to on/off.", usage = "/busy", rank = ICM_Rank.Rank.ADMINISTRATOR)
 public class Command_busy
 {
 

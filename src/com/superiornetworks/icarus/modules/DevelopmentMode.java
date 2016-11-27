@@ -58,7 +58,7 @@ public class DevelopmentMode extends IcarusModule implements Listener
         }
         if (DevelopmentMode.isInMode(DevMode.ADMIN_ONLY))
         {
-            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.SUPER))
+            if (!ICM_Rank.isRankOrHigher(player, ICM_Rank.Rank.ADMINISTRATOR))
             {
                 noQuitMessage.add(playername);
                 event.setJoinMessage(null);
