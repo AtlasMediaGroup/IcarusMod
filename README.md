@@ -7,6 +7,8 @@ The IcarusMod is an all-op Bukkit plugin created for the _**CJFreedom Network**_
  - Custom Displayname Handling
 
 ###Development
+[![Build Status](https://travis-ci.org/CJFreedom-Network/IcarusMod.svg?branch=master)](https://travis-ci.org/CJFreedom-Network/IcarusMod)
+
 The IcarusMod is currently heavily under development by these **lovely** chaps:
  - **Wild1145**  ~ [GitHub page] (https://github.com/Wild1145)
  - **Camzie99** ~ [GitHub page] (https://github.com/CameronRedmore)
