@@ -9,3 +9,4 @@ install:
 script:
       # grep so that download counts don't appear in log files
       - java -jar BuildTools.jar | grep -vE "[^/ ]*/[^/ ]*\s*KB\s*$" | grep -v "^\s*$"
+      - mvn clean package
