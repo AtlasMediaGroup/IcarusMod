@@ -9,7 +9,6 @@
     <version>1.2.0</version>
     <packaging>jar</packaging>
     <properties/>
-    <jar.finalName>${project.name}</jar.finalName>
 </project>
 
     <repositories>
