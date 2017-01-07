@@ -1,7 +1,6 @@
 language: java
-install:
-    - wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
-script:
-    # grep so that download counts don't appear in log files
-    - java -jar BuildTools.jar | grep -vE "[^/ ]*/[^/ ]*\s*KB\s*$" | grep -v "^\s*$"
-    - find Spigot/Spigot-Server/target/*.jar
+jdk:
+  - oraclejdk8
+  - openjdk8
+notifications:
+  email: false
