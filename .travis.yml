@@ -4,5 +4,4 @@ before_install:
   - wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar
   - java -jar BuildTools.jar
 
-mvn clean
-mvn package
+mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
