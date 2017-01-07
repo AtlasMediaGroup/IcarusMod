@@ -21,6 +21,7 @@ manifest.mf
 *.ipr
 *.iws
 /.idea
+/out
 
 # Maven excludes
 /target
