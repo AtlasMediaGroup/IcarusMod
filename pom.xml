@@ -8,9 +8,15 @@
     <artifactId>IcarusMod</artifactId>
     <version>1.2.0</version>
     <packaging>jar</packaging>
-    <properties/>
-    <jar.finalName>${project.name}</jar.finalName>
-</project>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+
+
+
 
     <repositories>
         <repository>
@@ -21,7 +27,12 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>elmakers-repo</id>
+            <url>http://maven.elmakers.com/repository/</url>
+        </repository>
     </repositories>
+
 
     <dependencies>
         <!--Spigot API-->
